@@ -1,7 +1,7 @@
 /* =========================
    The Reclamation Co. — Soul Reset
    Poster / apothecary-inspired, modern readable
-   CLEAN + RESPONSIVE FOUNDATION
+   CLEAN + RESPONSIVE FOUNDATION (UPDATED)
    ========================= */
 
 /* ---------- Tokens ---------- */
@@ -37,7 +37,6 @@ body {
   font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
   color: var(--ink);
 
-  /* background (kept your vibe) */
   background: linear-gradient(180deg, #F6F0E3 0%, #917355 85%);
 }
 
@@ -154,23 +153,49 @@ button:focus-visible {
   font-weight: 800;
   letter-spacing: 0.02em;
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
 .nav-toggle:hover { transform: translateY(-1px); }
 .nav-toggle:active { transform: translateY(0); }
 
-/* Mobile behavior: collapse menu */
+/* =========================
+   Mobile behavior: collapse menu (FIXED)
+   - Forces nav to drop BELOW header row
+   - Prevents the “side panel” look
+   ========================= */
 @media (max-width: 860px) {
-  .brand { min-width: unset; }
+  .nav-container {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
 
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .brand {
+    min-width: unset;
+    flex: 1 1 auto;
+    min-width: 0; /* prevents overflow */
+  }
 
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  /* NAV MUST DROP TO NEXT LINE */
   .main-nav {
     display: none;
+    flex-basis: 100%;
     width: 100%;
+    order: 3;
+
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: stretch;
+    gap: 10px;
+
     padding: 12px;
     margin-top: 10px;
 
@@ -186,7 +211,20 @@ button:focus-visible {
     width: 100%;
     padding: 12px 12px;
     border-radius: 12px;
+    white-space: normal; /* long link wraps nicely */
   }
+
+  .main-nav .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Tiny brand tightening for extra small screens */
+@media (max-width: 520px) {
+  #logo { width: 38px; height: 38px; }
+  .brand-text .name { font-size: 13px; }
+  .brand-text .tag { font-size: 11px; }
 }
 
 /* ---------- Buttons ---------- */
@@ -278,7 +316,6 @@ button:focus-visible {
 .appsoul-h1,
 .appsoul-h2,
 .services-h1 {
-  /* don’t hard-lock sizes; keep them responsive */
   font-size: clamp(24px, 3.5vw, 36px);
   font-weight: 650;
 }
@@ -286,9 +323,7 @@ button:focus-visible {
 .appsoul-h2 { margin: 18px 0; }
 
 /* ---------- Layout blocks ---------- */
-.section {
-  padding: 54px 0;
-}
+.section { padding: 54px 0; }
 
 .card {
   background: linear-gradient(180deg, rgba(230, 216, 190, 0.8), rgba(230, 216, 190, 0.62));
@@ -327,9 +362,7 @@ button:focus-visible {
 }
 
 /* ---------- Hero ---------- */
-.hero {
-  padding: 44px 0 24px;
-}
+.hero { padding: 44px 0 24px; }
 
 .hero-inner {
   display: grid;
