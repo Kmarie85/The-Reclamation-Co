@@ -1,7 +1,7 @@
 /* =========================
    The Reclamation Co. — Soul Reset
    Poster / apothecary-inspired, modern readable
-   CLEAN + RESPONSIVE FOUNDATION (UPDATED)
+   CLEAN + RESPONSIVE FOUNDATION (FULL UPDATED)
    ========================= */
 
 /* ---------- Tokens ---------- */
@@ -60,7 +60,10 @@ a {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
   border-radius: 12px;
@@ -100,6 +103,7 @@ button:focus-visible {
   align-items: center;
   gap: 12px;
   min-width: 220px;
+  min-width: 0; /* allow wrap without overflow */
 }
 
 .brand-text { line-height: 1.05; }
@@ -134,6 +138,7 @@ button:focus-visible {
   padding: 10px 10px;
   border-radius: 12px;
   transition: 0.2s ease;
+  white-space: nowrap;
 }
 
 .main-nav a:hover {
@@ -161,8 +166,8 @@ button:focus-visible {
 
 /* =========================
    Mobile behavior: collapse menu (FIXED)
-   - Forces nav to drop BELOW header row
-   - Prevents the “side panel” look
+   - Nav drops below header row
+   - Prevents “side panel” look
    ========================= */
 @media (max-width: 860px) {
   .nav-container {
@@ -172,9 +177,7 @@ button:focus-visible {
   }
 
   .brand {
-    min-width: unset;
     flex: 1 1 auto;
-    min-width: 0; /* prevents overflow */
   }
 
   .nav-toggle {
@@ -185,7 +188,6 @@ button:focus-visible {
     margin-left: auto;
   }
 
-  /* NAV MUST DROP TO NEXT LINE */
   .main-nav {
     display: none;
     flex-basis: 100%;
@@ -211,7 +213,7 @@ button:focus-visible {
     width: 100%;
     padding: 12px 12px;
     border-radius: 12px;
-    white-space: normal; /* long link wraps nicely */
+    white-space: normal;
   }
 
   .main-nav .btn {
@@ -220,7 +222,7 @@ button:focus-visible {
   }
 }
 
-/* Tiny brand tightening for extra small screens */
+/* Tiny brand tightening */
 @media (max-width: 520px) {
   #logo { width: 38px; height: 38px; }
   .brand-text .name { font-size: 13px; }
@@ -289,6 +291,10 @@ button:focus-visible {
   font-weight: 900;
 }
 
+.h2-tight {
+  font-size: clamp(22px, 2.4vw, 30px);
+}
+
 .kicker {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   letter-spacing: 0.12em;
@@ -308,7 +314,7 @@ button:focus-visible {
 
 .lead { max-width: 62ch; }
 
-/* Keep your page-specific heading classes supported */
+/* keep these class names supported if you still use them anywhere */
 .about-h1,
 .about-h2,
 .contact-h1,
@@ -320,10 +326,13 @@ button:focus-visible {
   font-weight: 650;
 }
 
-.appsoul-h2 { margin: 18px 0; }
-
 /* ---------- Layout blocks ---------- */
 .section { padding: 54px 0; }
+
+.section-tight {
+  padding-top: 24px;
+  padding-bottom: 0;
+}
 
 .card {
   background: linear-gradient(180deg, rgba(230, 216, 190, 0.8), rgba(230, 216, 190, 0.62));
@@ -333,6 +342,19 @@ button:focus-visible {
 }
 
 .card-pad { padding: 26px; }
+
+.card-flat {
+  background: rgba(236, 225, 202, 0.42);
+  border: 1px solid rgba(29, 27, 21, 0.14);
+  box-shadow: none;
+}
+
+.card-title {
+  margin: 6px 0 8px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
 
 .grid-2 {
   display: grid;
@@ -346,12 +368,36 @@ button:focus-visible {
   gap: 18px;
 }
 
+/* Default responsive collapse */
 @media (max-width: 920px) {
   .grid-2 { grid-template-columns: 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
   .card-pad { padding: 20px; }
   .section { padding: 42px 0; }
 }
+
+/* Fix nested grid inside the "patterns" card */
+.grid-2 .grid-3 { margin-top: 16px; }
+
+@media (min-width: 921px) {
+  .grid-2 .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 920px) and (min-width: 641px) {
+  .grid-2 .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid-2 .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* List utility used across pages */
+.list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.list li { margin: 6px 0; }
 
 /* HR utility */
 .hr {
@@ -396,6 +442,19 @@ button:focus-visible {
   margin-top: 18px;
 }
 
+/* CTA stacking on tiny screens */
+@media (max-width: 520px) {
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -428,6 +487,11 @@ button:focus-visible {
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow);
+}
+
+@media (max-width: 520px) {
+  .poster { padding: 20px; }
+  .poster h3 { font-size: 20px; }
 }
 
 .poster h3 {
@@ -478,6 +542,46 @@ button:focus-visible {
   margin: 0 0 8px;
   font-size: 18px;
   font-weight: 900;
+}
+
+/* ---------- Forms (Contact page) ---------- */
+.form {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field-label {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 27, 21, 0.22);
+  background: rgba(236, 225, 202, 0.55);
+  color: var(--ink);
+  font: inherit;
+}
+
+.textarea { resize: vertical; }
+
+.help {
+  margin: 0;
+  opacity: 0.75;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* ---------- Footer ---------- */

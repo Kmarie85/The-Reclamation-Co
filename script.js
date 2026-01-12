@@ -2,7 +2,7 @@
    The Reclamation Co. / Soul Stone Inc. — Base Scripts
    - Mobile nav toggle
    - GA click tracking (data-track / data-label)
-   - Optional outbound link tracking
+   - Outbound link tracking (no double-fire)
    - Footer year
    ========================================================= */
 
@@ -17,13 +17,34 @@
     }
   };
 
+  const hasGA = () => typeof window.gtag === "function";
+
   const track = (action, label, extra = {}) => {
-    if (!window.gtag) return;
+    if (!hasGA()) return;
     window.gtag("event", action || "click", {
       event_category: "engagement",
       event_label: label || "unknown",
       ...extra,
     });
+  };
+
+  const isOutboundLink = (a) => {
+    if (!a || a.tagName !== "A") return false;
+
+    const href = (a.getAttribute("href") || "").trim();
+    if (!href) return false;
+
+    // Ignore in-page anchors and tel/mail links
+    if (href.startsWith("#") || href.startsWith("tel:") || href.startsWith("mailto:")) return false;
+
+    let url;
+    try {
+      url = new URL(href, window.location.href);
+    } catch {
+      return false;
+    }
+
+    return url.origin !== window.location.origin;
   };
 
   onReady(() => {
@@ -48,12 +69,11 @@
         navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
-      // Close menu after clicking a nav link (mobile UX)
+      // Close menu after clicking any nav link (mobile UX)
       navLinks.addEventListener("click", (e) => {
         const a = e.target.closest("a");
         if (!a) return;
 
-        // Only close if menu is currently open (mobile)
         if (navLinks.classList.contains("is-open")) {
           navLinks.classList.remove("is-open");
           navToggle.setAttribute("aria-expanded", "false");
@@ -70,18 +90,40 @@
     }
 
     /* =========================
-       GA click tracking
-       Tracks any element with:
-       data-track="action_name"
-       data-label="label_here" (optional)
+       Single click handler for analytics
+       - Tracks data-track elements
+       - Tracks outbound links (without double firing)
        ========================= */
     document.addEventListener("click", (e) => {
+      // 1) Outbound link tracking (first, so we can stop double counts)
+      const a = e.target.closest("a[href]");
+      if (a && isOutboundLink(a)) {
+        // If you already explicitly track this element, don’t auto-track it again.
+        if (!a.hasAttribute("data-track")) {
+          const href = a.getAttribute("href");
+          track("outbound_click", href);
+
+          // If same-tab outbound navigation, give GA a breath to send
+          const opensNewTab = a.getAttribute("target") === "_blank";
+          const hasModifier =
+            e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+
+          if (!opensNewTab && !hasModifier) {
+            e.preventDefault();
+            setTimeout(() => {
+              window.location.href = href;
+            }, 150);
+          }
+        }
+        return; // prevent also being handled by data-track lookup below
+      }
+
+      // 2) Standard data-track tracking
       const el = e.target.closest("[data-track]");
       if (!el) return;
 
       const action = el.getAttribute("data-track") || "click";
 
-      // Prefer explicit label, fallback to text, fallback to href, fallback to unknown
       const explicitLabel = el.getAttribute("data-label");
       const textLabel = (el.textContent || "").trim().slice(0, 80);
       const hrefLabel =
@@ -89,35 +131,6 @@
       const label = explicitLabel || textLabel || hrefLabel || "unknown";
 
       track(action, label);
-    });
-
-    /* =========================
-       Optional: outbound link tracking
-       Adds event when clicking external links.
-       Safe: only runs if GA exists.
-       ========================= */
-    document.addEventListener("click", (e) => {
-      const a = e.target.closest("a[href]");
-      if (!a) return;
-
-      const href = a.getAttribute("href");
-      if (!href) return;
-
-      // Ignore in-page anchors and tel/mail links
-      if (href.startsWith("#") || href.startsWith("tel:") || href.startsWith("mailto:")) return;
-
-      // Only treat as outbound if it's absolute and not this site's origin
-      let url;
-      try {
-        url = new URL(href, window.location.href);
-      } catch {
-        return;
-      }
-
-      if (url.origin === window.location.origin) return;
-
-      // Track outbound clicks
-      track("outbound_click", url.href);
     });
   });
 })();
