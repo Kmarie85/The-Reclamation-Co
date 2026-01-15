@@ -1,8 +1,9 @@
 /* =========================================================
    The Reclamation Co. / Soul Stone Inc. — Base Scripts
-   - Mobile nav toggle
+   - Optional GA4 loader (set window.GA4_MEASUREMENT_ID in HTML)
    - GA click tracking (data-track / data-label)
    - Outbound link tracking (no double-fire)
+   - Mobile nav toggle
    - Footer year
    ========================================================= */
 
@@ -16,6 +17,37 @@
       fn();
     }
   };
+
+  /* =========================
+     GA4 (optional)
+     - Set window.GA4_MEASUREMENT_ID = "G-XXXX..." in the HTML head.
+     - If blank, GA will not load (site can launch without analytics).
+  ========================= */
+  const initGA4 = () => {
+    const idRaw = (window.GA4_MEASUREMENT_ID || "").toString().trim();
+    const valid = /^G-[A-Z0-9]{6,}$/i.test(idRaw);
+    if (!valid) return;
+
+    // Avoid double-init
+    if (window.__ga4_initialized) return;
+    window.__ga4_initialized = true;
+
+    // Load gtag.js
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(idRaw)}`;
+    document.head.appendChild(s);
+
+    // Init gtag
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", idRaw, {
+      anonymize_ip: true
+    });
+  };
+
+  initGA4();
 
   const hasGA = () => typeof window.gtag === "function";
 
