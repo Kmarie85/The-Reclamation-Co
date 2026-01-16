@@ -1,83 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <!-- =========================
+       Core
+  ========================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The Reclamation Co. | Soul Reset Bundle</title>
-    <meta
-      name="description"
-      content="Soul reset tools and guidance from The Reclamation Co. Explore offerings, resources, and your next step toward reclamation."
-    />
-    <meta name="robots" content="index,follow" />
+  <title>The Reclamation Co. | Soul Reset Bundle</title>
+  <meta
+    name="description"
+    content="Soul reset tools and guided offerings from The Reclamation Co. Explore resources designed to support reflection, grounding, and reclamation."
+  />
+  <meta name="robots" content="index,follow" />
 
-    <link rel="canonical" href="https://soulstoneinc.org/" />
+  <!-- Canonical -->
+  <link rel="canonical" href="https://soulstoneinc.org/" />
 
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="favicon.png" />
+  <!-- =========================
+       Icons
+  ========================== -->
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="The Reclamation Co." />
-    <meta
-      property="og:title"
-      content="The Reclamation Co. | Soul Reset Bundle"
-    />
-    <meta
-      property="og:description"
-      content="Soul reset tools and guidance from The Reclamation Co. Explore offerings, resources, and your next step toward reclamation."
-    />
-    <meta property="og:url" content="https://soulstoneinc.org/" />
-    <!-- TODO: Replace with a real image -->
-    <meta
-      property="og:image"
-      content="https://soulstoneinc.org/Static/Images/og-image.png"
-    />
+  <!-- =========================
+       Open Graph
+  ========================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Reclamation Co." />
+  <meta property="og:title" content="The Reclamation Co. | Soul Reset Bundle" />
+  <meta
+    property="og:description"
+    content="Soul reset tools and guided offerings from The Reclamation Co. Explore resources designed to support reflection, grounding, and reclamation."
+  />
+  <meta property="og:url" content="https://soulstoneinc.org/" />
+  <meta
+    property="og:image"
+    content="https://soulstoneinc.org/Static/Images/og-image.png"
+  />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="The Reclamation Co. | Soul Reset Bundle"
-    />
-    <meta
-      name="twitter:description"
-      content="Soul reset tools and guidance from The Reclamation Co. Explore offerings, resources, and your next step toward reclamation."
-    />
-    <meta name="twitter:url" content="https://soulstoneinc.org/" />
-    <meta
-      name="twitter:image"
-      content="https://soulstoneinc.org/Static/Images/og-image.png"
-    />
+  <!-- =========================
+       Twitter
+  ========================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Reclamation Co. | Soul Reset Bundle" />
+  <meta
+    name="twitter:description"
+    content="Soul reset tools and guided offerings from The Reclamation Co. Explore resources designed to support reflection, grounding, and reclamation."
+  />
+  <meta name="twitter:image" content="https://soulstoneinc.org/Static/Images/og-image.png" />
 
-    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
-    <script>
-      window.GA4_MEASUREMENT_ID = ""; // e.g. "G-XXXXXXXXXX"
-    </script>
+  <!-- =========================
+       GA4 – REQUIRED
+       Replace G-XXXXXXXXXX
+  ========================== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      anonymize_ip: true
+    });
+  </script>
 
-    <!-- Styles + Scripts -->
-    <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+  <!-- =========================
+       Styles & Scripts
+  ========================== -->
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 
-    <!-- Structured Data (Soul Stone Inc. + The Reclamation Co.) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "name": "Soul Stone Inc.",
-            "url": "https://soulstoneinc.org"
-          },
-          {
-            "@type": "WebSite",
-            "name": "The Reclamation Co.",
-            "url": "https://soulstoneinc.org"
+  <!-- =========================
+       Structured Data
+  ========================== -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Soul Stone Inc.",
+          "url": "https://soulstoneinc.org",
+          "brand": {
+            "@type": "Brand",
+            "name": "The Reclamation Co."
           }
-        ]
-      }
-    </script>
-  </head>
+        },
+        {
+          "@type": "WebSite",
+          "name": "The Reclamation Co.",
+          "url": "https://soulstoneinc.org"
+        }
+      ]
+    }
+  </script>
+</head>
+
 
   <body>
     <header class="site-header">
@@ -135,7 +153,7 @@
           </a>
           <a
             class="btn btn-primary"
-            href="BUY_LINK"
+            href="https://thereclamationco.gumroad.com/l/kiprt"
             target="_blank"
             rel="noopener"
             data-track="buy_click"
@@ -163,7 +181,7 @@
             <div class="hero-cta">
               <a
                 class="btn btn-primary"
-                href="BUY_LINK"
+                href="https://thereclamationco.gumroad.com/l/kiprt"
                 target="_blank"
                 rel="noopener"
                 data-track="buy_click"
@@ -207,7 +225,7 @@
             <div class="poster-cta">
               <a
                 class="btn btn-primary"
-                href="BUY_LINK"
+                href="https://thereclamationco.gumroad.com/l/kiprt"
                 target="_blank"
                 rel="noopener"
                 data-track="buy_click"
@@ -308,13 +326,13 @@
             <div class="hero-cta">
               <a
                 class="btn btn-primary"
-                href="BUY_LINK"
+                href="burnout-quiz.html"
                 target="_blank"
                 rel="noopener"
                 data-track="buy_click"
                 data-label="midpage_buy_download"
               >
-                Buy / Download
+                Take the Quiz
               </a>
               <a
                 class="btn btn-ghost"

@@ -86,6 +86,41 @@
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+/* =========================
+   Contact form prefill (from URL)
+   Example URLs:
+   - contact.html?interest=community
+   - contact.html?interest=private_support
+   - contact.html?interest=soul_reset_bundle
+========================= */
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const interest = (params.get("interest") || "").trim();
+  if (!interest) return;
+
+  // Only run on contact page
+  if (!/contact\.html$/i.test(window.location.pathname)) return;
+
+  const select = document.querySelector('select[name="interest"]');
+  if (!select) return;
+
+  const desired = interest.toLowerCase();
+
+  // Select by matching option value
+  for (const opt of Array.from(select.options)) {
+    if ((opt.value || "").toLowerCase() === desired) {
+      opt.selected = true;
+      break;
+    }
+  }
+
+  // Fire change in case anything else depends on it
+  try {
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+  } catch {}
+})();
+
+    
     /* =========================
        Mobile nav toggle
        Requires:

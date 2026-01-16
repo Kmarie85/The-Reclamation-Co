@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Burnout Archetype Quiz | The Reclamation Co.</title>
+    <meta
+      name="description"
+      content="Uncover your burnout survival style—so you can finally reset, not just push through. Take the Soul Survival Quiz and reveal your archetype."
+    />
+    <meta name="robots" content="index,follow" />
+
+    <link rel="canonical" href="https://soulstoneinc.org/burnout-quiz.html" />
+
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Reclamation Co." />
+    <meta property="og:title" content="Burnout Archetype Quiz | The Reclamation Co." />
+    <meta
+      property="og:description"
+      content="Uncover your burnout survival style—so you can finally reset, not just push through."
+    />
+    <meta property="og:url" content="https://soulstoneinc.org/burnout-quiz.html" />
+    <meta
+      property="og:image"
+      content="https://soulstoneinc.org/Static/Images/og-image.png"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Burnout Archetype Quiz | The Reclamation Co." />
+    <meta
+      name="twitter:description"
+      content="Uncover your burnout survival style—so you can finally reset, not just push through."
+    />
+    <meta name="twitter:url" content="https://soulstoneinc.org/burnout-quiz.html" />
+    <meta
+      name="twitter:image"
+      content="https://soulstoneinc.org/Static/Images/og-image.png"
+    />
+
+    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
+    <script>
+      window.GA4_MEASUREMENT_ID = ""; // e.g. "G-XXXXXXXXXX"
+    </script>
+
+    <!-- Styles + Scripts -->
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Soul Stone Inc.",
+            "url": "https://soulstoneinc.org"
+          },
+          {
+            "@type": "WebSite",
+            "name": "The Reclamation Co.",
+            "url": "https://soulstoneinc.org"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Burnout Archetype Quiz",
+            "url": "https://soulstoneinc.org/burnout-quiz.html"
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-container">
+        <a
+          href="index.html"
+          class="brand"
+          data-track="nav_click"
+          data-label="nav_home_brand"
+        >
+          <img
+            src="Static/Images/Soul logo One.png"
+            alt="The Reclamation Co. logo"
+            id="logo"
+          />
+          <div class="brand-text">
+            <div class="name">The Reclamation Co.</div>
+            <div class="tag">Trauma-informed tools for burned-out women</div>
+          </div>
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
+        >
+          Menu
+        </button>
+
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a href="services.html" data-track="nav_click" data-label="nav_services"
+            >Services</a
+          >
+          <a href="about.html" data-track="nav_click" data-label="nav_about"
+            >About</a
+          >
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact"
+            >Contact</a
+          >
+          <a
+            href="appalachian-soul-provisions.html"
+            data-track="nav_click"
+            data-label="nav_appalachian_soul_provisions"
+          >
+            Appalachian Soul Provisions
+          </a>
+          <a
+            class="btn btn-primary"
+            href="https://thereclamationco.gumroad.com/l/kiprt"
+            target="_blank"
+            rel="noopener"
+            data-track="buy_click"
+            data-label="nav_buy_soul_reset"
+          >
+            Buy Soul Reset
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section-tight">
+        <div class="container">
+          <div class="hero-panel">
+            <span class="badge"><span class="dot"></span> Burnout Archetype Quiz</span>
+
+            <h1 class="h1">Soul Survival Quiz</h1>
+
+            <p class="lead">
+              <strong>Uncover your burnout survival style—so you can finally reset, not just push through.</strong>
+            </p>
+
+            <p class="small" style="opacity: 0.9; margin-top: 10px">
+              This is not a diagnosis. This is a reflection tool. Take what resonates. Leave the rest.
+              Choose the answer that feels most true for you right now—even if it’s hard to admit.
+            </p>
+
+            <div class="hr"></div>
+
+            <!-- QUIZ -->
+            <form id="quizForm" novalidate>
+
+              <fieldset>
+                <legend>Q1. When I wake up in the morning, my first instinct is…</legend>
+
+                <label>
+                  <input type="radio" name="q1" value="caretaker" required />
+                  I need to make sure everyone’s okay. 
+                </label>
+
+                <label>
+                  <input type="radio" name="q1" value="overgiver" />
+                  Who needs something from me?
+                </label>
+
+                <label>
+                  <input type="radio" name="q1" value="invisible" />
+                  I don’t want to move.
+                </label>
+
+                <label>
+                  <input type="radio" name="q1" value="overachiever" />
+                  I’m already behind. Let’s go.
+                </label>
+
+                <label>
+                  <input type="radio" name="q1" value="chameleon" />
+                  What version of me do I need to be today?
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q2. When I’m overwhelmed, I usually…</legend>
+
+                <label>
+                  <input type="radio" name="q2" value="caretaker" required />
+                  Hold it together and stay in control.
+                </label>
+
+                <label>
+                  <input type="radio" name="q2" value="overgiver" />
+                  Overextend myself trying to help.
+                </label>
+
+                <label>
+                  <input type="radio" name="q2" value="invisible" />
+                  Shut down and disappear.
+                </label>
+
+                <label>
+                  <input type="radio" name="q2" value="overachiever" />
+                  Push harder and hustle through it.
+                </label>
+
+                <label>
+                  <input type="radio" name="q2" value="chameleon" />
+                  Adapt to whatever the room needs from me.
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q3. I feel most disconnected from myself when…</legend>
+
+                <label>
+                  <input type="radio" name="q3" value="caretaker" required />
+                  I’m emotionally responsible for others.
+                </label>
+
+                <label>
+                  <input type="radio" name="q3" value="overgiver" />
+                  I’m saying yes to things I don’t want.
+                </label>
+
+                <label>
+                  <input type="radio" name="q3" value="invisible" />
+                  I’m numb or dissociating.
+                </label>
+
+                <label>
+                  <input type="radio" name="q3" value="overachiever" />
+                  I’m productive but empty.
+                </label>
+
+                <label>
+                  <input type="radio" name="q3" value="chameleon" />
+                  I’ve been “performing” for too long.
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q4. I often silence my own needs because…</legend>
+
+                <label>
+                  <input type="radio" name="q4" value="caretaker" required />
+                  There’s no space for them.
+                </label>
+
+                <label>
+                  <input type="radio" name="q4" value="overgiver" />
+                  Other people’s needs come first.
+                </label>
+
+                <label>
+                  <input type="radio" name="q4" value="invisible" />
+                  I don’t even know what they are.
+                </label>
+
+                <label>
+                  <input type="radio" name="q4" value="overachiever" />
+                  I should be stronger than this.
+                </label>
+
+                <label>
+                  <input type="radio" name="q4" value="chameleon" />
+                  I worry I’ll be rejected if I’m honest.
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q5. When I rest, I feel…</legend>
+
+                <label>
+                  <input type="radio" name="q5" value="caretaker" required />
+                  Like I’m not doing enough.
+                </label>
+
+                <label>
+                  <input type="radio" name="q5" value="overgiver" />
+                  Guilty. Someone might need me.
+                </label>
+
+                <label>
+                  <input type="radio" name="q5" value="invisible" />
+                  Like I’d fall apart.
+                </label>
+
+                <label>
+                  <input type="radio" name="q5" value="overachiever" />
+                  Lazy, weak, or behind.
+                </label>
+
+                <label>
+                  <input type="radio" name="q5" value="chameleon" />
+                  Exposed. I wouldn’t know who I am.
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q6. When I do ask for help, I feel…</legend>
+
+                <label>
+                  <input type="radio" name="q6" value="caretaker" required />
+                  Embarrassed—it means I’m not strong.
+                </label>
+
+                <label>
+                  <input type="radio" name="q6" value="overgiver" />
+                  Like I’ve let someone down.
+                </label>
+
+                <label>
+                  <input type="radio" name="q6" value="invisible" />
+                  Like a burden.
+                </label>
+
+                <label>
+                  <input type="radio" name="q6" value="overachiever" />
+                  Like I’m failing.
+                </label>
+
+                <label>
+                  <input type="radio" name="q6" value="chameleon" />
+                  Like they’ll see the real me and leave.
+                </label>
+              </fieldset>
+
+              <fieldset>
+                <legend>Q7. I keep going because…</legend>
+
+                <label>
+                  <input type="radio" name="q7" value="caretaker" required />
+                  If I don’t, everything falls apart.
+                </label>
+
+                <label>
+                  <input type="radio" name="q7" value="overgiver" />
+                  People depend on me.
+                </label>
+
+                <label>
+                  <input type="radio" name="q7" value="invisible" />
+                  It’s easier than feeling.
+                </label>
+
+                <label>
+                  <input type="radio" name="q7" value="overachiever" />
+                  I don’t know how to stop.
+                </label>
+
+                <label>
+                  <input type="radio" name="q7" value="chameleon" />
+                  It’s safer to be what people expect.
+                </label>
+              </fieldset>
+
+              <button type="submit">Reveal My Archetype</button>
+            </form>
+
+            <!-- RESULTS (ID MUST MATCH JS: quizResult) -->
+            <div id="quizResult" aria-live="polite"></div>
+
+            <!-- <p class="small" style="margin-top: 14px; opacity: 0.8">
+              Note: This quiz is reflective, not diagnostic. Use it as a starting point.
+            </p> -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="small">
+          <strong>© The Reclamation Co.</strong> <span id="year"></span>
+        </div>
+
+        <div class="small footer-nav">
+          <a href="services.html" data-track="footer_click" data-label="footer_services">Services</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="about.html" data-track="footer_click" data-label="footer_about">About</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="contact.html" data-track="footer_click" data-label="footer_contact">Contact</a>
+
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Soul Stone on Facebook"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/facebook-custom.png"
+              alt="Follow Soul Stone on Facebook"
+              loading="lazy"
+            />
+          </a>
+
+          <a
+            href="https://www.instagram.com/soulstoneinc"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Soul Stone on Instagram"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/black-instagram-icon.svg"
+              alt="Follow Soul Stone on Instagram"
+              loading="lazy"
+            />
+          </a>
+
+          <a
+            href="https://soulstoneinc.substack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Soul Stone on Substack"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/substack-round-custom (4).png"
+              alt="Follow Soul Stone on Substack"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Quiz logic -->
+    <script defer src="burnout-quiz.js"></script>
+  </body>
+</html>
