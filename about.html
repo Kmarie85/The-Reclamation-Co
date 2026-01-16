@@ -1,190 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>About | The Reclamation Co.</title>
-  <meta
-    name="description"
-    content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
-  />
-  <meta name="robots" content="index,follow" />
+    <title>About | The Reclamation Co.</title>
+    <meta
+      name="description"
+      content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
+    />
+    <meta name="robots" content="index,follow" />
 
-  <link rel="canonical" href="https://soulstoneinc.org/about.html" />
+    <link rel="canonical" href="https://soulstoneinc.org/about.html" />
 
-  <link rel="icon" href="favicon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="The Reclamation Co." />
-  <meta property="og:title" content="About | The Reclamation Co." />
-  <meta
-    property="og:description"
-    content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
-  />
-  <meta property="og:url" content="https://soulstoneinc.org/about.html" />
-  <!-- TODO: Replace with a real image -->
-  <meta property="og:image" content="https://soulstoneinc.org/Static/Images/og-image.png" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Reclamation Co." />
+    <meta property="og:title" content="About | The Reclamation Co." />
+    <meta
+      property="og:description"
+      content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
+    />
+    <meta property="og:url" content="https://soulstoneinc.org/about.html" />
+    <!-- TODO: Replace with a real image -->
+    <meta
+      property="og:image"
+      content="https://soulstoneinc.org/Static/Images/og-image.png"
+    />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About | The Reclamation Co." />
-  <meta
-    name="twitter:description"
-    content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
-  />
-  <meta name="twitter:url" content="https://soulstoneinc.org/about.html" />
-  <meta name="twitter:image" content="https://soulstoneinc.org/Static/Images/og-image.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About | The Reclamation Co." />
+    <meta
+      name="twitter:description"
+      content="Learn about The Reclamation Co. and the mission behind Soul Stone Inc.—tools, courses, and resources for reclamation and renewal."
+    />
+    <meta name="twitter:url" content="https://soulstoneinc.org/about.html" />
+    <meta
+      name="twitter:image"
+      content="https://soulstoneinc.org/Static/Images/og-image.png"
+    />
 
-  <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
-  <script>window.GA4_MEASUREMENT_ID = ""; // e.g. "G-XXXXXXXXXX"</script>
+    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
+    <script>
+      window.GA4_MEASUREMENT_ID = ""; // e.g. "G-XXXXXXXXXX"
+    </script>
 
-  <!-- Styles + Scripts -->
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+    <!-- Styles + Scripts -->
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
 
-  <!-- Structured Data (Soul Stone Inc. + The Reclamation Co.) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
+    <!-- Structured Data (Soul Stone Inc. + The Reclamation Co.) -->
+    <script type="application/ld+json">
       {
-        "@type": "Organization",
-        "name": "Soul Stone Inc.",
-        "url": "https://soulstoneinc.org"
-      },
-      {
-        "@type": "WebSite",
-        "name": "The Reclamation Co.",
-        "url": "https://soulstoneinc.org"
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Soul Stone Inc.",
+            "url": "https://soulstoneinc.org"
+          },
+          {
+            "@type": "WebSite",
+            "name": "The Reclamation Co.",
+            "url": "https://soulstoneinc.org"
+          }
+        ]
       }
-    ]
-  }
-  </script>
-</head>
+    </script>
+  </head>
 
-<body>
-  <header class="site-header">
-    <div class="container nav-container">
-      <a href="index.html" class="brand" data-track="nav_click" data-label="nav_home_brand">
-        <img src="Static/Images/Soul logo One.png" alt="The Reclamation Co. logo" id="logo" />
-        <div class="brand-text">
-          <div class="name">The Reclamation Co.</div>
-          <div class="tag">Trauma-informed tools for burned-out women</div>
-        </div>
-      </a>
-
-      <!-- Mobile menu button -->
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-        aria-controls="site-nav"
-        data-nav-toggle
-        data-track="nav_toggle"
-        data-label="nav_toggle"
-      >
-        Menu
-      </button>
-
-      <nav class="main-nav" id="site-nav" data-nav-links>
-        <a href="services.html" data-track="nav_click" data-label="nav_services">Services</a>
-        <a href="about.html" data-track="nav_click" data-label="nav_about">About</a>
-        <a href="contact.html" data-track="nav_click" data-label="nav_contact">Contact</a>
+  <body>
+    <header class="site-header">
+      <div class="container nav-container">
         <a
-          href="appalachian-soul-provisions.html"
+          href="index.html"
+          class="brand"
           data-track="nav_click"
-          data-label="nav_appalachian_soul_provisions"
+          data-label="nav_home_brand"
         >
-          Appalachian Soul Provisions
+          <img
+            src="Static/Images/Soul logo One.png"
+            alt="The Reclamation Co. logo"
+            id="logo"
+          />
+          <div class="brand-text">
+            <div class="name">The Reclamation Co.</div>
+            <div class="tag">Trauma-informed tools for burned-out women</div>
+          </div>
         </a>
-        <a
-          class="btn btn-primary"
-          href="BUY_LINK"
-          target="_blank"
-          rel="noopener"
-          data-track="buy_click"
-          data-label="nav_buy_soul_reset"
+
+        <!-- Mobile menu button -->
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
         >
-          Buy Soul Reset
-        </a>
-      </nav>
-    </div>
-  </header>
+          Menu
+        </button>
 
-  <main class="section">
-    <div class="container grid-2">
-      <div class="card card-pad">
-        <div class="kicker">About</div>
-        <h1 class="h1">This is for the woman who is tired of being strong.</h1>
-
-        <p class="lead">
-          The Reclamation Co. exists for burned-out women who have been carrying too much for too long.
-          Not because they’re weak. Because they’ve been surviving.
-        </p>
-
-        <div class="hr"></div>
-
-        <p class="small">
-          We’re trauma-informed. We don’t shame the coping strategies. We name them, honor what they protected,
-          and build new patterns that don’t cost you your body.
-        </p>
-
-        <p class="small">
-          Soul Reset is our signature offering: a practical, grounded set of tools to regulate, reflect, and reclaim.
-          Not a “fix.” A return.
-        </p>
-
-        <div class="hero-cta">
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a
+            href="services.html"
+            data-track="nav_click"
+            data-label="nav_services"
+            >Services</a
+          >
+          <a href="about.html" data-track="nav_click" data-label="nav_about"
+            >About</a
+          >
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact"
+            >Contact</a
+          >
+          <a
+            href="appalachian-soul-provisions.html"
+            data-track="nav_click"
+            data-label="nav_appalachian_soul_provisions"
+          >
+            Appalachian Soul Provisions
+          </a>
           <a
             class="btn btn-primary"
             href="BUY_LINK"
             target="_blank"
             rel="noopener"
             data-track="buy_click"
-            data-label="about_buy_soul_reset"
+            data-label="nav_buy_soul_reset"
           >
             Buy Soul Reset
           </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container grid-2">
+        <div class="card card-pad">
+          <div class="kicker">About</div>
+          <h1 class="h1">
+            This is for the woman who is tired of being strong.
+          </h1>
+
+          <p class="lead">
+            The Reclamation Co. exists for burned-out women who have been
+            carrying too much for too long. Not because they’re weak. Because
+            they’ve been surviving.
+          </p>
+
+          <div class="hr"></div>
+
+          <p class="small">
+            We’re trauma-informed. We don’t shame the coping strategies. We name
+            them, honor what they protected, and build new patterns that don’t
+            cost you your body.
+          </p>
+
+          <p class="small">
+            Soul Reset is our signature offering: a practical, grounded set of
+            tools to regulate, reflect, and reclaim. Not a “fix.” A return.
+          </p>
+
+          <div class="hero-cta">
+            <a
+              class="btn btn-primary"
+              href="BUY_LINK"
+              target="_blank"
+              rel="noopener"
+              data-track="buy_click"
+              data-label="about_buy_soul_reset"
+            >
+              Buy Soul Reset
+            </a>
+            <a
+              class="btn btn-ghost"
+              href="contact.html"
+              data-track="cta_click"
+              data-label="about_contact"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+
+        <aside class="card card-pad">
+          <div class="kicker">What we believe</div>
+          <h2 class="h2">No shame. No guilt. Just recalibration.</h2>
+
+          <ul class="small list">
+            <li>
+              Healing happens in relationship—especially the one you have with
+              yourself.
+            </li>
+            <li>Boundaries are not barriers. They are bridges to longevity.</li>
+            <li>Rest isn’t earned. It’s required.</li>
+            <li>Small rituals beat big promises.</li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="small">
+          <strong>© The Reclamation Co.</strong> <span id="year"></span>
+        </div>
+
+        <div class="small footer-nav">
           <a
-            class="btn btn-ghost"
-            href="contact.html"
-            data-track="cta_click"
-            data-label="about_contact"
+            href="services.html"
+            data-track="footer_click"
+            data-label="footer_services"
+            >Services</a
           >
-            Contact
+          <span class="dot" aria-hidden="true"></span>
+          <a
+            href="about.html"
+            data-track="footer_click"
+            data-label="footer_about"
+            >About</a
+          >
+          <span class="dot" aria-hidden="true"></span>
+          <a
+            href="contact.html"
+            data-track="footer_click"
+            data-label="footer_contact"
+            >Contact</a
+          >
+
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Soul Stone on Facebook"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/facebook-fill-svgrepo-com.svg"
+              alt="Follow Soul Stone on Facebook"
+              loading="lazy"
+            />
+          </a>
+
+          <a
+            href="https://soulstoneinc.substack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Soul Stone on Substack"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/substack-icon.svg"
+              alt="Follow Soul Stone on Substack"
+              loading="lazy"
+            />
           </a>
         </div>
       </div>
-
-      <aside class="card card-pad">
-        <div class="kicker">What we believe</div>
-        <h2 class="h2">No shame. No guilt. Just recalibration.</h2>
-
-        <ul class="small list">
-          <li>Healing happens in relationship—especially the one you have with yourself.</li>
-          <li>Boundaries are not barriers. They are bridges to longevity.</li>
-          <li>Rest isn’t earned. It’s required.</li>
-          <li>Small rituals beat big promises.</li>
-        </ul>
-      </aside>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="small">
-        <strong>© The Reclamation Co.</strong> <span id="year"></span>
-      </div>
-      <div class="small">
-        <a href="services.html" data-track="footer_click" data-label="footer_services">Services</a> ·
-        <a href="about.html" data-track="footer_click" data-label="footer_about">About</a> ·
-        <a href="contact.html" data-track="footer_click" data-label="footer_contact">Contact</a>
-      </div>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
