@@ -648,9 +648,26 @@ textarea:focus-visible {
   display: block; /* removes baseline weirdness */
 }
 
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-nav {
+    justify-content: center;
+  }
+}
+
 /* ---------- Tiny utilities ---------- */
 .center { text-align: center; }
 .mt-0 { margin-top: 0; }
 .mt-2 { margin-top: 12px; }
 .mt-3 { margin-top: 18px; }
 .mt-4 { margin-top: 24px; }
+
+.appal-card-pad {
+  text-align: center; /* remove whole block when Appalachian Soul Provisions goes live! */
+}
