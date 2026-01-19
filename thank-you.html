@@ -3,28 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <title>Contact | The Reclamation Co.</title>
+    <!-- Primary SEO -->
+    <title>Message Received | The Reclamation Co.</title>
     <meta
       name="description"
-      content="Contact The Reclamation Co. through Soul Stone Inc. Questions, collaborations, or support—reach out here."
+      content="Thanks for reaching out. Your message has been received."
     />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="author" content="Soul Stone Inc." />
+    <link rel="canonical" href="https://soulstoneinc.org/thank-you.html" />
 
-    <link rel="canonical" href="https://soulstoneinc.org/contact.html" />
-
+    <!-- Favicons -->
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="favicon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="The Reclamation Co." />
-    <meta property="og:title" content="Contact | The Reclamation Co." />
+    <meta property="og:title" content="Message Received | The Reclamation Co." />
     <meta
       property="og:description"
-      content="Contact The Reclamation Co. through Soul Stone Inc. Questions, collaborations, or support—reach out here."
+      content="Thanks for reaching out. Your message has been received."
     />
-    <meta property="og:url" content="https://soulstoneinc.org/contact.html" />
+    <meta property="og:url" content="https://soulstoneinc.org/thank-you.html" />
     <meta
       property="og:image"
       content="https://soulstoneinc.org/Static/Images/og-image.png"
@@ -32,47 +35,36 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Contact | The Reclamation Co." />
+    <meta name="twitter:title" content="Message Received | The Reclamation Co." />
     <meta
       name="twitter:description"
-      content="Contact The Reclamation Co. through Soul Stone Inc. Questions, collaborations, or support—reach out here."
+      content="Thanks for reaching out. Your message has been received."
     />
-    <meta name="twitter:url" content="https://soulstoneinc.org/contact.html" />
+    <meta name="twitter:url" content="https://soulstoneinc.org/thank-you.html" />
     <meta
       name="twitter:image"
       content="https://soulstoneinc.org/Static/Images/og-image.png"
     />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- UI -->
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
     <script>
       window.GA4_MEASUREMENT_ID = ""; // e.g. "G-XXXXXXXXXX"
     </script>
 
-    <!-- Styles + Scripts -->
-    <link rel="stylesheet" href="style.css" />
+    <!-- Scripts (global) -->
     <script defer src="script.js"></script>
-
-    <!-- Structured Data (Soul Stone Inc. + The Reclamation Co.) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "name": "Soul Stone Inc.",
-            "url": "https://soulstoneinc.org"
-          },
-          {
-            "@type": "WebSite",
-            "name": "The Reclamation Co.",
-            "url": "https://soulstoneinc.org"
-          }
-        ]
-      }
-    </script>
   </head>
 
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Header / Nav -->
     <header class="site-header">
       <div class="container nav-container">
         <a
@@ -137,112 +129,32 @@
       </div>
     </header>
 
-    <main class="section">
-      <div class="container grid-2">
-        <div class="card card-pad">
-          <div class="kicker">Contact</div>
-          <h1 class="h1">Reach out.</h1>
-          <p class="lead">
-            You don’t have to carry it perfectly. You just have to begin.
+    <main id="main">
+      <section class="page-hero">
+        <div class="container narrow center-content">
+          <h1>Thank you — I’ve got it.</h1>
+          <p>Your message was submitted successfully.</p>
+
+          <p>
+            I’ll review it and respond within <strong>1–2 business days</strong>.
           </p>
 
-          <div class="hr"></div>
-
-          <!-- Contact form (Formspree) -->
-          <form
-            class="form"
-            action="https://formspree.io/f/mojjwkea"
-            method="POST"
-            data-track="form_view"
-            data-label="contact_form"
-          >
-            <!-- Optional helpers for cleaner emails + redirect -->
-            <input
-              type="hidden"
-              name="_subject"
-              value="New message from soulstoneinc.org"
-            />
-            <input type="hidden" name="_source" value="contact.html" />
-            <input
-              type="hidden"
-              name="_next"
-              value="https://soulstoneinc.org/thank-you.html"
-            />
-
-            <label class="field">
-              <span class="field-label">Name</span>
-              <input class="input" type="text" name="name" required />
-            </label>
-
-            <label class="field">
-              <span class="field-label">Email</span>
-              <input class="input" type="email" name="email" required />
-            </label>
-
-            <label class="field">
-              <span class="field-label">What are you carrying right now?</span>
-              <textarea class="textarea" name="message" rows="6" required></textarea>
-            </label>
-
-            <label class="field">
-              <span class="field-label">What do you want?</span>
-              <select class="select" name="interest" required>
-                <option value="soul_reset_bundle">Soul Reset Bundle</option>
-                <option value="private_support">1:1 Support</option>
-                <option value="community">Community / Soulstead</option>
-                <option value="collaboration">Collaboration</option>
-              </select>
-            </label>
-
-            <button
-              class="btn btn-primary"
-              type="submit"
-              data-track="contact_submit"
-              data-label="contact_form_submit"
-            >
-              Send Message
-            </button>
-
-            <p class="help">
-              If you don’t hear back within 1–2 business days, feel free to reach out again.
-            </p>
-          </form>
-        </div>
-
-        <aside class="card card-pad">
-          <div class="kicker">Quick links</div>
-          <h2 class="h2">Start here.</h2>
-          <p class="small">
-            If you’re ready now, the bundle is the cleanest first step.
+          <p class="small-note" style="margin-top: 1.25rem;">
+            Want to move faster? You can reply directly to the confirmation email.
           </p>
 
-          <div class="hero-cta">
+          <div class="hero-cta" style="margin-top: 1.5rem;">
             <a
+              href="index.html"
               class="btn btn-primary"
-              href="https://thereclamationco.gumroad.com/l/kiprt"
-              target="_blank"
-              rel="noopener"
-              data-track="buy_click"
-              data-label="contact_buy_download"
+              data-track="thankyou_click"
+              data-label="thankyou_return_home"
             >
-              Buy / Download
-            </a>
-            <a
-              class="btn btn-ghost"
-              href="services.html"
-              data-track="nav_click"
-              data-label="contact_services"
-            >
-              Services
+              Return to Home
             </a>
           </div>
-
-          <div class="hr"></div>
-
-          <p class="small"><strong>Email:</strong> info@soulstoneinc.org</p>
-          <p class="small"><strong>Instagram:</strong> @soulstoneinc</p>
-        </aside>
-      </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">

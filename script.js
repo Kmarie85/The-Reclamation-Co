@@ -5,6 +5,8 @@
    - Outbound link tracking (no double-fire)
    - Mobile nav toggle
    - Footer year
+   - Contact form interest prefill (URL param)
+   - Thank-you page view tracking
    ========================================================= */
 
 (() => {
@@ -35,16 +37,18 @@
     // Load gtag.js
     const s = document.createElement("script");
     s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(idRaw)}`;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+      idRaw
+    )}`;
     document.head.appendChild(s);
 
     // Init gtag
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments);
+    };
     window.gtag("js", new Date());
-    window.gtag("config", idRaw, {
-      anonymize_ip: true
-    });
+    window.gtag("config", idRaw, { anonymize_ip: true });
   };
 
   initGA4();
@@ -67,7 +71,12 @@
     if (!href) return false;
 
     // Ignore in-page anchors and tel/mail links
-    if (href.startsWith("#") || href.startsWith("tel:") || href.startsWith("mailto:")) return false;
+    if (
+      href.startsWith("#") ||
+      href.startsWith("tel:") ||
+      href.startsWith("mailto:")
+    )
+      return false;
 
     let url;
     try {
@@ -86,41 +95,45 @@
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* =========================
-   Contact form prefill (from URL)
-   Example URLs:
-   - contact.html?interest=community
-   - contact.html?interest=private_support
-   - contact.html?interest=soul_reset_bundle
-========================= */
-(() => {
-  const params = new URLSearchParams(window.location.search);
-  const interest = (params.get("interest") || "").trim();
-  if (!interest) return;
-
-  // Only run on contact page
-  if (!/contact\.html$/i.test(window.location.pathname)) return;
-
-  const select = document.querySelector('select[name="interest"]');
-  if (!select) return;
-
-  const desired = interest.toLowerCase();
-
-  // Select by matching option value
-  for (const opt of Array.from(select.options)) {
-    if ((opt.value || "").toLowerCase() === desired) {
-      opt.selected = true;
-      break;
+    /* =========================
+       Thank-you page view tracking
+       Fires once per load on /thank-you.html
+       ========================= */
+    if (/thank-you\.html$/i.test(window.location.pathname)) {
+      track("thank_you_view", "contact_form_thank_you", {
+        page_path: window.location.pathname,
+      });
     }
-  }
 
-  // Fire change in case anything else depends on it
-  try {
-    select.dispatchEvent(new Event("change", { bubbles: true }));
-  } catch {}
-})();
+    /* =========================
+       Contact form prefill (from URL)
+       Example URLs:
+       - contact.html?interest=community
+       - contact.html?interest=private_support
+       - contact.html?interest=soul_reset_bundle
+       ========================= */
+    if (/contact\.html$/i.test(window.location.pathname)) {
+      const params = new URLSearchParams(window.location.search);
+      const interest = (params.get("interest") || "").trim();
+      if (interest) {
+        const select = document.querySelector('select[name="interest"]');
+        if (select) {
+          const desired = interest.toLowerCase();
 
-    
+          for (const opt of Array.from(select.options)) {
+            if ((opt.value || "").toLowerCase() === desired) {
+              opt.selected = true;
+              break;
+            }
+          }
+
+          try {
+            select.dispatchEvent(new Event("change", { bubbles: true }));
+          } catch {}
+        }
+      }
+    }
+
     /* =========================
        Mobile nav toggle
        Requires:
@@ -194,7 +207,9 @@
       const explicitLabel = el.getAttribute("data-label");
       const textLabel = (el.textContent || "").trim().slice(0, 80);
       const hrefLabel =
-        el.tagName === "A" ? (el.getAttribute("href") || "").trim().slice(0, 120) : "";
+        el.tagName === "A"
+          ? (el.getAttribute("href") || "").trim().slice(0, 120)
+          : "";
       const label = explicitLabel || textLabel || hrefLabel || "unknown";
 
       track(action, label);
