@@ -108,10 +108,7 @@
         </button>
 
         <nav class="main-nav" id="site-nav" data-nav-links>
-          <a
-            href="services.html"
-            data-track="nav_click"
-            data-label="nav_services"
+          <a href="services.html" data-track="nav_click" data-label="nav_services"
             >Services</a
           >
           <a href="about.html" data-track="nav_click" data-label="nav_about"
@@ -152,14 +149,18 @@
 
           <div class="hr"></div>
 
-          <!-- Layout-ready form (wire to Formspree / Netlify / etc. later) -->
+          <!-- Contact form (Formspree) -->
           <form
             class="form"
-            action="#"
+            action="https://formspree.io/f/mojjwkea"
             method="POST"
             data-track="form_view"
             data-label="contact_form"
           >
+            <!-- Optional: makes Formspree emails clearer -->
+            <input type="hidden" name="_subject" value="New message from soulstoneinc.org" />
+            <input type="hidden" name="_source" value="contact.html" />
+
             <label class="field">
               <span class="field-label">Name</span>
               <input class="input" type="text" name="name" required />
@@ -172,17 +173,12 @@
 
             <label class="field">
               <span class="field-label">What are you carrying right now?</span>
-              <textarea
-                class="textarea"
-                name="message"
-                rows="6"
-                required
-              ></textarea>
+              <textarea class="textarea" name="message" rows="6" required></textarea>
             </label>
 
             <label class="field">
               <span class="field-label">What do you want?</span>
-              <select class="select" name="interest">
+              <select class="select" name="interest" required>
                 <option value="soul_reset_bundle">Soul Reset Bundle</option>
                 <option value="private_support">1:1 Support</option>
                 <option value="community">Community / Soulstead</option>
@@ -200,8 +196,7 @@
             </button>
 
             <p class="help">
-              (We’ll wire this to a real form handler next. For now it’s
-              layout-ready.)
+              If you don’t hear back within 2 business days, feel free to reach out again.
             </p>
           </form>
         </div>
@@ -249,24 +244,15 @@
         </div>
 
         <div class="small footer-nav">
-          <a
-            href="services.html"
-            data-track="footer_click"
-            data-label="footer_services"
+          <a href="services.html" data-track="footer_click" data-label="footer_services"
             >Services</a
           >
           <span class="dot" aria-hidden="true"></span>
-          <a
-            href="about.html"
-            data-track="footer_click"
-            data-label="footer_about"
+          <a href="about.html" data-track="footer_click" data-label="footer_about"
             >About</a
           >
           <span class="dot" aria-hidden="true"></span>
-          <a
-            href="contact.html"
-            data-track="footer_click"
-            data-label="footer_contact"
+          <a href="contact.html" data-track="footer_click" data-label="footer_contact"
             >Contact</a
           >
 
