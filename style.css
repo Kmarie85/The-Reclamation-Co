@@ -1009,3 +1009,43 @@ body .page-hero .hero-cta {
     align-items: center !important;
   }
 }
+
+/* =========================
+   THANK-YOU PAGE ONLY
+   ========================= */
+
+body.thank-you main,
+body.thank-you #main {
+  width: 100% !important;
+}
+
+body.thank-you .page-hero {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.thank-you .page-hero .container.narrow.center-content {
+  width: min(720px, 100%) !important;
+  margin: 0 auto !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  text-align: center !important;
+}
+
+body.thank-you .page-hero .container.narrow.center-content * {
+  text-align: center !important;
+}
+
+body.thank-you .page-hero .hero-cta {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
