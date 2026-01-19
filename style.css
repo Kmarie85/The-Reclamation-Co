@@ -965,3 +965,47 @@ textarea:focus-visible {
 .page-hero p {
   text-align: center;
 }
+
+/* =========================
+   THANK-YOU PAGE: FORCE CENTER
+   (drop-in override)
+   ========================= */
+
+body .page-hero {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+body .page-hero .container.narrow.center-content {
+  /* hard center the block */
+  width: 100% !important;
+  max-width: 720px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  /* center everything inside */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+body .page-hero .container.narrow.center-content > * {
+  text-align: center !important;
+}
+
+/* center the CTA row + button */
+body .page-hero .hero-cta {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* optional: make it feel centered vertically too */
+@media (min-width: 700px) {
+  body .page-hero {
+    min-height: 60vh !important;
+    align-items: center !important;
+  }
+}
