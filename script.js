@@ -5,8 +5,8 @@
    - Outbound link tracking (no double-fire)
    - Mobile nav toggle
    - Footer year
-   - Contact form interest prefill (URL param)
-   - Thank-you page view tracking
+   - Contact form prefill (from URL)
+   - Formspree submit handler (forces on-site thank-you redirect)
    ========================================================= */
 
 (() => {
@@ -22,19 +22,15 @@
 
   /* =========================
      GA4 (optional)
-     - Set window.GA4_MEASUREMENT_ID = "G-XXXX..." in the HTML head.
-     - If blank, GA will not load (site can launch without analytics).
   ========================= */
   const initGA4 = () => {
     const idRaw = (window.GA4_MEASUREMENT_ID || "").toString().trim();
     const valid = /^G-[A-Z0-9]{6,}$/i.test(idRaw);
     if (!valid) return;
 
-    // Avoid double-init
     if (window.__ga4_initialized) return;
     window.__ga4_initialized = true;
 
-    // Load gtag.js
     const s = document.createElement("script");
     s.async = true;
     s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
@@ -42,7 +38,6 @@
     )}`;
     document.head.appendChild(s);
 
-    // Init gtag
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag() {
       window.dataLayer.push(arguments);
@@ -70,7 +65,6 @@
     const href = (a.getAttribute("href") || "").trim();
     if (!href) return false;
 
-    // Ignore in-page anchors and tel/mail links
     if (
       href.startsWith("#") ||
       href.startsWith("tel:") ||
@@ -96,49 +90,34 @@
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     /* =========================
-       Thank-you page view tracking
-       Fires once per load on /thank-you.html
-       ========================= */
-    if (/thank-you\.html$/i.test(window.location.pathname)) {
-      track("thank_you_view", "contact_form_thank_you", {
-        page_path: window.location.pathname,
-      });
-    }
-
-    /* =========================
        Contact form prefill (from URL)
-       Example URLs:
-       - contact.html?interest=community
-       - contact.html?interest=private_support
-       - contact.html?interest=soul_reset_bundle
+       Example: contact.html?interest=community
        ========================= */
-    if (/contact\.html$/i.test(window.location.pathname)) {
+    (() => {
       const params = new URLSearchParams(window.location.search);
       const interest = (params.get("interest") || "").trim();
-      if (interest) {
-        const select = document.querySelector('select[name="interest"]');
-        if (select) {
-          const desired = interest.toLowerCase();
+      if (!interest) return;
 
-          for (const opt of Array.from(select.options)) {
-            if ((opt.value || "").toLowerCase() === desired) {
-              opt.selected = true;
-              break;
-            }
-          }
+      if (!/contact\.html$/i.test(window.location.pathname)) return;
 
-          try {
-            select.dispatchEvent(new Event("change", { bubbles: true }));
-          } catch {}
+      const select = document.querySelector('select[name="interest"]');
+      if (!select) return;
+
+      const desired = interest.toLowerCase();
+      for (const opt of Array.from(select.options)) {
+        if ((opt.value || "").toLowerCase() === desired) {
+          opt.selected = true;
+          break;
         }
       }
-    }
+
+      try {
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+      } catch {}
+    })();
 
     /* =========================
        Mobile nav toggle
-       Requires:
-       - button.nav-toggle[data-nav-toggle]
-       - nav.main-nav[data-nav-links]
        ========================= */
     const navToggle = document.querySelector("[data-nav-toggle]");
     const navLinks = document.querySelector("[data-nav-links]");
@@ -149,7 +128,6 @@
         navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
-      // Close menu after clicking any nav link (mobile UX)
       navLinks.addEventListener("click", (e) => {
         const a = e.target.closest("a");
         if (!a) return;
@@ -160,7 +138,6 @@
         }
       });
 
-      // Close menu with Escape
       document.addEventListener("keydown", (e) => {
         if (e.key !== "Escape") return;
         if (!navLinks.classList.contains("is-open")) return;
@@ -170,20 +147,66 @@
     }
 
     /* =========================
+       Formspree submit handler
+       Forces redirect to your on-site thank-you page.
+       ========================= */
+    (() => {
+      if (!/contact\.html$/i.test(window.location.pathname)) return;
+
+      const form = document.querySelector('form[action*="formspree.io/f/"]');
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        // Force our own redirect after successful submission
+        e.preventDefault();
+
+        const action = form.getAttribute("action");
+        const method = (form.getAttribute("method") || "POST").toUpperCase();
+
+        const nextInput = form.querySelector('input[name="_next"]');
+        const nextUrl =
+          (nextInput && nextInput.value) ||
+          "https://www.soulstoneinc.org/thank-you.html";
+
+        try {
+          const res = await fetch(action, {
+            method,
+            body: new FormData(form),
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (res.ok) {
+            // Optional: track successful submit
+            track("contact_submit_success", "contact_form_success");
+
+            // Redirect to your thank-you page
+            window.location.href = nextUrl;
+            return;
+          }
+
+          // If not ok, fall back to normal submit (so user still can send)
+          track("contact_submit_error", "contact_form_error", { status: res.status });
+          form.submit();
+        } catch (err) {
+          // Network issues: fall back to normal submit
+          track("contact_submit_error", "contact_form_error_network");
+          form.submit();
+        }
+      });
+    })();
+
+    /* =========================
        Single click handler for analytics
-       - Tracks data-track elements
-       - Tracks outbound links (without double firing)
        ========================= */
     document.addEventListener("click", (e) => {
-      // 1) Outbound link tracking (first, so we can stop double counts)
       const a = e.target.closest("a[href]");
       if (a && isOutboundLink(a)) {
-        // If you already explicitly track this element, don’t auto-track it again.
         if (!a.hasAttribute("data-track")) {
           const href = a.getAttribute("href");
           track("outbound_click", href);
 
-          // If same-tab outbound navigation, give GA a breath to send
           const opensNewTab = a.getAttribute("target") === "_blank";
           const hasModifier =
             e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
@@ -195,15 +218,13 @@
             }, 150);
           }
         }
-        return; // prevent also being handled by data-track lookup below
+        return;
       }
 
-      // 2) Standard data-track tracking
       const el = e.target.closest("[data-track]");
       if (!el) return;
 
       const action = el.getAttribute("data-track") || "click";
-
       const explicitLabel = el.getAttribute("data-label");
       const textLabel = (el.textContent || "").trim().slice(0, 80);
       const hrefLabel =
