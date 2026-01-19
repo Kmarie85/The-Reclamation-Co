@@ -928,3 +928,40 @@ textarea:focus-visible {
   border-radius: 999px;
 }
 
+
+
+/* =========================
+   Thank You Page – Centering Fix
+   ========================= */
+
+/* Center the hero section itself */
+.page-hero {
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure the inner container is centered */
+.page-hero .container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* If you’re using a “narrow” container, lock its width and center it */
+.page-hero .container.narrow {
+  max-width: 640px; /* adjust if you want wider */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Center CTA button row */
+.page-hero .hero-cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* Safety: center text elements explicitly */
+.page-hero h1,
+.page-hero p {
+  text-align: center;
+}
