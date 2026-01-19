@@ -15,6 +15,7 @@
   // ====== CONFIG ======
   const QUIZ_FORM_ID = "quizForm";
   const RESULT_ID = "quizResult";
+  const DEV_MODE = false;
 
   // MUST match your <input value="">
   const ARCHETYPES = ["caretaker", "overachiever", "invisible", "overgiver", "chameleon"];
@@ -246,24 +247,20 @@
         `;
       }
 
-      if (hasBundle) {
-        return `
-          <div class="quiz-cta">
-            <a class="btn-primary" href="${escapeHtml(bundleUrl)}" target="_blank" rel="noopener">
-              Unlock the Soul Reset Bundle
-            </a>
-            <div class="micro">
-              <p class="muted"><strong>What you’ll get:</strong></p>
-              ${buildList(WHAT_YOU_GET_BUNDLE)}
-            </div>
+if (hasBundle) {
+  return `
+    <div class="quiz-cta">
+      <a class="btn-primary" href="${escapeHtml(bundleUrl)}" target="_blank" rel="noopener">
+        Unlock the Soul Reset Bundle
+      </a>
+      <div class="micro">
+        <p class="muted"><strong>What you’ll get:</strong></p>
+        ${buildList(WHAT_YOU_GET_BUNDLE)}
+      </div>
+    </div>
+  `;
+}
 
-            <p class="muted small" style="margin-top:.75rem;">
-              “Full Archetype Report” product in Gumroad, paste its link into
-              <code>PAID_ARCHETYPE_BASE</code>, and this page will automatically show it as the primary unlock.
-            </p>
-          </div>
-        `;
-      }
 
       return `
         <div class="quiz-cta">

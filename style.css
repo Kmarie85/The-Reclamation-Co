@@ -914,3 +914,17 @@ textarea:focus-visible {
     transform: none;
   }
 }
+
+/* Quiz result primary CTA — make it feel bigger */
+.quiz-cta .btn-primary {
+  display: inline-flex;            /* better vertical centering */
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 12px;              /* ← this is the main change */
+  min-height: 40px;                /* larger tap target */
+  line-height: 1.2;
+
+  border-radius: 999px;
+}
+
