@@ -1049,3 +1049,151 @@ body.thank-you .page-hero .hero-cta {
   display: flex !important;
   justify-content: center !important;
 }
+
+/* =========================
+   Conversation (Archetype-style)
+   ========================= */
+
+.writing-shell { 
+  margin-bottom: 50px;
+}
+
+.writing-grid{
+  display: grid;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+@media (min-width: 760px){
+  .writing-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1040px){
+  .writing-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Entry card matches your archetype blocks */
+.writing-card{
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  background: rgba(236, 225, 202, 0.42);
+  border: 1px solid rgba(29, 27, 21, 0.14);
+  box-shadow: none;
+}
+
+.writing-card:hover{
+  transform: translateY(-1px);
+  background: rgba(230, 216, 190, 0.62);
+  border-color: rgba(111, 124, 99, 0.35);
+}
+
+.writing-title{
+  margin: 10px 0 10px;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.writing-excerpt{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.65;
+  opacity: 0.92;
+}
+
+.writing-date{
+  margin-top: 12px;
+  opacity: 0.7;
+}
+
+/* Chips should feel like your pills/badges */
+.chip{
+  border: 1px solid rgba(29, 27, 21, 0.18);
+  background: rgba(236, 225, 202, 0.45);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 22px rgba(29, 27, 21, 0.10);
+}
+
+.chip.is-active{
+  background: linear-gradient(180deg, rgba(83, 50, 29, 0.98), rgba(29, 27, 21, 0.98));
+  color: #f5eedd;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Conversation (Archetype-style)
+   ========================= */
+
+.writing-grid{
+  display: grid;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+@media (min-width: 760px){
+  .writing-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1040px){
+  .writing-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+.writing-card{
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  background: rgba(236, 225, 202, 0.42);
+  border: 1px solid rgba(29, 27, 21, 0.14);
+  box-shadow: none;
+}
+
+.writing-card:hover{
+  transform: translateY(-1px);
+  background: rgba(230, 216, 190, 0.62);
+  border-color: rgba(111, 124, 99, 0.35);
+}
+
+.writing-title{
+  margin: 10px 0 10px;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.writing-excerpt{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.65;
+  opacity: 0.92;
+}
+
+.writing-date{
+  margin-top: 12px;
+  opacity: 0.7;
+}
+
+/* Reader body spacing */
+.reader-body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+.reader-body p{
+  margin: 0 0 14px;
+}

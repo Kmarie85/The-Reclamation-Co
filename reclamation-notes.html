@@ -1,76 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <title>Services | The Reclamation Co.</title>
+    <!-- Primary SEO -->
+    <title>Reclamation Notes | The Reclamation Co.</title>
     <meta
       name="description"
-      content="Explore services and offerings from The Reclamation Co.—courses, workbooks, and support designed for real reclamation."
+      content="Daily words for women reclaiming themselves: reflections, pattern-naming, and guidance."
     />
     <meta name="robots" content="index,follow" />
-
-    <link rel="canonical" href="https://soulstoneinc.org/services.html" />
-
+    <link
+      rel="canonical"
+      href="https://soulstoneinc.org/reclamation-notes.html"
+    />
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="favicon.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="The Reclamation Co." />
-    <meta property="og:title" content="Services | The Reclamation Co." />
-    <meta
-      property="og:description"
-      content="Explore services and offerings from The Reclamation Co.—courses, workbooks, and support designed for real reclamation."
-    />
-    <meta property="og:url" content="https://soulstoneinc.org/services.html" />
-    <!-- TODO: Replace with a real image -->
-    <meta
-      property="og:image"
-      content="https://soulstoneinc.org/Static/Images/og-image.png"
-    />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Services | The Reclamation Co." />
-    <meta
-      name="twitter:description"
-      content="Explore services and offerings from The Reclamation Co.—courses, workbooks, and support designed for real reclamation."
-    />
-    <meta name="twitter:url" content="https://soulstoneinc.org/services.html" />
-    <meta
-      name="twitter:image"
-      content="https://soulstoneinc.org/Static/Images/og-image.png"
-    />
-
-    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
-<script>
-  window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
-</script>
-
-    <!-- Styles + Scripts -->
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
 
-    <!-- Structured Data (Soul Stone Inc. + The Reclamation Co.) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "name": "Soul Stone Inc.",
-            "url": "https://soulstoneinc.org"
-          },
-          {
-            "@type": "WebSite",
-            "name": "The Reclamation Co.",
-            "url": "https://soulstoneinc.org"
-          }
-        ]
-      }
-    </script>
+    <!-- Scripts -->
+    <script defer src="script.js"></script>
+    <script defer src="assets/js/reclamation-notes.js"></script>
   </head>
 
   <body>
@@ -144,96 +98,92 @@
       </div>
     </header>
 
-    <main class="section">
-      <div class="container">
-        <div class="kicker">Services</div>
-        <h1 class="h1">Choose your support.</h1>
-        <p class="lead">
-          Start with the bundle. Add 1:1 support if you want guidance,
-          accountability, and a steadier rhythm.
-        </p>
+    <main>
+      <!-- Filters + Feed wrapper card -->
+      <section class="section section-tight">
+        <div class="container">
+          <div class="card card-pad writing-shell">
+            <p class="kicker mt-0">THE CONVERSATION</p>
+            <h1 class="h2 h2-tight mt-0">
+              Daily words for women who are reclaiming themselves.
+            </h1>
+            <p class="lead mt-2">
+              Short reflections, pattern-naming, and guidance for women who
+              over-carry, over-function, and disappear for others. Updated
+              often. Take what steadies you. Leave the rest.
+            </p>
 
-        <div class="section section-tight">
-          <div class="grid-3">
-            <div class="card card-pad">
-              <div class="kicker">Digital</div>
-              <h2 class="h2 h2-tight">Soul Reset Bundle</h2>
-              <p class="small">
-                Your core toolkit: regulate → reflect → reclaim.
-              </p>
-              <div class="hr"></div>
-              <ul class="small list">
-                <li>Body-based regulation tools</li>
-                <li>Burnout archetype reflection</li>
-                <li>Micro-routines + boundary language</li>
-              </ul>
-              <div class="hero-cta">
-                <a
-                  class="btn btn-primary"
-                  href="https://thereclamationco.gumroad.com/l/kiprt"
-                  target="_blank"
-                  rel="noopener"
-                  data-track="buy_click"
-                  data-label="services_buy_soul_reset"
+            <div class="hr"></div>
+
+            <!-- Filters -->
+            <div class="writing-controls">
+              <div class="chip-row" role="tablist" aria-label="Entry types">
+                <button
+                  class="chip is-active"
+                  data-filter="all"
+                  role="tab"
+                  aria-selected="true"
                 >
-                  Buy / Download
-                </a>
+                  All
+                </button>
+                <button
+                  class="chip"
+                  data-filter="journal"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Journal
+                </button>
+                <button
+                  class="chip"
+                  data-filter="guidance"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Guidance
+                </button>
+                <button
+                  class="chip"
+                  data-filter="pattern"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Pattern
+                </button>
+                <button
+                  class="chip"
+                  data-filter="letter"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Letter
+                </button>
               </div>
             </div>
 
-            <div class="card card-pad">
-              <div class="kicker">1:1</div>
-              <h2 class="h2 h2-tight">Private Support</h2>
-              <p class="small">
-                For when you need more than information—you want a steadier
-                nervous system and a plan you can keep.
-              </p>
-              <div class="hr"></div>
-              <ul class="small list">
-                <li>Clarify what you’re carrying</li>
-                <li>Build a sustainable reset rhythm</li>
-                <li>Boundaries without guilt spirals</li>
-              </ul>
-              <div class="hero-cta">
-<a
-  class="btn btn-outline"
-  href="contact.html?interest=private_support"
-  data-track="cta_click"
-  data-label="services_private_support_request"
->
-  Request 1:1 Support
-</a>
-              </div>
-            </div>
-
-            <div class="card card-pad">
-              <div class="kicker">Community</div>
-              <h2 class="h2 h2-tight">Soulstead (Coming Soon)</h2>
-              <p class="small">
-                A private space for women ready to stop doing it alone.
-              </p>
-              <div class="hr"></div>
-              <ul class="small list">
-                <li>Reset circles + guided prompts</li>
-                <li>Support without performance</li>
-                <li>Practice, not pressure</li>
-              </ul>
-              <div class="hero-cta">
-<a
-  class="btn btn-primary"
-  href="contact.html?interest=community"
-  data-track="cta_click"
-  data-label="services_community_notify"
->
-  Get notified on Community
-</a>
-
-                </a>
-              </div>
-            </div>
+            <!-- Feed -->
+            <div id="writingStatus" class="help" aria-live="polite"></div>
+            <div id="writingList" class="writing-grid"></div>
           </div>
+
+          <!-- Reader (single entry view) -->
+          <section id="writingReader" class="writing-reader" hidden>
+            <button class="btn btn-ghost mt-3" id="backToFeed" type="button">
+              ← Back to entries
+            </button>
+
+            <div class="card card-pad mt-3">
+              <p class="kicker mt-0" id="readerType"></p>
+              <h2 class="h2 h2-tight mt-2" id="readerTitle"></h2>
+              <p class="help mt-2" id="readerMeta"></p>
+
+              <div class="hr"></div>
+
+              <article class="reader-body" id="readerBody"></article>
+            </div>
+          </section>
         </div>
-      </div>
+      </section>
     </main>
 
     <footer class="footer">
