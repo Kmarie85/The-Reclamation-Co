@@ -323,9 +323,56 @@ textarea:focus-visible {
 .appsoul-h2,
 .services-h1 {
   font-size: clamp(24px, 3.5vw, 36px);
-  font-weight: 650;
+  font-weight: 450;
 }
 
+/* About page: stacked cards spacing */
+.section .container > .card {
+  margin-bottom: 18px;
+}
+.section .container > .card:last-child {
+  margin-bottom: 0;
+}
+.about-page .h1 {
+  font-size: clamp(24px, 3.5vw, 36px);
+  line-height: 1.25;
+}
+
+.about-page .h1 {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.about-page .h1-sub {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  line-height: 1.5;
+  margin-top: 0.35rem;
+  max-width: none;
+}
+
+.about-page .lead {
+  max-width: none;
+}
+
+.about-page .card .small {
+  font-size: clamp(1.02rem, 1.1vw, 1rem);
+  line-height: 1.75;
+}
+
+.about-page .card .list {
+  font-size: inherit;
+  line-height: 1.75;
+}
+
+.about-page .card .lead {
+  font-size: clamp(.8rem, 1.4vw, 1rem);
+  line-height: 1.6;
+}
+
+.about-page .card ul {
+  padding-left: 3rem;   /* controls indent */
+  margin-left: 0;
+}
 /* ---------- Layout blocks ---------- */
 .section { padding: 54px 0; }
 
@@ -1236,4 +1283,105 @@ body.thank-you .page-hero .hero-cta {
   ) !important;
   color: #f5eedd !important;
   border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* =========================
+   Nav Dropdown (Our Work)
+   - Minimal, matches design system
+   - Desktop: hover/focus dropdown
+   - Mobile: becomes a simple stacked group in the open nav panel
+   ========================= */
+
+/* Wrapper behaves like a nav item */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Parent link: reuse your nav link styling */
+.nav-parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Little caret */
+.nav-caret {
+  font-size: 12px;
+  opacity: 0.7;
+  transform: translateY(-1px);
+}
+
+/* Menu panel */
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 240px;
+  padding: 10px;
+  border-radius: 14px;
+
+  background: rgba(236, 225, 202, 0.96);
+  border: 1px solid rgba(29, 27, 21, 0.16);
+  box-shadow: 0 14px 30px rgba(29, 27, 21, 0.12);
+
+  display: none;
+  z-index: 60;
+}
+
+/* Menu links */
+.nav-menu a {
+  display: block;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav-menu a:hover {
+  background: rgba(111, 124, 99, 0.08);
+}
+
+/* Show dropdown on hover (desktop) */
+.nav-dropdown:hover .nav-menu {
+  display: block;
+}
+
+/* Show dropdown when focused via keyboard */
+.nav-dropdown:focus-within .nav-menu {
+  display: block;
+}
+
+/* Optional: rotate caret when open */
+.nav-dropdown:hover .nav-caret,
+.nav-dropdown:focus-within .nav-caret {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+/* Mobile: dropdown becomes a stacked group (no absolute positioning) */
+@media (max-width: 860px) {
+  .nav-dropdown {
+    display: grid;
+    gap: 8px;
+  }
+
+  .nav-menu {
+    position: static;
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .nav-menu a {
+    width: 100%;
+    padding: 12px 12px;
+    border-radius: 12px;
+    white-space: normal;
+  }
 }
