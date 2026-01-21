@@ -3,16 +3,20 @@
    - Optional GA4 loader (set window.GA4_MEASUREMENT_ID in HTML)
    - GA click tracking (data-track / data-label)
    - Outbound link tracking (no double-fire)
+   - Sticky header anchor offset (no hidden section titles)
    - Mobile nav toggle
+   - Close dropdown (<details>) on outside click / Escape / selection
    - Footer year
    - Contact form prefill (from URL)
    - Formspree submit handler (forces on-site thank-you redirect)
-   - Sticky header offset + reliable anchor scrolling (FIXED)
    ========================================================= */
 
 (() => {
   "use strict";
 
+  /* -------------------------
+     Helpers
+  ------------------------- */
   const onReady = (fn) => {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", fn, { once: true });
@@ -21,9 +25,12 @@
     }
   };
 
-  /* =========================
+  const qs = (sel, root = document) => root.querySelector(sel);
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  /* -------------------------
      GA4 (optional)
-  ========================= */
+  ------------------------- */
   const initGA4 = () => {
     const idRaw = (window.GA4_MEASUREMENT_ID || "").toString().trim();
     const valid = /^G-[A-Z0-9]{6,}$/i.test(idRaw);
@@ -34,9 +41,7 @@
 
     const s = document.createElement("script");
     s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
-      idRaw
-    )}`;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(idRaw)}`;
     document.head.appendChild(s);
 
     window.dataLayer = window.dataLayer || [];
@@ -46,8 +51,6 @@
     window.gtag("js", new Date());
     window.gtag("config", idRaw, { anonymize_ip: true });
   };
-
-  initGA4();
 
   const hasGA = () => typeof window.gtag === "function";
 
@@ -70,9 +73,7 @@
       href.startsWith("#") ||
       href.startsWith("tel:") ||
       href.startsWith("mailto:")
-    ) {
-      return false;
-    }
+    ) return false;
 
     let url;
     try {
@@ -80,204 +81,249 @@
     } catch {
       return false;
     }
-
     return url.origin !== window.location.origin;
   };
 
-  onReady(() => {
-    /* =========================
-       Footer year helper
-       ========================= */
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  /* -------------------------
+     Sticky header offset + anchor scrolling
+  ------------------------- */
+  const initStickyAnchorOffset = () => {
+    const header = qs(".site-header");
+    if (!header) return;
 
-    /* =========================
-       Sticky header offset + reliable anchor scrolling
-       - fixes "section hidden under header"
-       - fixes hash jumps (including dropdown links)
-       ========================= */
-    (() => {
-      const header = document.querySelector(".site-header");
-      if (!header) return;
+    const setHeaderOffset = () => {
+      const h = Math.ceil(header.getBoundingClientRect().height || 0);
+      document.documentElement.style.setProperty("--header-offset", `${h}px`);
+    };
 
-      const setHeaderOffset = () => {
-        const h = Math.ceil(header.getBoundingClientRect().height);
-        document.documentElement.style.setProperty("--header-offset", `${h}px`);
-      };
-
-      const scrollToHash = (hash) => {
-        if (!hash) return;
-        const el = document.querySelector(decodeURIComponent(hash));
-        if (!el) return;
-
-        // Let layout settle, then scroll with measured offset
-        requestAnimationFrame(() => {
-          setHeaderOffset();
-          const offset =
-            parseInt(
-              getComputedStyle(document.documentElement)
-                .getPropertyValue("--header-offset")
-                .trim(),
-              10
-            ) || 0;
-
-          const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 16;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        });
-      };
-
-      // initial load with hash
-      if (window.location.hash) scrollToHash(window.location.hash);
-
-      // keep offset accurate
-      setHeaderOffset();
-      window.addEventListener("resize", setHeaderOffset);
-      window.addEventListener("orientationchange", setHeaderOffset);
-
-      // intercept in-page anchor clicks (prevents hiding under sticky header)
-      document.addEventListener("click", (e) => {
-        const a = e.target.closest('a[href^="#"], a[href*="services.html#"]');
-        if (!a) return;
-
-        const href = a.getAttribute("href") || "";
-        const hash = href.includes("#") ? "#" + href.split("#")[1] : href;
-        if (!hash || hash === "#") return;
-
-        e.preventDefault();
-        history.pushState(null, "", hash);
-        scrollToHash(hash);
-
-        // close dropdown after selecting a link
-        const openDetails = a.closest("details.nav-dropdown[open]");
-        if (openDetails) openDetails.removeAttribute("open");
-
-        // close mobile nav too (if open)
-        const navLinks = document.querySelector("[data-nav-links]");
-        const navToggle = document.querySelector("[data-nav-toggle]");
-        if (navLinks && navLinks.classList.contains("is-open")) {
-          navLinks.classList.remove("is-open");
-          if (navToggle) navToggle.setAttribute("aria-expanded", "false");
-        }
-      });
-
-      // close dropdown when clicking outside
-      document.addEventListener("click", (e) => {
-        const dd = document.querySelector("details.nav-dropdown[open]");
-        if (!dd) return;
-        if (e.target.closest("details.nav-dropdown")) return;
-        dd.removeAttribute("open");
-      });
-    })();
-
-    /* =========================
-       Contact form prefill (from URL)
-       Example: contact.html?interest=community
-       ========================= */
-    (() => {
-      const params = new URLSearchParams(window.location.search);
-      const interest = (params.get("interest") || "").trim();
-      if (!interest) return;
-
-      if (!/contact\.html$/i.test(window.location.pathname)) return;
-
-      const select = document.querySelector('select[name="interest"]');
-      if (!select) return;
-
-      const desired = interest.toLowerCase();
-      for (const opt of Array.from(select.options)) {
-        if ((opt.value || "").toLowerCase() === desired) {
-          opt.selected = true;
-          break;
-        }
-      }
-
+    const scrollToHash = (hash, smooth = true) => {
+      if (!hash) return;
+      let sel;
       try {
-        select.dispatchEvent(new Event("change", { bubbles: true }));
-      } catch {}
-    })();
+        sel = decodeURIComponent(hash);
+      } catch {
+        sel = hash;
+      }
+      const el = qs(sel);
+      if (!el) return;
 
-    /* =========================
-       Mobile nav toggle
-       ========================= */
-    const navToggle = document.querySelector("[data-nav-toggle]");
-    const navLinks = document.querySelector("[data-nav-links]");
+      // let layout settle; ensures header height is correct
+      requestAnimationFrame(() => {
+        setHeaderOffset();
+        const offset =
+          parseInt(
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--header-offset"),
+            10
+          ) || 0;
 
+        const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 16;
+
+        window.scrollTo({
+          top: y,
+          behavior: smooth ? "smooth" : "auto",
+        });
+      });
+    };
+
+    setHeaderOffset();
+    window.addEventListener("resize", setHeaderOffset);
+    window.addEventListener("orientationchange", setHeaderOffset);
+
+    // On initial load with hash
+    if (window.location.hash) {
+      scrollToHash(window.location.hash, false);
+    }
+
+    // Handle ALL in-page anchors so they don't hide under sticky header
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href*="#"]');
+      if (!a) return;
+
+      const href = a.getAttribute("href") || "";
+      const hasHash = href.includes("#");
+      if (!hasHash) return;
+
+      // Determine if link targets same page
+      const [pathPart, hashPart] = href.split("#");
+      const hash = "#" + (hashPart || "");
+      if (!hash || hash === "#") return;
+
+      const currentFile = window.location.pathname.split("/").pop() || "";
+      const isSamePage =
+        pathPart === "" ||
+        pathPart === currentFile ||
+        pathPart.endsWith("/" + currentFile);
+
+      // allow services.html#... from other pages too
+      const isSameOriginTarget = (() => {
+        try {
+          const url = new URL(href, window.location.href);
+          return url.origin === window.location.origin;
+        } catch {
+          return false;
+        }
+      })();
+
+      if (!isSameOriginTarget) return;
+
+      // If it's another page + hash, let browser navigate normally.
+      // Example: from index.html clicking services.html#tools-resources should navigate.
+      if (!isSamePage && pathPart !== "") return;
+
+      // Same page hash: prevent default jump; do our offset scroll
+      e.preventDefault();
+      history.pushState(null, "", hash);
+      scrollToHash(hash, true);
+
+      // Close any open dropdown details after selection
+      const openDetails = a.closest("details[open]");
+      if (openDetails) openDetails.removeAttribute("open");
+
+      // Close mobile nav if open
+      const navLinks = qs("[data-nav-links]");
+      const navToggle = qs("[data-nav-toggle]");
+      if (navLinks && navLinks.classList.contains("is-open")) {
+        navLinks.classList.remove("is-open");
+        if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // If user uses back/forward and hash changes
+    window.addEventListener("popstate", () => {
+      if (window.location.hash) scrollToHash(window.location.hash, false);
+    });
+  };
+
+  /* -------------------------
+     Nav toggle + dropdown close behaviors
+ ------------------------- */
+  const initNav = () => {
+    const navToggle = qs("[data-nav-toggle]");
+    const navLinks = qs("[data-nav-links]");
     if (navToggle && navLinks) {
       navToggle.addEventListener("click", () => {
         const isOpen = navLinks.classList.toggle("is-open");
         navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
-      // close nav after any link click (mobile)
-      navLinks.addEventListener("click", (e) => {
-        const a = e.target.closest("a[href]");
-        if (!a) return;
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
 
+        // close mobile nav
         if (navLinks.classList.contains("is-open")) {
           navLinks.classList.remove("is-open");
           navToggle.setAttribute("aria-expanded", "false");
         }
-      });
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key !== "Escape") return;
-        if (!navLinks.classList.contains("is-open")) return;
-        navLinks.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
+        // close any open dropdown
+        const dd = qs("details.nav-dropdown[open]");
+        if (dd) dd.removeAttribute("open");
       });
     }
 
-    /* =========================
-       Formspree submit handler
-       Forces redirect to your on-site thank-you page.
-       ========================= */
-    (() => {
-      if (!/contact\.html$/i.test(window.location.pathname)) return;
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      const openDd = qs("details.nav-dropdown[open]");
+      if (!openDd) return;
+      if (e.target.closest("details.nav-dropdown")) return;
+      openDd.removeAttribute("open");
+    });
+  };
 
-      const form = document.querySelector('form[action*="formspree.io/f/"]');
-      if (!form) return;
+  /* -------------------------
+     Footer year
+ ------------------------- */
+  const initYear = () => {
+    const yearEl = qs("#year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  };
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+  /* -------------------------
+     Contact form prefill (from URL)
+     Example: contact.html?interest=community
+ ------------------------- */
+  const initContactPrefill = () => {
+    const onContact =
+      /contact\.html$/i.test(window.location.pathname.split("/").pop() || "");
+    if (!onContact) return;
 
-        const action = form.getAttribute("action");
-        const method = (form.getAttribute("method") || "POST").toUpperCase();
+    const params = new URLSearchParams(window.location.search);
+    const interest = (params.get("interest") || "").trim();
+    if (!interest) return;
 
-        const nextInput = form.querySelector('input[name="_next"]');
-        const nextUrl =
-          (nextInput && nextInput.value) ||
-          "https://www.soulstoneinc.org/thank-you.html";
+    const select = qs('select[name="interest"]');
+    if (!select) return;
 
-        try {
-          const res = await fetch(action, {
-            method,
-            body: new FormData(form),
-            headers: { Accept: "application/json" },
-          });
+    const desired = interest.toLowerCase();
+    for (const opt of Array.from(select.options)) {
+      if ((opt.value || "").toLowerCase() === desired) {
+        opt.selected = true;
+        break;
+      }
+    }
 
-          if (res.ok) {
-            track("contact_submit_success", "contact_form_success");
-            window.location.href = nextUrl;
-            return;
-          }
+    try {
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+    } catch {}
+  };
 
-          track("contact_submit_error", "contact_form_error", { status: res.status });
-          form.submit();
-        } catch {
-          track("contact_submit_error", "contact_form_error_network");
-          form.submit();
+  /* -------------------------
+     Formspree submit handler
+     Forces redirect to on-site thank-you page.
+ ------------------------- */
+  const initFormspree = () => {
+    const onContact =
+      /contact\.html$/i.test(window.location.pathname.split("/").pop() || "");
+    if (!onContact) return;
+
+    const form = qs('form[action*="formspree.io/f/"]');
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const action = form.getAttribute("action");
+      const method = (form.getAttribute("method") || "POST").toUpperCase();
+
+      const nextInput = qs('input[name="_next"]', form);
+      const nextUrl =
+        (nextInput && nextInput.value) ||
+        "https://www.soulstoneinc.org/thank-you.html";
+
+      try {
+        const res = await fetch(action, {
+          method,
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          track("contact_submit_success", "contact_form_success");
+          window.location.href = nextUrl;
+          return;
         }
-      });
-    })();
 
-    /* =========================
-       Single click handler for analytics
-       ========================= */
+        track("contact_submit_error", "contact_form_error", { status: res.status });
+        form.submit();
+      } catch {
+        track("contact_submit_error", "contact_form_error_network");
+        form.submit();
+      }
+    });
+  };
+
+  /* -------------------------
+     Single click handler for analytics + outbound
+ ------------------------- */
+  const initClickTracking = () => {
     document.addEventListener("click", (e) => {
       const a = e.target.closest("a[href]");
+
+      // Outbound link tracking
       if (a && isOutboundLink(a)) {
         if (!a.hasAttribute("data-track")) {
-          const href = a.getAttribute("href");
+          const href = a.getAttribute("href") || "";
           track("outbound_click", href);
 
           const opensNewTab = a.getAttribute("target") === "_blank";
@@ -294,6 +340,7 @@
         return;
       }
 
+      // Any element with data-track
       const el = e.target.closest("[data-track]");
       if (!el) return;
 
@@ -308,5 +355,19 @@
 
       track(action, label);
     });
+  };
+
+  /* -------------------------
+     Boot
+ ------------------------- */
+  initGA4();
+
+  onReady(() => {
+    initStickyAnchorOffset();
+    initNav();
+    initYear();
+    initContactPrefill();
+    initFormspree();
+    initClickTracking();
   });
 })();

@@ -95,11 +95,12 @@
             id="logo"
           />
           <div class="brand-text">
-            <div class="name">The Reclamation Co.</div>
-            <div class="tag">Trauma-informed tools for burned-out women</div>
+            <div class="name">SoulStone, Inc.</div>
+            <div class="tag">a 501(c)(3) nonprofit organization</div>
           </div>
         </a>
 
+        <!-- Mobile menu button -->
         <button
           class="nav-toggle"
           type="button"
@@ -117,19 +118,32 @@
           <a href="about.html" data-track="nav_click" data-label="nav_about"
             >Who We Are</a
           >
-          <a
-            href="services.html"
-            data-track="nav_click"
-            data-label="nav_services"
-            >Our Work</a
-          >
+<details class="nav-dropdown" data-track="nav_dropdown" data-label="nav_work_dropdown">
+  <summary
+    class="nav-parent"
+    aria-label="Our Work menu"
+    data-track="nav_click"
+    data-label="nav_services"
+  >
+    Our Work <span class="nav-caret" aria-hidden="true">▾</span>
+  </summary>
+
+  <div class="nav-menu" role="menu" aria-label="Our Work sections">
+    <a role="menuitem" href="services.html#live-cohorts" data-track="nav_click" data-label="nav_work_live_cohorts">Live Cohorts</a>
+    <a role="menuitem" href="services.html#trainings-workshops" data-track="nav_click" data-label="nav_work_trainings">Trainings &amp; Workshops</a>
+    <a role="menuitem" href="services.html#community-supports" data-track="nav_click" data-label="nav_work_community">Community-Based Supports</a>
+    <a role="menuitem" href="services.html#tools-resources" data-track="nav_click" data-label="nav_work_tools">Tools &amp; Resources</a>
+  </div>
+</details>
+
+
           <a
             href="get-involved.html"
             data-track="nav_click"
-            data-label="nav_contact"
+            data-label="nav_get_involved"
             >Get Involved</a
           >
-          <a href="impact.html" data-track="nav_click" data-label="nav_contact"
+          <a href="impact.html" data-track="nav_click" data-label="nav_impact"
             >Impact</a
           >
           <a href="contact.html" data-track="nav_click" data-label="nav_contact"
@@ -138,17 +152,10 @@
           <a
             href="reclamation-notes.html"
             data-track="nav_click"
-            data-label="nav_contact"
+            data-label="nav_notes"
             >Reclamation Notes</a
           >
-          <!-- <a
-            href="appalachian-soul-provisions.html"
-            data-track="nav_click"
-            data-label="nav_appalachian_soul_provisions"
-          >
-            Appalachian Soul Provisions
-          </a> -->
-          <!-- <a
+                    <!-- <a
             class="btn btn-primary"
             href="https://thereclamationco.gumroad.com/l/kiprt"
             target="_blank"
