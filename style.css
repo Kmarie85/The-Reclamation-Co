@@ -1197,3 +1197,43 @@ body.thank-you .page-hero .hero-cta {
 .reader-body p{
   margin: 0 0 14px;
 }
+
+/* --- FORCE filter chips to be pill buttons (put at very bottom) --- */
+.writing-shell .chip,
+.writing-shell button.chip,
+.writing-shell a.chip {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid rgba(29, 27, 21, 0.18) !important;
+  background: rgba(236, 225, 202, 0.45) !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9999px !important;
+  padding: 6px 12px;
+  line-height: 1;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.writing-shell .chip:hover {
+  transform: translateY(-1px);
+}
+
+.writing-shell .chip.is-active,
+.writing-shell button.chip.is-active,
+.writing-shell a.chip.is-active {
+  background: linear-gradient(
+    180deg,
+    rgba(83, 50, 29, 0.98),
+    rgba(29, 27, 21, 0.98)
+  ) !important;
+  color: #f5eedd !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
