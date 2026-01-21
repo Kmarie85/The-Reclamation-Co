@@ -7,6 +7,7 @@
    - Footer year
    - Contact form prefill (from URL)
    - Formspree submit handler (forces on-site thank-you redirect)
+   - Sticky header offset + reliable anchor scrolling (FIXED)
    ========================================================= */
 
 (() => {
@@ -69,8 +70,9 @@
       href.startsWith("#") ||
       href.startsWith("tel:") ||
       href.startsWith("mailto:")
-    )
+    ) {
       return false;
+    }
 
     let url;
     try {
@@ -88,6 +90,84 @@
        ========================= */
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* =========================
+       Sticky header offset + reliable anchor scrolling
+       - fixes "section hidden under header"
+       - fixes hash jumps (including dropdown links)
+       ========================= */
+    (() => {
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+
+      const setHeaderOffset = () => {
+        const h = Math.ceil(header.getBoundingClientRect().height);
+        document.documentElement.style.setProperty("--header-offset", `${h}px`);
+      };
+
+      const scrollToHash = (hash) => {
+        if (!hash) return;
+        const el = document.querySelector(decodeURIComponent(hash));
+        if (!el) return;
+
+        // Let layout settle, then scroll with measured offset
+        requestAnimationFrame(() => {
+          setHeaderOffset();
+          const offset =
+            parseInt(
+              getComputedStyle(document.documentElement)
+                .getPropertyValue("--header-offset")
+                .trim(),
+              10
+            ) || 0;
+
+          const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 16;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        });
+      };
+
+      // initial load with hash
+      if (window.location.hash) scrollToHash(window.location.hash);
+
+      // keep offset accurate
+      setHeaderOffset();
+      window.addEventListener("resize", setHeaderOffset);
+      window.addEventListener("orientationchange", setHeaderOffset);
+
+      // intercept in-page anchor clicks (prevents hiding under sticky header)
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest('a[href^="#"], a[href*="services.html#"]');
+        if (!a) return;
+
+        const href = a.getAttribute("href") || "";
+        const hash = href.includes("#") ? "#" + href.split("#")[1] : href;
+        if (!hash || hash === "#") return;
+
+        e.preventDefault();
+        history.pushState(null, "", hash);
+        scrollToHash(hash);
+
+        // close dropdown after selecting a link
+        const openDetails = a.closest("details.nav-dropdown[open]");
+        if (openDetails) openDetails.removeAttribute("open");
+
+        // close mobile nav too (if open)
+        const navLinks = document.querySelector("[data-nav-links]");
+        const navToggle = document.querySelector("[data-nav-toggle]");
+        if (navLinks && navLinks.classList.contains("is-open")) {
+          navLinks.classList.remove("is-open");
+          if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // close dropdown when clicking outside
+      document.addEventListener("click", (e) => {
+        const dd = document.querySelector("details.nav-dropdown[open]");
+        if (!dd) return;
+        if (e.target.closest("details.nav-dropdown")) return;
+        dd.removeAttribute("open");
+      });
+    })();
 
     /* =========================
        Contact form prefill (from URL)
@@ -128,8 +208,9 @@
         navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
+      // close nav after any link click (mobile)
       navLinks.addEventListener("click", (e) => {
-        const a = e.target.closest("a");
+        const a = e.target.closest("a[href]");
         if (!a) return;
 
         if (navLinks.classList.contains("is-open")) {
@@ -157,7 +238,6 @@
       if (!form) return;
 
       form.addEventListener("submit", async (e) => {
-        // Force our own redirect after successful submission
         e.preventDefault();
 
         const action = form.getAttribute("action");
@@ -172,25 +252,18 @@
           const res = await fetch(action, {
             method,
             body: new FormData(form),
-            headers: {
-              Accept: "application/json",
-            },
+            headers: { Accept: "application/json" },
           });
 
           if (res.ok) {
-            // Optional: track successful submit
             track("contact_submit_success", "contact_form_success");
-
-            // Redirect to your thank-you page
             window.location.href = nextUrl;
             return;
           }
 
-          // If not ok, fall back to normal submit (so user still can send)
           track("contact_submit_error", "contact_form_error", { status: res.status });
           form.submit();
-        } catch (err) {
-          // Network issues: fall back to normal submit
+        } catch {
           track("contact_submit_error", "contact_form_error_network");
           form.submit();
         }
