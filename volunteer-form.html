@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Volunteer | SoulStone, Inc.</title>
+    <meta
+      name="description"
+      content="Volunteer with SoulStone. Share your interest — not a commitment, just a conversation."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://www.soulstoneinc.org/volunteer-form.html" />
+
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+
+  <body class="volunteer-page">
+    <header class="site-header">
+      <div class="container nav-container">
+        <a href="index.html" class="brand" data-track="nav_click" data-label="nav_home_brand">
+          <img
+            src="Static/Images/Soul logo One.png"
+            alt="SoulStone, Inc. logo"
+            id="logo"
+          />
+          <div class="brand-text">
+            <div class="name">SoulStone, Inc.</div>
+            <div class="tag">a 501(c)(3) nonprofit organization</div>
+          </div>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
+        >
+          Menu
+        </button>
+
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare">Who We Are</a>
+
+          <details class="nav-dropdown" data-track="nav_dropdown" data-label="nav_work_dropdown">
+            <summary class="nav-parent" aria-label="Our Work menu" data-track="nav_click" data-label="nav_our-work">
+              Our Work <span class="nav-caret" aria-hidden="true">▾</span>
+            </summary>
+
+            <div class="nav-menu" role="menu" aria-label="Our Work sections">
+              <a role="menuitem" href="our-work.html#live-cohorts" data-track="nav_click" data-label="nav_work_live_cohorts">Live Cohorts</a>
+              <a role="menuitem" href="trainings-workshops.html" data-track="nav_click" data-label="nav_work_trainings">Trainings &amp; Workshops</a>
+              <a role="menuitem" href="our-work.html#community-supports" data-track="nav_click" data-label="nav_work_community">Community-Based Supports</a>
+              <a role="menuitem" href="our-work.html#tools-resources" data-track="nav_click" data-label="nav_work_tools">Tools &amp; Resources</a>
+            </div>
+          </details>
+
+          <a href="get-involved.html" data-track="nav_click" data-label="nav_get_involved">Get Involved</a>
+          <a href="impact.html" data-track="nav_click" data-label="nav_impact">Impact</a>
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact">Contact</a>
+          <a href="reclamation-notes.html" data-track="nav_click" data-label="nav_notes">Reclamation Notes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+<section class="hero hero-small" id="volunteer-hero">
+        <div class="container hero-inner">
+          <div class="hero-panel">
+            <h1 class="h1">Volunteer With SoulStone</h1>
+            <p class="lead">
+              This form is a way to start a conversation — not a commitment or obligation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="volunteer-interest">
+        <div class="container">
+          <div class="card">
+            <p class="threshold"><strong>Volunteer Interest Form</strong></p>
+
+            <p class="lead">
+              SoulStone’s work is rooted in community, care, and shared responsibility.
+              If you’re interested in volunteering, this is a way to reach out.
+            </p>
+
+            <p class="small muted">
+              We honor capacity, boundaries, and real life. There is room here for different skills,
+              different seasons, and different levels of involvement.
+            </p>
+
+            <div class="card" style="margin: 14px 0 0; padding: 16px;">
+              <p class="small" style="margin: 0;">
+                <strong>About this form</strong><br />
+                This helps us understand how you’d like to be involved and what feels sustainable for you right now.
+                Submitting does not guarantee placement, and you are not committing to anything by filling it out.
+                We’ll follow up if there’s a potential fit.
+              </p>
+            </div>
+
+            <form action="YOUR_FORMSPREE_ENDPOINT" method="POST" style="margin-top: 14px;">
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" value="New Volunteer Interest — SoulStone, Inc." />
+
+              <label class="field">
+                <span class="field-label">Full Name <span aria-hidden="true">*</span></span>
+                <input class="input" type="text" name="name" placeholder="Your name" required autocomplete="name" />
+              </label>
+
+              <label class="field">
+                <span class="field-label">Email Address <span aria-hidden="true">*</span></span>
+                <input class="input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                <span class="field-help small muted">We’ll use this to follow up if there’s a potential fit.</span>
+              </label>
+
+              <label class="field">
+                <span class="field-label">Location (City &amp; State or “Remote”) <span aria-hidden="true">*</span></span>
+                <input class="input" type="text" name="location" placeholder="Sandusky, OH or Remote" required />
+                <span class="field-help small muted">This helps us understand regional availability and time zones.</span>
+              </label>
+
+              <fieldset class="fieldset" style="margin-top: 10px;">
+                <legend class="legend">
+                  What kinds of volunteer support are you interested in?
+                  <span class="muted">(check all that apply)</span>
+                </legend>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Community support / facilitation" />
+                  <span>Community support or facilitation</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Events / cohorts support" />
+                  <span>Events or cohort support</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Admin / behind-the-scenes" />
+                  <span>Administrative or behind-the-scenes help</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Creative / communications" />
+                  <span>Creative or communications support</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Professional skills" />
+                  <span>Professional skills (education, facilitation, wellness, operations, etc.)</span>
+                </label>
+
+                <label class="check">
+                  <input type="checkbox" name="interests[]" value="Not sure yet" />
+                  <span>Not sure yet / open to learning more</span>
+                </label>
+              </fieldset>
+
+              <label class="field" style="margin-top: 10px;">
+                <span class="field-label">What level of involvement feels realistic right now? <span aria-hidden="true">*</span></span>
+                <select class="select" name="availability" required>
+                  <option value="">Select one</option>
+                  <option value="One-time or occasional">One-time or occasional support</option>
+                  <option value="Short-term">Short-term (a few weeks or months)</option>
+                  <option value="Ongoing, low-commitment">Ongoing, low-commitment support</option>
+                  <option value="Not sure yet">I’m not sure yet</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span class="field-label">Phone Number <span class="muted">(optional)</span></span>
+                <input class="input" type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
+                <span class="field-help small muted">Only if you’re comfortable.</span>
+              </label>
+
+              <label class="field">
+                <span class="field-label">Anything you’d like us to know? <span class="muted">(optional)</span></span>
+                <textarea class="textarea" name="message" rows="5" placeholder="Skills, experience, boundaries, questions, or what drew you here…"></textarea>
+                <span class="field-help small muted">
+                  This can include skills, lived experience, interests, boundaries, or questions. Sharing is optional.
+                </span>
+              </label>
+
+              <p class="small muted" style="margin-top: 6px;">
+                By submitting this form, you’re expressing interest — not making a commitment.
+                We’ll reach out if there’s a potential next step.
+              </p>
+
+              <div class="actions" style="margin-top: 12px;">
+                <button class="btn btn-primary" type="submit">Submit Volunteer Interest</button>
+                <a class="btn btn-ghost" href="get-involved.html">Back to Get Involved</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="small">
+          <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="muted">© <span id="year"></span></span>
+        </div>
+
+        <div class="small footer-nav">
+          <a href="financial-transparency.html">Financial Transparency</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="donor-faq.html">Donor FAQ</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="contact.html">Contact</a>
+
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SoulStone on Facebook"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/facebook-custom.png"
+              alt="Follow SoulStone on Facebook"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

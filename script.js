@@ -1,5 +1,5 @@
 /* =========================================================
-   The Reclamation Co. / Soul Stone Inc. — Base Scripts
+   The Reclamation Co. / Soul Stone Inc. — Base Scripts (FIXED)
    - Optional GA4 loader (set window.GA4_MEASUREMENT_ID in HTML)
    - GA click tracking (data-track / data-label)
    - Outbound link tracking (no double-fire)
@@ -9,6 +9,7 @@
    - Footer year
    - Contact form prefill (from URL)
    - Formspree submit handler (forces on-site thank-you redirect)
+   - Reveal-on-scroll (calm motion; respects prefers-reduced-motion)
    ========================================================= */
 
 (() => {
@@ -28,6 +29,8 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  const currentFile = () => window.location.pathname.split("/").pop() || "";
+
   /* -------------------------
      GA4 (optional)
   ------------------------- */
@@ -41,7 +44,9 @@
 
     const s = document.createElement("script");
     s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(idRaw)}`;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+      idRaw
+    )}`;
     document.head.appendChild(s);
 
     window.dataLayer = window.dataLayer || [];
@@ -73,7 +78,8 @@
       href.startsWith("#") ||
       href.startsWith("tel:") ||
       href.startsWith("mailto:")
-    ) return false;
+    )
+      return false;
 
     let url;
     try {
@@ -98,31 +104,40 @@
 
     const scrollToHash = (hash, smooth = true) => {
       if (!hash) return;
+
       let sel;
       try {
         sel = decodeURIComponent(hash);
       } catch {
         sel = hash;
       }
+
       const el = qs(sel);
       if (!el) return;
 
-      // let layout settle; ensures header height is correct
+      // Let layout settle; ensures correct header height
       requestAnimationFrame(() => {
         setHeaderOffset();
+
         const offset =
           parseInt(
             getComputedStyle(document.documentElement)
-              .getPropertyValue("--header-offset"),
+              .getPropertyValue("--header-offset")
+              .trim(),
             10
           ) || 0;
 
-        const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 16;
+        // THIS controls “how close” you land under the header:
+        // smaller number = closer to header (but still visible)
+        const breathingRoom = 6;
 
-        window.scrollTo({
-          top: y,
-          behavior: smooth ? "smooth" : "auto",
-        });
+        const y =
+          el.getBoundingClientRect().top +
+          window.pageYOffset -
+          offset -
+          breathingRoom;
+
+        window.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" });
       });
     };
 
@@ -132,51 +147,44 @@
 
     // On initial load with hash
     if (window.location.hash) {
-      scrollToHash(window.location.hash, false);
+      // Slight delay helps prevent “land too low” on load
+      setTimeout(() => scrollToHash(window.location.hash, false), 0);
     }
 
-    // Handle ALL in-page anchors so they don't hide under sticky header
+    // Handle SAME-PAGE in-page anchors (offset scroll)
     document.addEventListener("click", (e) => {
       const a = e.target.closest('a[href*="#"]');
       if (!a) return;
 
-      const href = a.getAttribute("href") || "";
-      const hasHash = href.includes("#");
-      if (!hasHash) return;
+      const href = (a.getAttribute("href") || "").trim();
+      if (!href.includes("#")) return;
 
-      // Determine if link targets same page
-      const [pathPart, hashPart] = href.split("#");
-      const hash = "#" + (hashPart || "");
+      // Only handle same-origin
+      let url;
+      try {
+        url = new URL(href, window.location.href);
+      } catch {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+
+      const hash = url.hash || "";
       if (!hash || hash === "#") return;
 
-      const currentFile = window.location.pathname.split("/").pop() || "";
-      const isSamePage =
-        pathPart === "" ||
-        pathPart === currentFile ||
-        pathPart.endsWith("/" + currentFile);
+      const targetFile = (url.pathname.split("/").pop() || "").trim();
+      const thisFile = currentFile();
 
-      // allow services.html#... from other pages too
-      const isSameOriginTarget = (() => {
-        try {
-          const url = new URL(href, window.location.href);
-          return url.origin === window.location.origin;
-        } catch {
-          return false;
-        }
-      })();
-
-      if (!isSameOriginTarget) return;
-
-      // If it's another page + hash, let browser navigate normally.
-      // Example: from index.html clicking services.html#tools-resources should navigate.
-      if (!isSamePage && pathPart !== "") return;
+      // If it’s another page + hash, let browser navigate normally.
+      // Example: index.html -> our-work.html#tools-resources
+      const isSamePage = targetFile === "" || targetFile === thisFile;
+      if (!isSamePage) return;
 
       // Same page hash: prevent default jump; do our offset scroll
       e.preventDefault();
       history.pushState(null, "", hash);
       scrollToHash(hash, true);
 
-      // Close any open dropdown details after selection
+      // Close open dropdown details after selection
       const openDetails = a.closest("details[open]");
       if (openDetails) openDetails.removeAttribute("open");
 
@@ -189,7 +197,7 @@
       }
     });
 
-    // If user uses back/forward and hash changes
+    // Back/forward hash changes
     window.addEventListener("popstate", () => {
       if (window.location.hash) scrollToHash(window.location.hash, false);
     });
@@ -197,32 +205,51 @@
 
   /* -------------------------
      Nav toggle + dropdown close behaviors
- ------------------------- */
+  ------------------------- */
   const initNav = () => {
     const navToggle = qs("[data-nav-toggle]");
     const navLinks = qs("[data-nav-links]");
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("is-open");
-        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      });
+    if (!navToggle || !navLinks) return;
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key !== "Escape") return;
+    // Mobile toggle
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
 
-        // close mobile nav
-        if (navLinks.classList.contains("is-open")) {
-          navLinks.classList.remove("is-open");
-          navToggle.setAttribute("aria-expanded", "false");
-        }
+    // Close mobile nav + dropdown when clicking any nav link (FIRST CLICK NAVIGATES)
+    navLinks.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
 
-        // close any open dropdown
-        const dd = qs("details.nav-dropdown[open]");
-        if (dd) dd.removeAttribute("open");
-      });
-    }
+      // Close any open dropdown <details>
+      const openDd = qs("details.nav-dropdown[open]");
+      if (openDd) openDd.removeAttribute("open");
 
-    // Close dropdown when clicking outside
+      // Close mobile menu
+      if (navLinks.classList.contains("is-open")) {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
+
+      // IMPORTANT: do NOT preventDefault here
+      // Browser navigates immediately on first click.
+    });
+
+    // Escape closes menus
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+
+      if (navLinks.classList.contains("is-open")) {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
+
+      const dd = qs("details.nav-dropdown[open]");
+      if (dd) dd.removeAttribute("open");
+    });
+
+    // Click outside closes dropdown
     document.addEventListener("click", (e) => {
       const openDd = qs("details.nav-dropdown[open]");
       if (!openDd) return;
@@ -233,7 +260,7 @@
 
   /* -------------------------
      Footer year
- ------------------------- */
+  ------------------------- */
   const initYear = () => {
     const yearEl = qs("#year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -242,39 +269,73 @@
   /* -------------------------
      Contact form prefill (from URL)
      Example: contact.html?interest=community
- ------------------------- */
-  const initContactPrefill = () => {
-    const onContact =
-      /contact\.html$/i.test(window.location.pathname.split("/").pop() || "");
-    if (!onContact) return;
+  ------------------------- */
+const initContactPrefill = () => {
+  const onContact =
+    /contact\.html$/i.test(window.location.pathname.split("/").pop() || "");
+  if (!onContact) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const interest = (params.get("interest") || "").trim();
-    if (!interest) return;
+  const params = new URLSearchParams(window.location.search);
+  const raw = (params.get("interest") || params.get("topic") || "").trim();
+  if (!raw) return;
 
-    const select = qs('select[name="interest"]');
-    if (!select) return;
+  const select = qs('select[name="interest"]');
+  if (!select) return;
 
-    const desired = interest.toLowerCase();
+  const desired = raw.toLowerCase();
+
+  // Alias map (so links can stay human-friendly)
+  const aliases = {
+    donate: "donation",
+    giving: "donation",
+    donation: "donation",
+    volunteer: "volunteer",
+    volunteers: "volunteer",
+    partnership: "partnership",
+    partner: "partnership",
+    updates: "updates",
+    newsletter: "updates",
+    email: "updates",
+    general: "general",
+    contact: "general",
+  };
+
+  const normalized = aliases[desired] || desired;
+
+  // 1) Match by option VALUE
+  let matched = false;
+  for (const opt of Array.from(select.options)) {
+    if ((opt.value || "").toLowerCase() === normalized) {
+      opt.selected = true;
+      matched = true;
+      break;
+    }
+  }
+
+  // 2) Fallback: match by visible text (contains)
+  if (!matched) {
     for (const opt of Array.from(select.options)) {
-      if ((opt.value || "").toLowerCase() === desired) {
+      const text = (opt.textContent || "").toLowerCase();
+      if (text.includes(normalized)) {
         opt.selected = true;
+        matched = true;
         break;
       }
     }
+  }
 
-    try {
-      select.dispatchEvent(new Event("change", { bubbles: true }));
-    } catch {}
-  };
+  try {
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+  } catch {}
+};
+
 
   /* -------------------------
      Formspree submit handler
      Forces redirect to on-site thank-you page.
- ------------------------- */
+  ------------------------- */
   const initFormspree = () => {
-    const onContact =
-      /contact\.html$/i.test(window.location.pathname.split("/").pop() || "");
+    const onContact = /contact\.html$/i.test(currentFile());
     if (!onContact) return;
 
     const form = qs('form[action*="formspree.io/f/"]');
@@ -304,7 +365,9 @@
           return;
         }
 
-        track("contact_submit_error", "contact_form_error", { status: res.status });
+        track("contact_submit_error", "contact_form_error", {
+          status: res.status,
+        });
         form.submit();
       } catch {
         track("contact_submit_error", "contact_form_error_network");
@@ -314,23 +377,72 @@
   };
 
   /* -------------------------
+     Reveal-on-scroll (calm motion)
+  ------------------------- */
+  const initReveal = () => {
+    const reduce =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const targets = Array.from(
+      document.querySelectorAll(
+        ".card, .hero, .page-hero, .section .h1, .section .h2, .section h2, .section h3"
+      )
+    );
+
+    if (!targets.length) return;
+
+    targets.forEach((el, idx) => {
+      el.classList.add("reveal");
+      const delay = Math.min((idx % 6) * 40, 200);
+      el.style.setProperty("--reveal-delay", delay + "ms");
+      if (reduce) el.classList.add("is-visible");
+    });
+
+    if (reduce) return;
+
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    targets.forEach((el) => io.observe(el));
+  };
+
+  /* -------------------------
      Single click handler for analytics + outbound
- ------------------------- */
+  ------------------------- */
   const initClickTracking = () => {
     document.addEventListener("click", (e) => {
+      // If something already intentionally prevented default (like same-page hash),
+      // we still want analytics, but we should NOT re-hijack navigation.
+      const defaultPrevented = e.defaultPrevented;
+
       const a = e.target.closest("a[href]");
 
-      // Outbound link tracking
+      // Outbound link tracking (only hijack navigation if not already prevented)
       if (a && isOutboundLink(a)) {
         if (!a.hasAttribute("data-track")) {
-          const href = a.getAttribute("href") || "";
+          const href = (a.getAttribute("href") || "").trim();
           track("outbound_click", href);
 
           const opensNewTab = a.getAttribute("target") === "_blank";
           const hasModifier =
             e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
 
-          if (!opensNewTab && !hasModifier) {
+          if (!defaultPrevented && !opensNewTab && !hasModifier) {
             e.preventDefault();
             setTimeout(() => {
               window.location.href = href;
@@ -359,12 +471,13 @@
 
   /* -------------------------
      Boot
- ------------------------- */
+  ------------------------- */
   initGA4();
 
   onReady(() => {
     initStickyAnchorOffset();
     initNav();
+    initReveal();
     initYear();
     initContactPrefill();
     initFormspree();

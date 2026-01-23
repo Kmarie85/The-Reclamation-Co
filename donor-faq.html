@@ -3,31 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Primary SEO -->
-    <title>Reclamation Notes | SoulStone, Inc.</title>
+    <title>Donor FAQ | SoulStone, Inc.</title>
     <meta
       name="description"
-      content="Daily words for women reclaiming themselves: reflections, pattern-naming, and guidance."
+      content="Common questions about donating to SoulStone, Inc., a registered 501(c)(3) nonprofit organization."
     />
     <meta name="robots" content="index,follow" />
-    <link
-      rel="canonical"
-      href="https://www.soulstoneinc.org/reclamation-notes.html"
+    <link rel="canonical" href="https://www.soulstoneinc.org/donor-faq.html" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SoulStone, Inc." />
+    <meta property="og:title" content="Donor FAQ | SoulStone, Inc." />
+    <meta
+      property="og:description"
+      content="Common questions about donating to SoulStone, Inc."
     />
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="favicon.png" />
+    <meta property="og:url" content="https://www.soulstoneinc.org/donor-faq.html" />
+    <meta property="og:image" content="https://www.soulstoneinc.org/favicon.png" />
 
-    <!-- Styles -->
+    <script>
+      window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+    </script>
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Scripts -->
     <script defer src="script.js"></script>
-    <script defer src="assets/js/reclamation-notes.js"></script>
   </head>
 
-  <body>
+  <body class="donor-faq-page">
 <header class="site-header">
   <div class="container nav-container">
     <a
@@ -138,89 +143,66 @@
 
 
     <main>
-      <!-- Filters + Feed wrapper card -->
-      <section class="section section-tight">
+      <section class="hero hero-small">
+        <div class="container hero-inner">
+          <div class="hero-panel">
+            <h1 class="h1">Donor FAQ</h1>
+            <p class="lead">
+              We want giving to feel clear, respectful, and aligned — not pressured. Here are answers to common questions.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="contact.html?interest=donation">Talk with Us About Giving</a>
+              <a class="btn btn-ghost" href="financial-transparency.html">Financial Transparency</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="container">
-          <div class="card card-pad writing-shell">
-            <p class="kicker mt-0">THE CONVERSATION</p>
-            <h1 class="h2 h2-tight mt-0">
-              Daily words for women who are reclaiming themselves.
-            </h1>
-            <p class="lead mt-2">
-              Short reflections, pattern-naming, and guidance for women who
-              over-carry, over-function, and disappear for others. Updated
-              often. Take what steadies you. Leave the rest.
+          <div class="card">
+            <h2 class="h2">Is SoulStone a nonprofit?</h2>
+            <p>
+              Yes. SoulStone, Inc. is a registered 501(c)(3) nonprofit organization committed to trauma-informed, community-centered support.
             </p>
 
-            <div class="hr"></div>
+            <h2 class="h2">Are donations tax-deductible?</h2>
+            <p>
+              Donations to eligible 501(c)(3) organizations are generally tax-deductible in the United States. For questions about your situation,
+              consult a tax professional.
+            </p>
 
-            <!-- Filters -->
-            <div class="writing-controls">
-              <div class="chip-row" role="tablist" aria-label="Entry types">
-                <button
-                  class="chip is-active"
-                  data-filter="all"
-                  role="tab"
-                  aria-selected="true"
-                >
-                  All
-                </button>
-                <button
-                  class="chip"
-                  data-filter="journal"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Journal
-                </button>
-                <button
-                  class="chip"
-                  data-filter="guidance"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Guidance
-                </button>
-                <button
-                  class="chip"
-                  data-filter="pattern"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Pattern
-                </button>
-                <button
-                  class="chip"
-                  data-filter="letter"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Letter
-                </button>
-              </div>
+            <h2 class="h2">Where does my donation go?</h2>
+            <p>
+              Donations support the mission and help sustain trauma-informed programming, resources, community supports, and operational capacity.
+              You can review financial information on our <a href="financial-transparency.html">Financial Transparency</a> page.
+            </p>
+
+            <h2 class="h2">Can I give in honor of someone?</h2>
+            <p>
+              Yes. If you’d like to give in honor or memory of someone, reach out and we’ll make sure it’s handled thoughtfully.
+            </p>
+
+            <h2 class="h2">Can I donate goods or services?</h2>
+            <p>
+              Sometimes. In-kind support depends on current needs and capacity. Use the contact form and select “Donation” to start a conversation.
+            </p>
+
+            <h2 class="h2">Can I sponsor a program or training?</h2>
+            <p>
+              Yes — sponsorship and partnership options may be available depending on programming. Reach out and we’ll talk through what’s realistic and aligned.
+            </p>
+
+            <h2 class="h2">How can I request a receipt?</h2>
+            <p>
+              If you need a receipt or documentation, contact us and we’ll help you get what you need.
+            </p>
+
+            <div class="actions">
+              <a class="btn btn-primary" href="contact.html?interest=donation">Contact Us About Giving</a>
+              <a class="btn btn-ghost" href="get-involved.html#support">Back to Get Involved</a>
             </div>
-
-            <!-- Feed -->
-            <div id="writingStatus" class="help" aria-live="polite"></div>
-            <div id="writingList" class="writing-grid"></div>
           </div>
-
-          <!-- Reader (single entry view) -->
-          <section id="writingReader" class="writing-reader" hidden>
-            <button class="btn btn-ghost mt-3" id="backToFeed" type="button">
-              ← Back to entries
-            </button>
-
-            <div class="card card-pad mt-3">
-              <p class="kicker mt-0" id="readerType"></p>
-              <h2 class="h2 h2-tight mt-2" id="readerTitle"></h2>
-              <p class="help mt-2" id="readerMeta"></p>
-
-              <div class="hr"></div>
-
-              <article class="reader-body" id="readerBody"></article>
-            </div>
-          </section>
         </div>
       </section>
     </main>
@@ -255,7 +237,6 @@
       </a>
     </div>
   </div>
-</footer>
-
-  </body>
+</footer>  
+</body>
 </html>

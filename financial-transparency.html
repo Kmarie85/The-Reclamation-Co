@@ -3,31 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Primary SEO -->
-    <title>Reclamation Notes | SoulStone, Inc.</title>
+    <title>Financial Transparency | SoulStone, Inc.</title>
     <meta
       name="description"
-      content="Daily words for women reclaiming themselves: reflections, pattern-naming, and guidance."
+      content="Financial transparency information for SoulStone, Inc., a registered 501(c)(3) nonprofit organization."
     />
     <meta name="robots" content="index,follow" />
-    <link
-      rel="canonical"
-      href="https://www.soulstoneinc.org/reclamation-notes.html"
+    <link rel="canonical" href="https://www.soulstoneinc.org/financial-transparency.html" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SoulStone, Inc." />
+    <meta property="og:title" content="Financial Transparency | SoulStone, Inc." />
+    <meta
+      property="og:description"
+      content="Financial transparency information for SoulStone, Inc."
     />
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="favicon.png" />
+    <meta property="og:url" content="https://www.soulstoneinc.org/financial-transparency.html" />
+    <meta property="og:image" content="https://www.soulstoneinc.org/favicon.png" />
 
-    <!-- Styles -->
+    <script>
+      window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
+    </script>
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Scripts -->
     <script defer src="script.js"></script>
-    <script defer src="assets/js/reclamation-notes.js"></script>
   </head>
 
-  <body>
+  <body class="transparency-page">
 <header class="site-header">
   <div class="container nav-container">
     <a
@@ -136,91 +141,56 @@
   </div>
 </header>
 
-
     <main>
-      <!-- Filters + Feed wrapper card -->
-      <section class="section section-tight">
+      <section class="hero hero-small">
+        <div class="container hero-inner">
+          <div class="hero-panel">
+            <h1 class="h1">Financial Transparency</h1>
+            <p class="lead">
+              We believe transparency builds trust. This page is a home for financial documents and giving-related information as it becomes available.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="donor-faq.html">Donor FAQ</a>
+              <a class="btn btn-ghost" href="contact.html?interest=donation">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="container">
-          <div class="card card-pad writing-shell">
-            <p class="kicker mt-0">THE CONVERSATION</p>
-            <h1 class="h2 h2-tight mt-0">
-              Daily words for women who are reclaiming themselves.
-            </h1>
-            <p class="lead mt-2">
-              Short reflections, pattern-naming, and guidance for women who
-              over-carry, over-function, and disappear for others. Updated
-              often. Take what steadies you. Leave the rest.
+          <div class="card">
+            <h2 class="h2">What You’ll Find Here</h2>
+            <ul class="bullets">
+              <li>Annual reporting and key financial documents (as available)</li>
+              <li>Program and operational overview information</li>
+              <li>Policies related to giving and donor support</li>
+            </ul>
+
+            <hr class="hr" />
+
+            <h2 class="h2">Documents</h2>
+            <p class="muted">
+              Documents will be posted here as they are prepared and published. If you need something specific right now,
+              reach out and we’ll respond as capacity allows.
             </p>
 
-            <div class="hr"></div>
+            <ul class="bullets">
+              <li>IRS determination letter (coming soon)</li>
+              <li>Annual report (coming soon)</li>
+              <li>Form 990 (posted when available/required)</li>
+            </ul>
 
-            <!-- Filters -->
-            <div class="writing-controls">
-              <div class="chip-row" role="tablist" aria-label="Entry types">
-                <button
-                  class="chip is-active"
-                  data-filter="all"
-                  role="tab"
-                  aria-selected="true"
-                >
-                  All
-                </button>
-                <button
-                  class="chip"
-                  data-filter="journal"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Journal
-                </button>
-                <button
-                  class="chip"
-                  data-filter="guidance"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Guidance
-                </button>
-                <button
-                  class="chip"
-                  data-filter="pattern"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Pattern
-                </button>
-                <button
-                  class="chip"
-                  data-filter="letter"
-                  role="tab"
-                  aria-selected="false"
-                >
-                  Letter
-                </button>
-              </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="contact.html?interest=donation">Request Information</a>
+              <a class="btn btn-ghost" href="get-involved.html#support">Back to Get Involved</a>
             </div>
 
-            <!-- Feed -->
-            <div id="writingStatus" class="help" aria-live="polite"></div>
-            <div id="writingList" class="writing-grid"></div>
+            <p class="small muted" style="margin-top: 14px">
+              Note: If you plan to add PDFs later, place them in a folder like <code>/assets/docs/</code>
+              and link them here (e.g., <code>assets/docs/annual-report.pdf</code>).
+            </p>
           </div>
-
-          <!-- Reader (single entry view) -->
-          <section id="writingReader" class="writing-reader" hidden>
-            <button class="btn btn-ghost mt-3" id="backToFeed" type="button">
-              ← Back to entries
-            </button>
-
-            <div class="card card-pad mt-3">
-              <p class="kicker mt-0" id="readerType"></p>
-              <h2 class="h2 h2-tight mt-2" id="readerTitle"></h2>
-              <p class="help mt-2" id="readerMeta"></p>
-
-              <div class="hr"></div>
-
-              <article class="reader-body" id="readerBody"></article>
-            </div>
-          </section>
         </div>
       </section>
     </main>
@@ -255,7 +225,5 @@
       </a>
     </div>
   </div>
-</footer>
-
-  </body>
+</footer>    </body>
 </html>

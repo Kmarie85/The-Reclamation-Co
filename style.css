@@ -27,7 +27,9 @@
 }
 
 /* ---------- Reset / Base ---------- */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -38,8 +40,17 @@ html {
   scroll-padding-top: calc(var(--header-offset) + 16px);
 }
 
+html { scroll-padding-top: var(--header-offset); }
+[id] { scroll-margin-top: var(--header-offset); }
+
+html { scroll-padding-top: var(--header-offset, 90px); }
+[id] { scroll-margin-top: var(--header-offset, 90px); }
+
+
 /* any element with an id will land below sticky header */
-[id] { scroll-margin-top: calc(var(--header-offset) + 16px); }
+[id] {
+  scroll-margin-top: calc(var(--header-offset) + 16px);
+}
 
 body {
   min-height: 100vh;
@@ -53,7 +64,57 @@ body {
   background: linear-gradient(180deg, #f6f0e3 0%, #917355 85%);
 }
 
-main { flex: 1; }
+/* subtle depth so the site doesn’t feel flat (keeps your colors) */
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+  background:
+    radial-gradient(
+      900px 520px at 20% 10%,
+      rgba(145, 115, 85, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 80% 90%,
+      rgba(111, 124, 99, 0.12),
+      transparent 62%
+    );
+  animation: bg-drift 18s ease-in-out infinite;
+}
+
+@keyframes bg-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+  .card {
+    transition: none;
+  }
+  .btn {
+    transition: none;
+  }
+}
+
+main {
+  flex: 1;
+}
 
 img {
   max-width: 100%;
@@ -121,7 +182,9 @@ textarea:focus-visible {
   min-width: 0; /* allow wrap without overflow */
 }
 
-.brand-text { line-height: 1.05; }
+.brand-text {
+  line-height: 1.05;
+}
 
 .brand-text .name {
   font-weight: 900;
@@ -131,7 +194,14 @@ textarea:focus-visible {
 }
 
 .brand-text .tag {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 12px;
   letter-spacing: 0.02em;
   opacity: 0.8;
@@ -147,7 +217,14 @@ textarea:focus-visible {
 }
 
 .main-nav a {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 14px;
   letter-spacing: 0.02em;
   padding: 10px 10px;
@@ -168,16 +245,27 @@ textarea:focus-visible {
   border-radius: 12px;
   border: 1px solid rgba(29, 27, 21, 0.22);
   background: rgba(236, 225, 202, 0.55);
-  box-shadow: 0 10px 22px rgba(29, 27, 21, 0.10);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  box-shadow: 0 10px 22px rgba(29, 27, 21, 0.1);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-weight: 800;
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 
-.nav-toggle:hover { transform: translateY(-1px); }
-.nav-toggle:active { transform: translateY(0); }
+.nav-toggle:hover {
+  transform: translateY(-1px);
+}
+.nav-toggle:active {
+  transform: translateY(0);
+}
 
 /* =========================
    Mobile behavior: collapse menu
@@ -220,7 +308,9 @@ textarea:focus-visible {
     box-shadow: 0 14px 30px rgba(29, 27, 21, 0.12);
   }
 
-  .main-nav.is-open { display: flex; }
+  .main-nav.is-open {
+    display: flex;
+  }
 
   .main-nav a {
     width: 100%;
@@ -237,9 +327,16 @@ textarea:focus-visible {
 
 /* Tiny brand tightening */
 @media (max-width: 520px) {
-  #logo { width: 38px; height: 38px; }
-  .brand-text .name { font-size: 13px; }
-  .brand-text .tag { font-size: 11px; }
+  #logo {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-text .name {
+    font-size: 13px;
+  }
+  .brand-text .tag {
+    font-size: 11px;
+  }
 }
 
 /* ---------- Buttons ---------- */
@@ -256,18 +353,36 @@ textarea:focus-visible {
   box-shadow: 0 10px 22px rgba(29, 27, 21, 0.12);
   cursor: pointer;
 
-  transition: 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+  transition:
+    0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease;
 
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
-.btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
 
 .btn-primary {
-  background: linear-gradient(180deg, rgba(83, 50, 29, 0.98), rgba(29, 27, 21, 0.98));
+  background: linear-gradient(
+    180deg,
+    rgba(83, 50, 29, 0.98),
+    rgba(29, 27, 21, 0.98)
+  );
   color: #f5eedd;
   border-color: rgba(255, 255, 255, 0.14);
 }
@@ -309,7 +424,14 @@ textarea:focus-visible {
 }
 
 .kicker {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 12px;
@@ -319,13 +441,22 @@ textarea:focus-visible {
 
 .lead,
 .small {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 15px;
   line-height: 1.65;
   opacity: 0.92;
 }
 
-.lead { max-width: 62ch; }
+.lead {
+  max-width: 62ch;
+}
 
 /* keep these class names supported if you still use them anywhere */
 .about-h1,
@@ -340,8 +471,12 @@ textarea:focus-visible {
 }
 
 /* About page: stacked cards spacing */
-.section .container > .card { margin-bottom: 18px; }
-.section .container > .card:last-child { margin-bottom: 0; }
+.section .container > .card {
+  margin-bottom: 6px;
+}
+.section .container > .card:last-child {
+  margin-bottom: 0;
+}
 
 .about-page .h1 {
   font-size: clamp(24px, 3.5vw, 36px);
@@ -357,7 +492,9 @@ textarea:focus-visible {
   max-width: none;
 }
 
-.about-page .lead { max-width: none; }
+.about-page .lead {
+  max-width: none;
+}
 
 .about-page .card .small {
   font-size: clamp(1.02rem, 1.1vw, 1rem);
@@ -370,7 +507,7 @@ textarea:focus-visible {
 }
 
 .about-page .card .lead {
-  font-size: clamp(.8rem, 1.4vw, 1rem);
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
   line-height: 1.6;
 }
 
@@ -380,7 +517,9 @@ textarea:focus-visible {
 }
 
 /* ---------- Layout blocks ---------- */
-.section { padding: 54px 0; }
+.section {
+  padding: 54px 0;
+}
 
 .section-tight {
   padding-top: 24px;
@@ -388,13 +527,73 @@ textarea:focus-visible {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(230, 216, 190, 0.8), rgba(230, 216, 190, 0.62));
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(230, 216, 190, 0.8),
+    rgba(230, 216, 190, 0.62)
+  );
   border: 2px double rgba(29, 27, 21, 0.18);
   border-radius: var(--radius);
   box-shadow: 0 30px 30px rgba(29, 27, 21, 0.14);
+
+  /* critical: keep content away from the edges */
+  padding: 26px;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  will-change: transform;
+  overflow: hidden;
 }
 
-.card-pad { padding: 26px; }
+/* alias — keep supported if you used it elsewhere */
+.card-pad {
+  padding: 26px;
+}
+
+/* subtle “alive” overlay — doesn’t change your palette */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  opacity: 0.35;
+  background:
+    radial-gradient(
+      520px 220px at 12% 8%,
+      rgba(145, 115, 85, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      420px 220px at 88% 92%,
+      rgba(111, 124, 99, 0.12),
+      transparent 62%
+    );
+  transform: translate3d(0, 0, 0);
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 38px 38px rgba(29, 27, 21, 0.16);
+  border-color: rgba(29, 27, 21, 0.22);
+}
+
+@media (max-width: 920px) {
+  .card {
+    padding: 20px;
+  }
+  .card-pad {
+    padding: 20px;
+  }
+}
 
 .card-flat {
   background: rgba(236, 225, 202, 0.42);
@@ -422,40 +621,93 @@ textarea:focus-visible {
 }
 
 @media (max-width: 920px) {
-  .grid-2 { grid-template-columns: 1fr; }
-  .grid-3 { grid-template-columns: 1fr; }
-  .card-pad { padding: 20px; }
-  .section { padding: 42px 0; }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .section {
+    padding: 42px 0;
+  }
 }
 
-.grid-2 .grid-3 { margin-top: 16px; }
+.grid-2 .grid-3 {
+  margin-top: 16px;
+}
 
 @media (min-width: 921px) {
-  .grid-2 .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 920px) and (min-width: 641px) {
-  .grid-2 .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
-  .grid-2 .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 .grid-3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* List utility used across pages */
-.list { margin: 0; padding-left: 18px; }
-.list li { margin: 6px 0; }
+.list {
+  margin: 0;
+  padding-left: 18px;
+}
+.list li {
+  margin: 6px 0;
+}
+
+/* Bullets + actions used in your page markup */
+.bullets {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.bullets li {
+  margin: 8px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+@media (max-width: 520px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 /* HR utility */
 .hr {
   height: 1px;
   width: 100%;
   margin: 22px 0;
-  background: linear-gradient(90deg, transparent, rgba(111,124,99,0.35), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(111, 124, 99, 0.35),
+    transparent
+  );
 }
 
 /* ---------- Hero ---------- */
-.hero { padding: 44px 0 24px; }
+.hero {
+  padding: 44px 0 24px;
+}
 
 .hero-inner {
   display: grid;
@@ -465,21 +717,33 @@ textarea:focus-visible {
 }
 
 @media (max-width: 920px) {
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-panel {
   border-radius: var(--radius);
   border: 1px solid rgba(29, 27, 21, 0.18);
   background:
-    radial-gradient(900px 420px at 20% 0%, rgba(145, 115, 85, 0.25), transparent 55%),
-    linear-gradient(180deg, rgba(236, 225, 202, 0.85), rgba(230, 216, 190, 0.55));
+    radial-gradient(
+      900px 420px at 20% 0%,
+      rgba(145, 115, 85, 0.25),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(236, 225, 202, 0.85),
+      rgba(230, 216, 190, 0.55)
+    );
   padding: 34px;
   box-shadow: var(--shadow);
 }
 
 @media (max-width: 520px) {
-  .hero-panel { padding: 22px; }
+  .hero-panel {
+    padding: 22px;
+  }
 }
 
 .hero-cta {
@@ -509,7 +773,14 @@ textarea:focus-visible {
   background: rgba(236, 225, 202, 0.45);
   padding: 10px 12px;
   border-radius: 999px;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 13px;
   letter-spacing: 0.02em;
 }
@@ -529,10 +800,20 @@ textarea:focus-visible {
   margin-top: 10px;
 }
 
-.field { display: grid; gap: 6px; }
+.field {
+  display: grid;
+  gap: 6px;
+}
 
 .field-label {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -549,12 +830,21 @@ textarea:focus-visible {
   font: inherit;
 }
 
-.textarea { resize: vertical; }
+.textarea {
+  resize: vertical;
+}
 
 .help {
   margin: 0;
   opacity: 0.75;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -605,7 +895,9 @@ textarea:focus-visible {
   justify-content: center;
   width: 30px;
   height: 30px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .footer-nav .social-link:hover {
@@ -633,19 +925,33 @@ textarea:focus-visible {
 }
 
 /* ---------- Tiny utilities ---------- */
-.center { text-align: center; }
-.mt-0 { margin-top: 0; }
-.mt-2 { margin-top: 12px; }
-.mt-3 { margin-top: 18px; }
-.mt-4 { margin-top: 24px; }
+.center {
+  text-align: center;
+}
+.mt-0 {
+  margin-top: 0;
+}
+.mt-2 {
+  margin-top: 12px;
+}
+.mt-3 {
+  margin-top: 18px;
+}
+.mt-4 {
+  margin-top: 24px;
+}
 
-.appal-card-pad { text-align: center; }
+.appal-card-pad {
+  text-align: center;
+}
 
 /* =========================
    Conversation (Archetype-style) — deduped
    ========================= */
 
-.writing-shell { margin-bottom: 50px; }
+.writing-shell {
+  margin-bottom: 50px;
+}
 
 .writing-grid {
   display: grid;
@@ -654,16 +960,23 @@ textarea:focus-visible {
 }
 
 @media (min-width: 760px) {
-  .writing-grid { grid-template-columns: repeat(2, 1fr); }
+  .writing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1040px) {
-  .writing-grid { grid-template-columns: repeat(3, 1fr); }
+  .writing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .writing-card {
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
   background: rgba(236, 225, 202, 0.42);
   border: 1px solid rgba(29, 27, 21, 0.14);
   box-shadow: none;
@@ -686,7 +999,14 @@ textarea:focus-visible {
 
 .writing-excerpt {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   line-height: 1.65;
   opacity: 0.92;
 }
@@ -697,12 +1017,21 @@ textarea:focus-visible {
 }
 
 .reader-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   line-height: 1.8;
   opacity: 0.95;
 }
 
-.reader-body p { margin: 0 0 14px; }
+.reader-body p {
+  margin: 0 0 14px;
+}
 
 /* Chips */
 .chip {
@@ -710,19 +1039,32 @@ textarea:focus-visible {
   background: rgba(236, 225, 202, 0.45);
   border-radius: 999px;
   padding: 10px 12px;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 13px;
   letter-spacing: 0.02em;
-  box-shadow: 0 10px 22px rgba(29, 27, 21, 0.10);
+  box-shadow: 0 10px 22px rgba(29, 27, 21, 0.1);
 }
 
 .chip.is-active {
-  background: linear-gradient(180deg, rgba(83, 50, 29, 0.98), rgba(29, 27, 21, 0.98));
+  background: linear-gradient(
+    180deg,
+    rgba(83, 50, 29, 0.98),
+    rgba(29, 27, 21, 0.98)
+  );
   color: #f5eedd;
   border-color: rgba(255, 255, 255, 0.14);
 }
 
-.chip:hover { transform: translateY(-1px); }
+.chip:hover {
+  transform: translateY(-1px);
+}
 
 /* Force chips to behave as pill buttons */
 .writing-shell .chip,
@@ -742,13 +1084,20 @@ textarea:focus-visible {
   line-height: 1;
 
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .writing-shell .chip.is-active,
 .writing-shell button.chip.is-active,
 .writing-shell a.chip.is-active {
-  background: linear-gradient(180deg, rgba(83, 50, 29, 0.98), rgba(29, 27, 21, 0.98)) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(83, 50, 29, 0.98),
+    rgba(29, 27, 21, 0.98)
+  ) !important;
   color: #f5eedd !important;
   border-color: rgba(255, 255, 255, 0.14) !important;
 }
@@ -770,7 +1119,14 @@ textarea:focus-visible {
 }
 
 .main-nav details.nav-dropdown > summary.nav-parent {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 14px;
   letter-spacing: 0.02em;
   padding: 10px 10px;
@@ -822,7 +1178,14 @@ textarea:focus-visible {
   display: block;
   padding: 10px 10px;
   border-radius: 12px;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 14px;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -833,7 +1196,9 @@ textarea:focus-visible {
 }
 
 @media (max-width: 860px) {
-  .main-nav details.nav-dropdown { width: 100%; }
+  .main-nav details.nav-dropdown {
+    width: 100%;
+  }
 
   .main-nav details.nav-dropdown > summary.nav-parent {
     width: 100%;
@@ -856,3 +1221,380 @@ textarea:focus-visible {
     white-space: normal;
   }
 }
+
+/* =========================
+   SoulStone — Calm additions
+   ========================= */
+
+.pull-quote {
+  margin-top: 5px;
+  padding: 5px;
+  border-left: 4px solid rgba(111, 124, 99, 0.65);
+  background: rgba(230, 216, 190, 0.45);
+  border-radius: 25px;
+}
+
+.band {
+  position: relative;
+  padding: 14px 0;
+  background: rgba(230, 216, 190, 0.55);
+  border-top: solid var(--line);
+  border-bottom: solid var(--line);
+  height: 10px;
+  z-index: 1;
+}
+
+.section.band p.small {
+  margin: 0;
+  margin-top: -10px;
+  text-align: center;
+}
+
+.band .small {
+  justify-content: center;
+  text-align: center;
+}
+
+.p .small {
+  text-align: center;
+  justify-content: center;
+}
+
+.threshold {
+  margin: 0 0 10px;
+  letter-spacing: 0.01em;
+}
+
+.training-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.training-item {
+  padding: 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(236, 225, 202, 0.45);
+}
+
+.training-item .h3 {
+  margin: 0 0 6px;
+}
+
+.section.band::before,
+.section.band::after {
+  content: none;
+}
+
+/* ========== Simple grids + panels ========== */
+.grid-2 {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 860px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.panel {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(236, 225, 202, 0.45);
+}
+
+.hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 18px 0;
+}
+
+/* =========================================================
+   Motion + tighter card rhythm (requested)
+   - Keeps palette identical
+   - Adds reveal-on-scroll + gentle ambient motion
+   ========================================================= */
+
+/* Bring stacked cards closer together */
+.card {
+  margin-bottom: 12px;
+}
+.card:last-child {
+  margin-bottom: 0;
+}
+
+/* Grid rhythm: closer cards without feeling cramped */
+.grid-2 {
+  gap: 18px;
+}
+.grid-3 {
+  gap: 14px;
+}
+@media (max-width: 920px) {
+  .grid-2 {
+    gap: 14px;
+  }
+  .grid-3 {
+    gap: 12px;
+  }
+}
+
+/* Slightly tighter section spacing so the page flows */
+.section {
+  padding: 46px 0;
+}
+@media (max-width: 920px) {
+  .section {
+    padding: 38px 0;
+  }
+}
+
+/* Reveal-on-scroll states (JS adds .reveal + toggles .is-visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(0.2px);
+  transition:
+    opacity 520ms ease,
+    transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 520ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Calm ambient drift behind the whole page (very subtle) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -40vh -30vw;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+  background:
+    radial-gradient(
+      650px 420px at 18% 12%,
+      rgba(145, 115, 85, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      720px 520px at 78% 86%,
+      rgba(111, 124, 99, 0.18),
+      transparent 62%
+    ),
+    radial-gradient(
+      520px 380px at 55% 40%,
+      rgba(29, 27, 21, 0.06),
+      transparent 62%
+    );
+  transform: translate3d(0, 0, 0);
+  animation: ambientDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes ambientDrift {
+  from {
+    transform: translate3d(-12px, -10px, 0) scale(1);
+  }
+  to {
+    transform: translate3d(12px, 10px, 0) scale(1.02);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  body::before {
+    animation: none !important;
+  }
+}
+
+/* CARD GRIDS — CLOSER ROWS & COLUMNS */
+.cards,
+.card-grid,
+.program-grid,
+.notes-grid {
+  gap: 10px; /* was likely 20–32px */
+}
+
+/* SECTION SPACING — LESS AIR */
+.section {
+  padding: 28px 0; /* was likely 48–64px */
+}
+
+.section .container {
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    margin-bottom: 6px;
+  }
+
+  .cards,
+  .card-grid,
+  .program-grid,
+  .notes-grid {
+    gap: 8px;
+  }
+
+  .section {
+    padding: 22px 0;
+  }
+}
+
+/* Anchor offset for sticky header */
+:root {
+  --header-offset: 80px; /* adjust once */
+}
+
+/* Any section you jump to (id targets) */
+[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+:root { --header-offset: 92px; }
+
+@media (max-width: 640px) {
+  :root { --header-offset: 76px; }
+}
+
+/* Anchor offset for sticky header */
+:root { --header-offset: 88px; } /* tweak this number once */
+
+
+.field { display: grid; gap: 6px; margin-top: 12px; }
+.field-label { font-weight: 600; }
+.field-help { display: block; margin-top: 2px; }
+
+.fieldset { border: 1px solid var(--line); border-radius: var(--radius, 16px); padding: 12px; }
+.legend { font-weight: 650; padding: 0 6px; }
+
+.check { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; }
+.check input { margin-top: 3px; }
+
+/* =========================================================
+   Volunteer Form — FORCE LAYOUT (override site rules)
+   ========================================================= */
+
+#volunteer-interest form {
+  display: grid !important;
+  gap: 14px !important;
+  margin-top: 14px !important;
+}
+
+#volunteer-interest label.field {
+  display: grid !important;
+  gap: 6px !important;
+  margin-top: 10px !important;
+}
+
+#volunteer-interest .field-label {
+  font-weight: 650 !important;
+  display: block !important;
+}
+
+#volunteer-interest input.input,
+#volunteer-interest select.select,
+#volunteer-interest textarea.textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+
+  padding: 12px 12px !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--line) !important;
+
+  background: rgba(236, 225, 202, 0.6) !important;
+  color: var(--ink) !important;
+
+  font: inherit !important;
+  line-height: 1.35 !important;
+  outline: none !important;
+}
+
+#volunteer-interest textarea.textarea {
+  resize: vertical !important;
+  min-height: 120px !important;
+}
+
+#volunteer-interest input.input:focus,
+#volunteer-interest select.select:focus,
+#volunteer-interest textarea.textarea:focus {
+  border-color: rgba(29, 27, 21, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(111, 124, 99, 0.18) !important;
+}
+
+#volunteer-interest fieldset.fieldset {
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 12px !important;
+  margin-top: 8px !important;
+}
+
+#volunteer-interest legend.legend {
+  padding: 0 8px !important;
+  font-weight: 650 !important;
+}
+
+#volunteer-interest label.check {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: flex-start !important;
+  margin-top: 10px !important;
+  line-height: 1.35 !important;
+}
+
+#volunteer-interest label.check input[type="checkbox"] {
+  margin-top: 3px !important;
+}
+
+#volunteer-interest .actions {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  margin-top: 10px !important;
+}
+
+/* Volunteer hero: centered + wide */
+#volunteer-hero .hero-panel {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+}
+
+/* VOLUNTEER HERO: force single-column layout so the hero card can fill/center */
+.volunteer-page #volunteer-hero .hero-inner {
+  grid-template-columns: 1fr !important;
+}
+
+/* Now the hero panel can actually span the available width */
+.volunteer-page #volunteer-hero .hero-panel {
+  width: 100% !important;
+  max-width: 980px !important;   /* pick your width */
+  margin: 0 auto !important;     /* center */
+}
+
+.volunteer-page h1 {
+  text-align: center;
+}
+
+.volunteer-page p.lead {
+  max-width: 100%;
+  text-align: center;
+}
+
+:root { --header-offset: 92px; }
+@media (max-width: 640px) { :root { --header-offset: 76px; } }
+[id] { scroll-margin-top: calc(var(--header-offset) + 16px); }
