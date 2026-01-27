@@ -276,15 +276,19 @@ const initContactPrefill = () => {
   if (!onContact) return;
 
   const params = new URLSearchParams(window.location.search);
-  const raw = (params.get("interest") || params.get("topic") || "").trim();
+  let raw = (params.get("interest") || params.get("topic") || "").trim();
   if (!raw) return;
 
-  const select = qs('select[name="interest"]');
+  // Normalize common URL quirks
+  raw = raw
+    .toLowerCase()
+    .replace(/\+/g, " ")        // handle + for spaces
+    .replace(/_/g, "-")         // interest_list -> interest-list
+    .replace(/\s+/g, "-");      // "interest list" -> interest-list
+
+  const select = document.querySelector('select[name="interest"]');
   if (!select) return;
 
-  const desired = raw.toLowerCase();
-
-  // Alias map (so links can stay human-friendly)
   const aliases = {
     donate: "donation",
     giving: "donation",
@@ -298,37 +302,36 @@ const initContactPrefill = () => {
     email: "updates",
     general: "general",
     contact: "general",
+
+    // legacy page params:
+    community: "interest-list",
+    collaboration: "trainings",
+    trainings: "trainings",
+
+    // make "interest list" bulletproof:
+    "interestlist": "interest-list",
+    "interest-list": "interest-list",
+    "interest-list-signup": "interest-list",
   };
 
-  const normalized = aliases[desired] || desired;
+  const normalized = aliases[raw] || raw;
 
-  // 1) Match by option VALUE
-  let matched = false;
-  for (const opt of Array.from(select.options)) {
-    if ((opt.value || "").toLowerCase() === normalized) {
-      opt.selected = true;
-      matched = true;
-      break;
-    }
-  }
+  // BEST WAY: set value directly (more reliable than opt.selected)
+  select.value = normalized;
 
-  // 2) Fallback: match by visible text (contains)
-  if (!matched) {
-    for (const opt of Array.from(select.options)) {
-      const text = (opt.textContent || "").toLowerCase();
-      if (text.includes(normalized)) {
-        opt.selected = true;
-        matched = true;
-        break;
-      }
-    }
+  // If the value didn't match any option, try a text contains fallback
+  if (!select.value) {
+    const opts = Array.from(select.options);
+    const match = opts.find((o) =>
+      (o.textContent || "").toLowerCase().includes(normalized.replace(/-/g, " "))
+    );
+    if (match) select.value = match.value;
   }
 
   try {
     select.dispatchEvent(new Event("change", { bubbles: true }));
   } catch {}
 };
-
 
   /* -------------------------
      Formspree submit handler
