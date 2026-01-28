@@ -40,10 +40,6 @@ html {
   scroll-padding-top: calc(var(--header-offset) + 16px);
 }
 
-html { scroll-padding-top: var(--header-offset); }
-[id] { scroll-margin-top: var(--header-offset); }
-
-html { scroll-padding-top: var(--header-offset, 90px); }
 [id] { scroll-margin-top: var(--header-offset, 90px); }
 
 
@@ -190,7 +186,7 @@ textarea:focus-visible {
   font-weight: 900;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 22px;
 }
 
 .brand-text .tag {
@@ -202,7 +198,7 @@ textarea:focus-visible {
     Roboto,
     Arial,
     sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.02em;
   opacity: 0.8;
 }
@@ -456,8 +452,18 @@ textarea:focus-visible {
 }
 
 .lead {
-  max-width: 62ch;
+  max-width: 100%;
+  text-align: center;
 }
+
+/* OUR WORK: let the intro lead span the full card width */
+.hero-panel .lead {
+  max-width: none !important;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 
 /* keep these class names supported if you still use them anywhere */
 .about-h1,
@@ -1461,12 +1467,6 @@ body::before {
 }
 
 /* Any section you jump to (id targets) */
-[id] {
-  scroll-margin-top: var(--header-offset);
-}
-
-:root { --header-offset: 92px; }
-
 @media (max-width: 640px) {
   :root { --header-offset: 76px; }
 }
@@ -1596,7 +1596,6 @@ body::before {
   text-align: center;
 }
 
-:root { --header-offset: 92px; }
 @media (max-width: 640px) { :root { --header-offset: 76px; } }
 [id] { scroll-margin-top: calc(var(--header-offset) + 16px); }
 
@@ -1639,3 +1638,493 @@ body::before {
   font-size: 0.9em;
   opacity: 0.85;
 }
+
+
+/* =========================================================
+   INDEX HERO — fixed photo + gradient curtain (adds, doesn't break other pages)
+   How it works:
+   - .fixed-hero-bg is a fixed image behind everything
+   - .hero is transparent so the photo shows only in the hero area
+   - .after-hero paints the site gradient over the photo for the rest of the page
+   ========================================================= */
+
+.fixed-hero-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("Static/Images/heropic.jpg") center / cover no-repeat;
+}
+
+.hero{
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 84px 0 64px;
+  background: transparent;
+  box-shadow: inset 0 -80px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* dark overlay so hero text reads */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.35);
+  pointer-events:none;
+}
+
+.hero .hero-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* gradient curtain so the fixed photo DOES NOT continue down the page */
+.after-hero{
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(180deg, #f6f0e3 0%, #917355 85%);
+}
+
+/* keep content above the curtain */
+.after-hero > *{
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px){
+  .hero{
+    min-height: 55vh;
+    padding: 72px 0 48px;
+  }
+}
+
+/* =========================
+   WHO WE ARE — HERO IMAGE
+   ========================= */
+
+.who-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+
+  background-image: url("Static/Images/windows.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* subtle darkening for readability */
+.who-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* content stays readable */
+.who-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.who-hero-panel {
+  max-width: 760px;
+  margin: 0 auto;
+
+  padding: 34px;
+  border-radius: var(--radius);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(236, 225, 202, 0.9),
+      rgba(230, 216, 190, 0.75)
+    );
+
+  border: 1px solid rgba(29, 27, 21, 0.18);
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .who-hero {
+    min-height: 50vh;
+  }
+
+  .who-hero-panel {
+    padding: 22px;
+  }
+}
+
+/* =========================
+   Per-page fixed background system (SAFE)
+   ========================= */
+
+/* base fixed layer (no image here) */
+.fixed-page-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Who We Are: set the fixed image */
+.whoweare-page .fixed-page-bg{
+  background-image: url("Static/Images/windows.jpg");
+}
+
+/* Who We Are hero sits on top of fixed image */
+.whoweare-page .who-hero{
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  background: transparent; /* reveal the fixed image */
+}
+
+/* readability overlay */
+.whoweare-page .who-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.30);
+  pointer-events:none;
+}
+
+/* keep hero content above overlay */
+.whoweare-page .who-hero-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient “curtain” AFTER the hero */
+.whoweare-page .after-who-hero{
+  background: linear-gradient(180deg, #f6f0e3 0%, #917355 85%);
+}
+
+/* IMPORTANT: let sections be transparent so the gradient shows through */
+.whoweare-page .after-who-hero .section,
+.whoweare-page .after-who-hero .footer{
+  background: transparent;
+}
+
+@media (max-width: 640px){
+  .whoweare-page .who-hero{ min-height: 52vh; }
+  .whoweare-page .who-hero::before{ background: rgba(0,0,0,0.22); }
+}
+
+/* =========================================================
+   Who We Are — fixed background + gradient curtain
+   (page-scoped so it won't break other pages)
+   ========================================================= */
+
+/* the fixed photo layer behind everything */
+.whoweare-page .fixed-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("Static/Images/windows.jpg") center / cover no-repeat;
+}
+
+/* hero should NOT have its own background image */
+.whoweare-page .who-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 84px 0 64px;
+  background: transparent; /* critical */
+}
+
+/* dark overlay on top of the fixed image for readability */
+.whoweare-page .who-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+}
+
+/* keep hero content above the overlay */
+.whoweare-page .who-hero-inner,
+.whoweare-page .who-hero-panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* curtain for everything after the hero */
+.whoweare-page .after-hero {
+  background: linear-gradient(180deg, #f6f0e3 0%, #917355 85%);
+}
+
+/* make the footer sit on the curtain too (not plain solid) */
+.whoweare-page {
+  background: transparent;
+}
+
+/* =========================================================
+   Get Involved page — fixed background image behind hero
+   (page-scoped so it won't break other pages)
+   ========================================================= */
+
+/* fixed background layer */
+.get-involved-page .fixed-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("Static/Images/helping-hands.jpg") center / cover no-repeat;
+}
+
+/* hero reveals the background */
+.get-involved-page .get-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 84px 0 64px;
+  background: transparent !important; /* important: don't let other rules paint over it */
+}
+
+/* readability overlay */
+.get-involved-page .get-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 27, 21, 0.58),
+    rgba(29, 27, 21, 0.18)
+  );
+  pointer-events: none;
+}
+
+/* keep hero content above overlay */
+.get-involved-page .get-hero .get-hero-inner,
+.get-involved-page .get-hero .get-hero-panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* OPTIONAL but recommended:
+   make the hero card feel intentional on top of a photo */
+.get-involved-page .get-hero .get-hero-panel {
+  background: rgba(236, 225, 202, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(29, 27, 21, 0.18);
+  border-radius: var(--radius, 18px);
+  box-shadow: 0 18px 40px rgba(29, 27, 21, 0.25);
+}
+
+/* IMPORTANT:
+   Your global CSS likely gives .section / .footer a solid background.
+   Keep them solid so text is readable (NOT transparent). */
+.get-involved-page .section,
+.get-involved-page .footer {
+  background: rgba(236, 225, 202, 0.92);
+}
+
+/* Get Involved hero: stop text hugging the card */
+.get-involved-page .get-hero-panel {
+  padding: clamp(22px, 3.2vw, 42px) !important;
+}
+
+.get-involved-page .get-hero-panel p,
+.get-involved-page .get-hero-panel .lead {
+  margin-top: 12px;
+  margin-bottom: 0;
+  line-height: 1.75;
+}
+
+/* give the first paragraph under the H1 a little air */
+.get-involved-page .get-hero-panel .lead {
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* keep the bottom "501(c)(3)" line from smashing the edge */
+.get-involved-page .get-hero-panel .small {
+  margin-top: 16px;
+  padding-top: 10px;
+}
+
+/* Let the lead stretch full width inside the hero card */
+.get-involved-page .get-hero-panel .lead {
+  width: 100%;
+  max-width: none !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.get-hero-panel .lead {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  align-items: stretch;
+}
+
+.hero-panel p {
+  max-width: none !important;
+  width: 100%;
+}
+
+/* =========================
+   OUR WORK — HERO BACKGROUND
+   ========================= */
+
+.our-work-page .work-hero {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Put your image here */
+  background-image: url("Static/Images/our-work.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* intentional: scroll, not fixed */
+  background-attachment: scroll;
+}
+
+/* Warm overlay tuned to SoulStone gradient */
+.our-work-page .work-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 27, 21, 0.55) 0%,
+    rgba(145, 115, 85, 0.55) 55%,
+    rgba(246, 240, 227, 0.85) 100%
+  );
+  z-index: 0;
+}
+
+/* Keep content above overlay */
+.our-work-page .work-hero-inner {
+  position: relative;
+  z-index: 1;
+  
+}
+
+.our-work-page .work-hero-panel {
+  width: 100%;  
+  padding: 36px;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgba(246, 240, 227, 0.86);
+  box-shadow: 0 24px 48px rgba(29, 27, 21, 0.18);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .our-work-page .work-hero {
+    min-height: 62vh;
+  }
+  .our-work-page .work-hero-panel {
+    padding: 24px;
+  }
+}
+
+
+/* =========================
+   OUR WORK — HERO IMAGE (match Who We Are)
+   ========================= */
+
+.work-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+
+  background-image: url("Static/Images/our-work-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* subtle darkening for readability (same as Who We Are) */
+.work-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* content stays readable */
+.work-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.work-hero-panel {
+  max-width: 760px;
+  margin: 0 auto;
+
+  padding: 34px;
+  border-radius: var(--radius);
+
+  background: linear-gradient(
+    180deg,
+    rgba(236, 225, 202, 0.9),
+    rgba(230, 216, 190, 0.75)
+  );
+
+  border: 1px solid rgba(29, 27, 21, 0.18);
+  box-shadow: var(--shadow);
+
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .work-hero {
+    min-height: 50vh;
+  }
+
+  .work-hero-panel {
+    padding: 22px;
+  }
+}
+
+/* =========================
+   OUR WORK — HERO PANEL (force match Who We Are)
+   Put this near the END of style.css so it wins.
+   ========================= */
+
+.our-work-page .work-hero-panel {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 34px;
+  border-radius: var(--radius);
+  text-align: center;
+
+  /* match Who We Are panel */
+  background: linear-gradient(
+    180deg,
+    rgba(236, 225, 202, 0.9),
+    rgba(230, 216, 190, 0.75)
+  ) !important;
+
+  border: 1px solid rgba(29, 27, 21, 0.18);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 640px) {
+  .our-work-page .work-hero-panel {
+    padding: 22px;
+  }
+}
+
+

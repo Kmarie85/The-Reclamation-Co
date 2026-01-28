@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Who We Are | SoulStone, Inc.</title>
-<meta
-  name="description"
-  content="SoulStone, Inc. is a 501(c)(3) nonprofit offering trauma-informed, community-centered support for caregivers, helping professionals, and women navigating burnout, chronic stress, or transition."
-/>
-
+    <meta
+      name="description"
+      content="SoulStone, Inc. is a 501(c)(3) nonprofit offering trauma-informed, community-centered support for caregivers, helping professionals, and women navigating burnout, chronic stress, or transition."
+    />
     <meta name="robots" content="index,follow" />
 
     <link rel="canonical" href="https://www.soulstoneinc.org/whoweare.html" />
-
     <link rel="icon" href="favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="favicon.png" />
 
@@ -26,7 +24,6 @@
       content="About SoulStone — a nonprofit rooted in reclamation, regulation, and real human support. Trauma-informed spaces for burned-out women and caregivers."
     />
     <meta property="og:url" content="https://www.soulstoneinc.org/whoweare.html" />
-    <!-- TODO: Replace with a real image -->
     <meta
       property="og:image"
       content="https://www.soulstoneinc.org/Static/Images/og-image.png"
@@ -45,419 +42,275 @@
       content="https://www.soulstoneinc.org/Static/Images/og-image.png"
     />
 
-    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
     <script>
       window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
     </script>
 
-    <!-- Styles + Scripts -->
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
 
-    <!-- Structured Data (Soul Stone, Inc. + SoulStone, Inc.) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
-          {
-            "@type": "Organization",
-            "name": "SoulStone, Inc.",
-            "url": "https://www.soulstoneinc.org"
-          },
-          {
-            "@type": "WebSite",
-            "name": "SoulStone, Inc.",
-            "url": "https://www.soulstoneinc.org"
-          }
+          { "@type": "Organization", "name": "SoulStone, Inc.", "url": "https://www.soulstoneinc.org" },
+          { "@type": "WebSite", "name": "SoulStone, Inc.", "url": "https://www.soulstoneinc.org" }
         ]
       }
     </script>
   </head>
 
   <body class="whoweare-page">
-<header class="site-header">
-  <div class="container nav-container">
-    <a
-      href="index.html"
-      class="brand"
-      data-track="nav_click"
-      data-label="nav_home_brand"
-    >
-      <img
-        src="Static/Images/Soul logo One.png"
-        alt="SoulStone, Inc. logo"
-        id="logo"
-      />
-      <div class="brand-text">
-        <div class="name">SoulStone, Inc.</div>
-        <div class="tag">a 501(c)(3) nonprofit organization</div>
-      </div>
-    </a>
+    <!-- Fixed background image layer (behind everything) -->
+    <div class="fixed-page-bg" aria-hidden="true"></div>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-nav-toggle
-      data-track="nav_toggle"
-      data-label="nav_toggle"
-    >
-      Menu
-    </button>
+    <header class="site-header">
+      <div class="container nav-container">
+        <a href="index.html" class="brand" data-track="nav_click" data-label="nav_home_brand">
+          <img src="Static/Images/Soul logo One.png" alt="SoulStone, Inc. logo" id="logo" />
+          <div class="brand-text">
+            <div class="name">SoulStone, Inc.</div>
+            <div class="tag">a 501(c)(3) nonprofit organization</div>
+          </div>
+        </a>
 
-    <nav class="main-nav" id="site-nav" data-nav-links>
-      <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare"
-        >Who We Are</a
-      >
-
-      <details
-        class="nav-dropdown"
-        data-track="nav_dropdown"
-        data-label="nav_work_dropdown"
-      >
-        <summary
-          class="nav-parent"
-          aria-label="Our Work menu"
-          data-track="nav_click"
-          data-label="nav_our-work"
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
         >
-          Our Work <span class="nav-caret" aria-hidden="true">▾</span>
-        </summary>
+          Menu
+        </button>
 
-        <div class="nav-menu" role="menu" aria-label="Our Work sections">
-          <a
-            role="menuitem"
-            href="our-work.html#live-cohorts"
-            data-track="nav_click"
-            data-label="nav_work_live_cohorts"
-            >Live Cohorts</a
-          >
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare">Who We Are</a>
 
-          <a
-            role="menuitem"
-            href="trainings-workshops.html"
-            data-track="nav_click"
-            data-label="nav_work_trainings"
-            >Trainings &amp; Workshops</a
-          >
+          <details class="nav-dropdown" data-track="nav_dropdown" data-label="nav_work_dropdown">
+            <summary class="nav-parent" aria-label="Our Work menu" data-track="nav_click" data-label="nav_our-work">
+              Our Work <span class="nav-caret" aria-hidden="true">▾</span>
+            </summary>
 
-          <a
-            role="menuitem"
-            href="our-work.html#community-supports"
-            data-track="nav_click"
-            data-label="nav_work_community"
-            >Community-Based Supports</a
-          >
+            <div class="nav-menu" role="menu" aria-label="Our Work sections">
+              <a role="menuitem" href="our-work.html#live-cohorts" data-track="nav_click" data-label="nav_work_live_cohorts">Live Cohorts</a>
+              <a role="menuitem" href="trainings-workshops.html" data-track="nav_click" data-label="nav_work_trainings">Trainings &amp; Workshops</a>
+              <a role="menuitem" href="our-work.html#community-supports" data-track="nav_click" data-label="nav_work_community">Community-Based Supports</a>
+              <a role="menuitem" href="our-work.html#tools-resources" data-track="nav_click" data-label="nav_work_tools">Tools &amp; Resources</a>
+            </div>
+          </details>
 
-          <a
-            role="menuitem"
-            href="our-work.html#tools-resources"
-            data-track="nav_click"
-            data-label="nav_work_tools"
-            >Tools &amp; Resources</a
-          >
-        </div>
-      </details>
-
-      <a
-        href="get-involved.html"
-        data-track="nav_click"
-        data-label="nav_get_involved"
-        >Get Involved</a
-      >
-      <!-- <a href="impact.html" data-track="nav_click" data-label="nav_impact"
-        >Impact</a
-      > -->
-      <a href="contact.html" data-track="nav_click" data-label="nav_contact"
-        >Contact</a
-      >
-      <a
-        href="reclamation-notes.html"
-        data-track="nav_click"
-        data-label="nav_notes"
-        >Reclamation Notes</a
-      >
-    </nav>
-  </div>
-</header>
-
+          <a href="get-involved.html" data-track="nav_click" data-label="nav_get_involved">Get Involved</a>
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact">Contact</a>
+          <a href="reclamation-notes.html" data-track="nav_click" data-label="nav_notes">Reclamation Notes</a>
+        </nav>
+      </div>
+    </header>
 
     <main>
-      <section class="hero hero-small">
-        <div class="container hero-inner">
-          <div class="hero-panel">
+      <!-- HERO: transparent section that reveals the fixed background -->
+      <section class="who-hero">
+        <div class="container who-hero-inner">
+          <div class="who-hero-panel">
             <h1 class="h1">Who We Are</h1>
-            <p class="lead">
-              SoulStone, Inc. — Trauma-informed support rooted in dignity and
-              community.
-            </p>
+            <p class="lead">SoulStone, Inc. — Trauma-informed support rooted in dignity and community.</p>
             <p>
-              SoulStone, Inc. is a 501(c)(3) nonprofit organization offering
-              trauma-informed, community-centered support for caregivers,
-              helping professionals, and women navigating burnout, chronic
-              stress, or transition.
+              SoulStone, Inc. is a 501(c)(3) nonprofit organization offering trauma-informed, community-centered support for caregivers,
+              helping professionals, and women navigating burnout, chronic stress, or transition.
             </p>
 
             <div class="hero-cta">
-              <a class="btn btn-primary" href="our-work.html"
-                >Explore Our Work</a
-              >
+              <a class="btn btn-primary" href="our-work.html">Explore Our Work</a>
               <a class="btn btn-ghost" href="get-involved.html">Get Involved</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong>Burnout is not a personal failure.</strong>
-            </p>
-            <h2 class="h2">OUR WHY</h2>
-            <p>
-              Many of the people we serve are caregivers, helping professionals,
-              women in midlife transition, or people who have spent years being
-              “the strong one.” They are capable, insightful, and deeply caring
-              — and they are tired.
-            </p>
-            <p>
-              SoulStone exists because rest, regulation, and sustainable support
-              should not be luxuries. Burnout is a nervous-system response to
-              prolonged stress and responsibility, not weakness. Our work
-              supports people in slowing down, reconnecting with themselves, and
-              rebuilding from a place of safety and dignity — not performance or
-              urgency.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong
-                >These beliefs guide how we show up and how we work.</strong
-              >
-            </p>
-            <h2 class="h2">WHAT WE BELIEVE</h2>
-            <ul class="bullets">
-              <li>The nervous system matters — healing begins with safety.</li>
-              <li>Burnout is information, not weakness.</li>
-              <li>People heal in relationship, not isolation.</li>
-              <li>
-                Support should respect choice, pace, and lived experience.
-              </li>
-              <li>
-                Growth happens through safety and steady care, not pressure or
-                urgency.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong
-                >Support that is practical, relational, and grounded in real
-                life.</strong
-              >
-            </p>
-            <h2 class="h2">HOW WE HELP</h2>
-            <p>
-              SoulStone offers trauma-informed supports designed for real life —
-              not theory alone. Our work blends education, embodiment, and
-              relational connection in ways that help people integrate new
-              awareness and tools into daily living without pressure to “get it
-              right.”
-            </p>
-            <p><strong>Our core offerings include:</strong></p>
-            <ul class="bullets">
-              <li>
-                Live cohorts that balance education, practice, and connection
-              </li>
-              <li>
-                Trainings &amp; workshops tailored to caregivers, professionals,
-                and organizations
-              </li>
-              <li>Community-based supports that reduce isolation</li>
-              <li>
-                Tools &amp; resources designed to complement, not replace,
-                relational care
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong>One mission, multiple expressions of care.</strong>
-            </p>
-            <h2 class="h2">OUR ECOSYSTEM</h2>
-            <p>
-              SoulStone, Inc. is the nonprofit home of this work. Connected to
-              SoulStone are mission-aligned initiatives that expand how support
-              is offered:
-            </p>
-            <ul class="bullets">
-              <li>
-                <strong>SoulStone, Inc.</strong> — Education, tools, and
-                supports designed to help people reconnect to themselves and
-                strengthen capacity.
-              </li>
-              <li>
-                <strong>Appalachian Soul Provisions</strong> — Thoughtfully
-                created goods rooted in nourishment, care, and place.
-              </li>
-            </ul>
-            <p>
-              Each branch serves the same mission: helping people return to
-              themselves — gently, honestly, and without shame.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong>We grow with intention, not urgency.</strong>
-            </p>
-            <h2 class="h2">LOOKING AHEAD</h2>
-            <p>As SoulStone continues to evolve, we are building:</p>
-            <ul class="bullets">
-              <li>Additional live cohorts with focused themes</li>
-              <li>Community-based programming responsive to need</li>
-              <li>Professional trainings for organizations and caregivers</li>
-              <li>
-                Strategic partnerships that strengthen regional support systems
-              </li>
-            </ul>
-            <p>
-              We are committed to growing with integrity and discernment —
-              quality over speed.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="threshold">
-              <strong>You don’t need to be certain to belong here.</strong>
-            </p>
-            <h2 class="h2">AN INVITATION</h2>
-            <p>If you’ve found your way here, you may be:</p>
-            <ul class="bullets">
-              <li>Tired of holding everything together</li>
-              <li>In a season of transition or questioning</li>
-              <li>Looking for grounded, sustainable support</li>
-            </ul>
-            <p><strong>You are welcome here.</strong></p>
-            <p>
-              When you’re ready, explore how SoulStone’s programs and community
-              can support your path.
-            </p>
-
-            <div class="actions">
-              <a class="btn btn-primary" href="our-work.html"
-                >Explore Our Work</a
-              >
-              <a class="btn btn-ghost" href="get-involved.html">Get Involved</a>
+      <!-- Everything below hero scrolls over the gradient curtain -->
+      <div class="after-hero">
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>Burnout is not a personal failure.</strong></p>
+              <h2 class="h2">OUR WHY</h2>
+              <p>
+                Many of the people we serve are caregivers, helping professionals, women in midlife transition, or people who have spent
+                years being “the strong one.” They are capable, insightful, and deeply caring — and they are tired.
+              </p>
+              <p>
+                SoulStone exists because rest, regulation, and sustainable support should not be luxuries. Burnout is a nervous-system
+                response to prolonged stress and responsibility, not weakness. Our work supports people in slowing down, reconnecting
+                with themselves, and rebuilding from a place of safety and dignity — not performance or urgency.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <h2 class="h2">OUR FOUNDER</h2>
-            <p>
-              Julie Reutcke (RUT-key) is a trauma-informed practitioner with
-              over two decades of experience supporting caregivers, helping
-              professionals, and families navigating high-stress systems. She
-              founded SoulStone to create accessible, community-centered spaces
-              where people can experience regulation, rest, and sustainable
-              support without pressure or shame. Julie’s work is grounded in
-              nervous-system awareness, practical application, and deep respect
-              for lived experience.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <p class="lead">
-              Learn more about how SoulStone supports individuals, communities,
-              and organizations through trauma-informed programming and
-              collaboration.
-            </p>
-            <div class="actions">
-              <a class="btn btn-primary" href="contact.html?interest=general">Contact Us</a>
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>These beliefs guide how we show up and how we work.</strong></p>
+              <h2 class="h2">WHAT WE BELIEVE</h2>
+              <ul class="bullets">
+                <li>The nervous system matters — healing begins with safety.</li>
+                <li>Burnout is information, not weakness.</li>
+                <li>People heal in relationship, not isolation.</li>
+                <li>Support should respect choice, pace, and lived experience.</li>
+                <li>Growth happens through safety and steady care, not pressure or urgency.</li>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>Support that is practical, relational, and grounded in real life.</strong></p>
+              <h2 class="h2">HOW WE HELP</h2>
+              <p>
+                SoulStone offers trauma-informed supports designed for real life — not theory alone. Our work blends education,
+                embodiment, and relational connection in ways that help people integrate new awareness and tools into daily living
+                without pressure to “get it right.”
+              </p>
+              <p><strong>Our core offerings include:</strong></p>
+              <ul class="bullets">
+                <li>Live cohorts that balance education, practice, and connection</li>
+                <li>Trainings &amp; workshops tailored to caregivers, professionals, and organizations</li>
+                <li>Community-based supports that reduce isolation</li>
+                <li>Tools &amp; resources designed to complement, not replace, relational care</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>One mission, multiple expressions of care.</strong></p>
+              <h2 class="h2">OUR ECOSYSTEM</h2>
+              <p>
+                SoulStone, Inc. is the nonprofit home of this work. Connected to SoulStone are mission-aligned initiatives that expand
+                how support is offered:
+              </p>
+              <ul class="bullets">
+                <li><strong>SoulStone, Inc.</strong> — Education, tools, and supports designed to help people reconnect to themselves and strengthen capacity.</li>
+                <li><strong>Appalachian Soul Provisions</strong> — Thoughtfully created goods rooted in nourishment, care, and place.</li>
+              </ul>
+              <p>Each branch serves the same mission: helping people return to themselves — gently, honestly, and without shame.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>We grow with intention, not urgency.</strong></p>
+              <h2 class="h2">LOOKING AHEAD</h2>
+              <p>As SoulStone continues to evolve, we are building:</p>
+              <ul class="bullets">
+                <li>Additional live cohorts with focused themes</li>
+                <li>Community-based programming responsive to need</li>
+                <li>Professional trainings for organizations and caregivers</li>
+                <li>Strategic partnerships that strengthen regional support systems</li>
+              </ul>
+              <p>We are committed to growing with integrity and discernment — quality over speed.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="threshold"><strong>You don’t need to be certain to belong here.</strong></p>
+              <h2 class="h2">AN INVITATION</h2>
+              <p>If you’ve found your way here, you may be:</p>
+              <ul class="bullets">
+                <li>Tired of holding everything together</li>
+                <li>In a season of transition or questioning</li>
+                <li>Looking for grounded, sustainable support</li>
+              </ul>
+              <p><strong>You are welcome here.</strong></p>
+              <p>When you’re ready, explore how SoulStone’s programs and community can support your path.</p>
+
+              <div class="actions">
+                <a class="btn btn-primary" href="our-work.html">Explore Our Work</a>
+                <a class="btn btn-ghost" href="get-involved.html">Get Involved</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <h2 class="h2">OUR FOUNDER</h2>
+              <p>
+                Julie Reutcke (RUT-key) is a trauma-informed practitioner with over two decades of experience supporting caregivers,
+                helping professionals, and families navigating high-stress systems. She founded SoulStone to create accessible,
+                community-centered spaces where people can experience regulation, rest, and sustainable support without pressure or
+                shame. Julie’s work is grounded in nervous-system awareness, practical application, and deep respect for lived experience.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <p class="lead">
+                Learn more about how SoulStone supports individuals, communities, and organizations through trauma-informed programming
+                and collaboration.
+              </p>
+              <div class="actions">
+                <a class="btn btn-primary" href="contact.html?interest=general">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer class="footer">
-  <div class="container footer-inner">
-    <div class="small footer-meta">
-  <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+      <div class="container footer-inner">
+        <div class="small footer-meta">
+          <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="muted">©<span id="year"></span></span>
 
-  <span class="dot" aria-hidden="true"></span>
+          <span class="muted site-credit">
+            Site by
+            <a href="https://kaylamariecollective.com" target="_blank" rel="noopener noreferrer">
+              Kayla Marie Collective
+            </a>
+          </span>
+        </div>
 
-  <span class="muted">©<span id="year"></span></span>
+        <div class="small footer-nav">
+          <a href="financial-transparency.html">Financial Transparency</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="donor-faq.html">Donor FAQ</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="contact.html">Contact</a>
 
-  <!-- <span class="dot" aria-hidden="true"></span> -->
-
-  <span class="muted site-credit">Site by
-    <a
-      href="https://kaylamariecollective.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Kayla Marie Collective
-    </a>
-  </span>
-</div>
-
-    <div class="small footer-nav">
-      <a href="financial-transparency.html">Financial Transparency</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="donor-faq.html">Donor FAQ</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="contact.html">Contact</a>
-
-      <a
-        href="https://www.facebook.com/SoulStoneInc/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="SoulStone on Facebook"
-        class="social-link"
-      >
-        <img
-          src="Static/Images/facebook-custom.png"
-          alt="Follow SoulStone on Facebook"
-          loading="lazy"
-        />
-      </a>
-    </div>
-  </div>
-</footer>
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SoulStone on Facebook"
+            class="social-link"
+          >
+            <img
+              src="Static/Images/facebook-custom.png"
+              alt="Follow SoulStone on Facebook"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

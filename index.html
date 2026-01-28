@@ -3,22 +3,15 @@
   <head>
     <!-- =========================
        Core
-  ========================== -->
+    ========================== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>
-      SoulStone, Inc. | Trauma-informed support for people who carry a lot.
-    </title>
+    <title>SoulStone, Inc. | Trauma-informed support for people who carry a lot.</title>
+
     <meta
       name="description"
       content="SoulStone, Inc. is a 501(c)(3) nonprofit providing trauma-informed, community-centered support for caregivers, helping professionals, and women experiencing burnout, chronic stress, or transition."
-    />
-    <meta property="og:site_name" content="SoulStone, Inc." />
-    <meta property="og:title" content="SoulStone, Inc." />
-    <meta
-      property="og:description"
-      content="Trauma-informed, community-centered support for caregivers, helping professionals, and women experiencing burnout, chronic stress, or transition."
     />
 
     <!-- Canonical -->
@@ -26,46 +19,34 @@
 
     <!-- =========================
        Icons
-  ========================== -->
+    ========================== -->
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
 
     <!-- =========================
        Open Graph
-  ========================== -->
+    ========================== -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SoulStone, Inc." />
-    <meta
-      property="og:title"
-      content="SoulStone, Inc. | Soul Reset Bundle"
-    />
+    <meta property="og:title" content="SoulStone, Inc. | Soul Reset Bundle" />
     <meta
       property="og:description"
       content="Soul reset tools and guided offerings from SoulStone, Inc. Explore resources designed to support reflection, grounding, and reclamation."
     />
     <meta property="og:url" content="https://www.soulstoneinc.org/" />
-    <meta
-      property="og:image"
-      content="https://www.soulstoneinc.org/Static/Images/og-image.png"
-    />
+    <meta property="og:image" content="https://www.soulstoneinc.org/Static/Images/og-image.png" />
 
     <!-- =========================
        Twitter
-  ========================== -->
+    ========================== -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="SoulStone, Inc."
-    />
+    <meta name="twitter:title" content="SoulStone, Inc." />
     <meta
       name="twitter:description"
       content="Trauma-informed, community-centered support for caregivers, helping professionals, and women experiencing burnout, chronic stress, or transition."
     />
     <meta name="twitter:url" content="https://www.soulstoneinc.org/" />
-    <meta
-      name="twitter:image"
-      content="https://www.soulstoneinc.org/Static/Images/og-image.png"
-    />
+    <meta name="twitter:image" content="https://www.soulstoneinc.org/Static/Images/og-image.png" />
 
     <script>
       window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
@@ -73,13 +54,13 @@
 
     <!-- =========================
        Styles & Scripts
-  ========================== -->
+    ========================== -->
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
 
     <!-- =========================
        Structured Data
-  ========================== -->
+    ========================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -88,322 +69,212 @@
             "@type": "Organization",
             "name": "SoulStone, Inc.",
             "url": "https://www.soulstoneinc.org",
-            "brand": {
-              "@type": "Brand",
-              "name": "SoulStone, Inc."
-            }
+            "brand": { "@type": "Brand", "name": "SoulStone, Inc." }
           },
-          {
-            "@type": "WebSite",
-            "name": "SoulStone, Inc.",
-            "url": "https://www.soulstoneinc.org"
-          }
+          { "@type": "WebSite", "name": "SoulStone, Inc.", "url": "https://www.soulstoneinc.org" }
         ]
       }
     </script>
   </head>
 
   <body>
-<header class="site-header">
-  <div class="container nav-container">
-    <a
-      href="index.html"
-      class="brand"
-      data-track="nav_click"
-      data-label="nav_home_brand"
-    >
-      <img
-        src="Static/Images/Soul logo One.png"
-        alt="SoulStone, Inc. logo"
-        id="logo"
-      />
-      <div class="brand-text">
-        <div class="name">SoulStone, Inc.</div>
-        <div class="tag">a 501(c)(3) nonprofit organization</div>
-      </div>
-    </a>
+    <!-- Fixed hero image layer (sits behind everything) -->
+    <div class="fixed-hero-bg" aria-hidden="true"></div>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-nav-toggle
-      data-track="nav_toggle"
-      data-label="nav_toggle"
-    >
-      Menu
-    </button>
+    <header class="site-header">
+      <div class="container nav-container">
+        <a href="index.html" class="brand" data-track="nav_click" data-label="nav_home_brand">
+          <img src="Static/Images/Soul logo One.png" alt="SoulStone, Inc. logo" id="logo" />
+          <div class="brand-text">
+            <div class="name">SoulStone, Inc.</div>
+            <div class="tag">a 501(c)(3) nonprofit organization</div>
+          </div>
+        </a>
 
-    <nav class="main-nav" id="site-nav" data-nav-links>
-      
-      <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare"
-        >Who We Are</a
-      >
-
-      <details
-        class="nav-dropdown"
-        data-track="nav_dropdown"
-        data-label="nav_work_dropdown"
-      >
-        <summary
-          class="nav-parent"
-          aria-label="Our Work menu"
-          data-track="nav_click"
-          data-label="nav_our-work"
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
         >
-          Our Work <span class="nav-caret" aria-hidden="true">▾</span>
-        </summary>
+          Menu
+        </button>
 
-        <div class="nav-menu" role="menu" aria-label="Our Work sections">
-          <a
-            role="menuitem"
-            href="our-work.html#live-cohorts"
-            data-track="nav_click"
-            data-label="nav_work_live_cohorts"
-            >Live Cohorts</a
-          >
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare">Who We Are</a>
 
-          <a
-            role="menuitem"
-            href="trainings-workshops.html"
-            data-track="nav_click"
-            data-label="nav_work_trainings"
-            >Trainings &amp; Workshops</a
-          >
+          <details class="nav-dropdown" data-track="nav_dropdown" data-label="nav_work_dropdown">
+            <summary class="nav-parent" aria-label="Our Work menu" data-track="nav_click" data-label="nav_our-work">
+              Our Work <span class="nav-caret" aria-hidden="true">▾</span>
+            </summary>
 
-          <a
-            role="menuitem"
-            href="our-work.html#community-supports"
-            data-track="nav_click"
-            data-label="nav_work_community"
-            >Community-Based Supports</a
-          >
+            <div class="nav-menu" role="menu" aria-label="Our Work sections">
+              <a role="menuitem" href="our-work.html#live-cohorts" data-track="nav_click" data-label="nav_work_live_cohorts">Live Cohorts</a>
+              <a role="menuitem" href="trainings-workshops.html" data-track="nav_click" data-label="nav_work_trainings">Trainings &amp; Workshops</a>
+              <a role="menuitem" href="our-work.html#community-supports" data-track="nav_click" data-label="nav_work_community">Community-Based Supports</a>
+              <a role="menuitem" href="our-work.html#tools-resources" data-track="nav_click" data-label="nav_work_tools">Tools &amp; Resources</a>
+            </div>
+          </details>
 
-          <a
-            role="menuitem"
-            href="our-work.html#tools-resources"
-            data-track="nav_click"
-            data-label="nav_work_tools"
-            >Tools &amp; Resources</a
-          >
-        </div>
-      </details>
-
-      <a
-        href="get-involved.html"
-        data-track="nav_click"
-        data-label="nav_get_involved"
-        >Get Involved</a
-      >
-      <!-- <a href="impact.html" data-track="nav_click" data-label="nav_impact"
-        >Impact</a
-      > -->
-      <a href="contact.html" data-track="nav_click" data-label="nav_contact"
-        >Contact</a
-      >
-      <a
-        href="reclamation-notes.html"
-        data-track="nav_click"
-        data-label="nav_notes"
-        >Reclamation Notes</a
-      >
-    </nav>
-  </div>
-</header>
-
+          <a href="get-involved.html" data-track="nav_click" data-label="nav_get_involved">Get Involved</a>
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact">Contact</a>
+          <a href="reclamation-notes.html" data-track="nav_click" data-label="nav_notes">Reclamation Notes</a>
+        </nav>
+      </div>
+    </header>
 
     <main>
+      <!-- HERO: reveals the fixed background image -->
       <section class="hero">
         <div class="container hero-inner">
           <div class="hero-panel">
-            <h1 class="h1">
-              Trauma-informed support for people who carry a lot.
-            </h1>
+            <h1 class="h1">Trauma-informed support for people who carry a lot.</h1>
 
             <p class="lead">
-              SoulStone, Inc. is a 501(c)(3) nonprofit providing
-              trauma-informed, community-centered support for caregivers,
-              helping professionals, and women experiencing burnout, chronic
-              stress, or transition.
+              SoulStone, Inc. is a 501(c)(3) nonprofit providing trauma-informed, community-centered support for caregivers,
+              helping professionals, and women experiencing burnout, chronic stress, or transition.
             </p>
 
             <div class="hero-cta">
-              <a class="btn btn-primary" href="our-work.html"
-                >Explore Our Work</a
-              >
+              <a class="btn btn-primary" href="our-work.html">Explore Our Work</a>
               <a class="btn btn-ghost" href="get-involved.html">Get Involved</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <h2 class="h2">Welcome to SoulStone</h2>
+      <!-- Everything below hero gets the gradient "curtain" -->
+      <div class="after-hero">
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <h2 class="h2">Welcome to SoulStone</h2>
 
-            <p>
-              You don’t need to be “ready” or have everything figured out to be
-              here.
-            </p>
+              <p>You don’t need to be “ready” or have everything figured out to be here.</p>
 
-            <p>
-              SoulStone exists for people who have spent years caring for
-              others, holding responsibility, and pushing through — often at the
-              expense of their own wellbeing. People come to SoulStone when
-              burnout feels familiar, stress has become constant, and rest no
-              longer comes easily. Our work offers grounded, trauma-informed
-              support that meets people where they are — without pressure to
-              perform or push through.
-            </p>
+              <p>
+                SoulStone exists for people who have spent years caring for others, holding responsibility, and pushing through —
+                often at the expense of their own wellbeing. People come to SoulStone when burnout feels familiar, stress has become
+                constant, and rest no longer comes easily. Our work offers grounded, trauma-informed support that meets people where
+                they are — without pressure to perform or push through.
+              </p>
 
-            <p class="pull-quote">
-              <strong>
-                Burnout is not a personal failure. It is a nervous system
-                response to prolonged stress and responsibility.
-              </strong>
-            </p>
+              <p class="pull-quote">
+                <strong>Burnout is not a personal failure. It is a nervous system response to prolonged stress and responsibility.</strong>
+              </p>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="our-work.html"
-                >Learn How We Help</a
-              >
+              <div class="actions">
+                <a class="btn btn-primary" href="our-work.html">Learn How We Help</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <h2 class="h2">A Different Approach to Support</h2>
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <h2 class="h2">A Different Approach to Support</h2>
 
-            <ul class="bullets">
-              <li>Trauma-informed, nervous-system-aware programming</li>
-              <li>Intentional pacing without urgency or pressure</li>
-              <li>Support designed for real life, not perfection</li>
-              <li>
-                Programs for caregivers, helping professionals, and women in
-                transition
-              </li>
-              <li>Community-centered and relational, not performative</li>
-            </ul>
+              <ul class="bullets">
+                <li>Trauma-informed, nervous-system-aware programming</li>
+                <li>Intentional pacing without urgency or pressure</li>
+                <li>Support designed for real life, not perfection</li>
+                <li>Programs for caregivers, helping professionals, and women in transition</li>
+                <li>Community-centered and relational, not performative</li>
+              </ul>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="our-work.html">View Our Work</a>
+              <div class="actions">
+                <a class="btn btn-primary" href="our-work.html">View Our Work</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <h2 class="h2">You’re in the Right Place If…</h2>
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <h2 class="h2">You’re in the Right Place If…</h2>
 
-            <ul class="bullets">
-              <li>You’ve been carrying responsibility for a long time</li>
-              <li>
-                You’re caring for others — foster children, aging parents,
-                family, or community
-              </li>
-              <li>You feel burned out, overwhelmed, or disconnected</li>
-              <li>You want support that feels safe, grounded, and human</li>
-              <li>You’re looking for connection, not hype</li>
-            </ul>
+              <ul class="bullets">
+                <li>You’ve been carrying responsibility for a long time</li>
+                <li>You’re caring for others — foster children, aging parents, family, or community</li>
+                <li>You feel burned out, overwhelmed, or disconnected</li>
+                <li>You want support that feels safe, grounded, and human</li>
+                <li>You’re looking for connection, not hype</li>
+              </ul>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="get-involved.html"
-                >Get Connected</a
-              >
+              <div class="actions">
+                <a class="btn btn-primary" href="get-involved.html">Get Connected</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section band">
-        <div class="container">
-          <p class="small">
-            <strong>SoulStone, Inc.</strong> is a registered 501(c)(3) nonprofit
-            organization committed to trauma-informed, community-centered
-            support.
-          </p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="card">
-            <h2 class="h2">You Are Welcome Here</h2>
-
-            <p>
-              SoulStone offers spaces to slow down, reconnect, and build
-              sustainable ways of living and caring — without shame or urgency.
-              Whether you are seeking support, exploring partnership, or
-              learning about our work, you are invited to engage in ways that
-              feel aligned and accessible.
+        <section class="section band">
+          <div class="container">
+            <p class="small">
+              <strong>SoulStone, Inc.</strong> is a registered 501(c)(3) nonprofit organization committed to trauma-informed,
+              community-centered support.
             </p>
+          </div>
+        </section>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="our-work.html"
-                >Explore Programs</a
-              >
-              <a class="btn btn-ghost" href="get-involved.html#support"
-                >Support the Mission</a
-              >
+        <section class="section">
+          <div class="container">
+            <div class="card">
+              <h2 class="h2">You Are Welcome Here</h2>
+
+              <p>
+                SoulStone offers spaces to slow down, reconnect, and build sustainable ways of living and caring — without shame or
+                urgency. Whether you are seeking support, exploring partnership, or learning about our work, you are invited to
+                engage in ways that feel aligned and accessible.
+              </p>
+
+              <div class="actions">
+                <a class="btn btn-primary" href="our-work.html">Explore Programs</a>
+                <a class="btn btn-ghost" href="get-involved.html#support">Support the Mission</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
     <footer class="footer">
-  <div class="container footer-inner">
-    <div class="small footer-meta">
-  <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+      <div class="container footer-inner">
+        <div class="small footer-meta">
+          <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="muted">©<span id="year"></span></span>
 
-  <span class="dot" aria-hidden="true"></span>
+          <span class="muted site-credit">
+            Site by
+            <a href="https://kaylamariecollective.com" target="_blank" rel="noopener noreferrer">Kayla Marie Collective</a>
+          </span>
+        </div>
 
-  <span class="muted">©<span id="year"></span></span>
+        <div class="small footer-nav">
+          <a href="financial-transparency.html">Financial Transparency</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="donor-faq.html">Donor FAQ</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="contact.html">Contact</a>
 
-  <!-- <span class="dot" aria-hidden="true"></span> -->
-
-  <span class="muted site-credit">Site by
-    <a
-      href="https://kaylamariecollective.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Kayla Marie Collective
-    </a>
-  </span>
-</div>
-
-    <div class="small footer-nav">
-      <a href="financial-transparency.html">Financial Transparency</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="donor-faq.html">Donor FAQ</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="contact.html">Contact</a>
-
-      <a
-        href="https://www.facebook.com/SoulStoneInc/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="SoulStone on Facebook"
-        class="social-link"
-      >
-        <img
-          src="Static/Images/facebook-custom.png"
-          alt="Follow SoulStone on Facebook"
-          loading="lazy"
-        />
-      </a>
-    </div>
-  </div>
-</footer>
-
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SoulStone on Facebook"
+            class="social-link"
+          >
+            <img src="Static/Images/facebook-custom.png" alt="Follow SoulStone on Facebook" loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

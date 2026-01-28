@@ -25,10 +25,7 @@
       content="Trauma-informed, intentional programming designed to support nervous-system safety, dignity, and sustainable change."
     />
     <meta property="og:url" content="https://www.soulstoneinc.org/our-work.html" />
-    <meta
-      property="og:image"
-      content="https://www.soulstoneinc.org/Static/Images/og-image.png"
-    />
+    <meta property="og:image" content="https://www.soulstoneinc.org/Static/Images/og-image.png" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -38,195 +35,123 @@
       content="Trauma-informed, intentional programming designed to support nervous-system safety, dignity, and sustainable change."
     />
     <meta name="twitter:url" content="https://www.soulstoneinc.org/our-work.html" />
-    <meta
-      name="twitter:image"
-      content="https://www.soulstoneinc.org/Static/Images/og-image.png"
-    />
+    <meta name="twitter:image" content="https://www.soulstoneinc.org/Static/Images/og-image.png" />
 
-    <!-- GA4 (optional): set your Measurement ID once, then events will auto-track -->
     <script>
       window.GA4_MEASUREMENT_ID = "G-XXXXXXXXXX";
     </script>
 
-    <!-- Styles + Scripts -->
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
 
-    <!-- Structured Data (Soul Stone Inc. + SoulStone, Inc.) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
-          {
-            "@type": "Organization",
-            "name": "SoulStone, Inc.",
-            "url": "https://www.soulstoneinc.org"
-          },
-          {
-            "@type": "WebSite",
-            "name": "SoulStone, Inc.",
-            "url": "https://www.soulstoneinc.org"
-          }
+          { "@type": "Organization", "name": "SoulStone, Inc.", "url": "https://www.soulstoneinc.org" },
+          { "@type": "WebSite", "name": "SoulStone, Inc.", "url": "https://www.soulstoneinc.org" }
         ]
       }
     </script>
   </head>
 
-  <body>
-<header class="site-header">
-  <div class="container nav-container">
-    <a
-      href="index.html"
-      class="brand"
-      data-track="nav_click"
-      data-label="nav_home_brand"
-    >
-      <img
-        src="Static/Images/Soul logo One.png"
-        alt="SoulStone, Inc. logo"
-        id="logo"
-      />
-      <div class="brand-text">
-        <div class="name">SoulStone, Inc.</div>
-        <div class="tag">a 501(c)(3) nonprofit organization</div>
-      </div>
-    </a>
+  <body class="our-work-page">
+    <header class="site-header">
+      <div class="container nav-container">
+        <a href="index.html" class="brand" data-track="nav_click" data-label="nav_home_brand">
+          <img src="Static/Images/Soul logo One.png" alt="SoulStone, Inc. logo" id="logo" />
+          <div class="brand-text">
+            <div class="name">SoulStone, Inc.</div>
+            <div class="tag">a 501(c)(3) nonprofit organization</div>
+          </div>
+        </a>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-nav-toggle
-      data-track="nav_toggle"
-      data-label="nav_toggle"
-    >
-      Menu
-    </button>
-
-    <nav class="main-nav" id="site-nav" data-nav-links>
-      <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare"
-        >Who We Are</a
-      >
-
-      <details
-        class="nav-dropdown"
-        data-track="nav_dropdown"
-        data-label="nav_work_dropdown"
-      >
-        <summary
-          class="nav-parent"
-          aria-label="Our Work menu"
-          data-track="nav_click"
-          data-label="nav_our-work"
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+          data-track="nav_toggle"
+          data-label="nav_toggle"
         >
-          Our Work <span class="nav-caret" aria-hidden="true">▾</span>
-        </summary>
+          Menu
+        </button>
 
-        <div class="nav-menu" role="menu" aria-label="Our Work sections">
-          <a
-            role="menuitem"
-            href="our-work.html#live-cohorts"
-            data-track="nav_click"
-            data-label="nav_work_live_cohorts"
-            >Live Cohorts</a
-          >
+        <nav class="main-nav" id="site-nav" data-nav-links>
+          <a href="whoweare.html" data-track="nav_click" data-label="nav_whoweare">Who We Are</a>
 
-          <a
-            role="menuitem"
-            href="trainings-workshops.html"
-            data-track="nav_click"
-            data-label="nav_work_trainings"
-            >Trainings &amp; Workshops</a
-          >
+          <details class="nav-dropdown" data-track="nav_dropdown" data-label="nav_work_dropdown">
+            <summary class="nav-parent" aria-label="Our Work menu" data-track="nav_click" data-label="nav_our-work">
+              Our Work <span class="nav-caret" aria-hidden="true">▾</span>
+            </summary>
 
-          <a
-            role="menuitem"
-            href="our-work.html#community-supports"
-            data-track="nav_click"
-            data-label="nav_work_community"
-            >Community-Based Supports</a
-          >
+            <div class="nav-menu" role="menu" aria-label="Our Work sections">
+              <a role="menuitem" href="our-work.html#live-cohorts" data-track="nav_click" data-label="nav_work_live_cohorts">
+                Live Cohorts
+              </a>
+              <a role="menuitem" href="trainings-workshops.html" data-track="nav_click" data-label="nav_work_trainings">
+                Trainings &amp; Workshops
+              </a>
+              <a role="menuitem" href="our-work.html#community-supports" data-track="nav_click" data-label="nav_work_community">
+                Community-Based Supports
+              </a>
+              <a role="menuitem" href="our-work.html#tools-resources" data-track="nav_click" data-label="nav_work_tools">
+                Tools &amp; Resources
+              </a>
+            </div>
+          </details>
 
-          <a
-            role="menuitem"
-            href="our-work.html#tools-resources"
-            data-track="nav_click"
-            data-label="nav_work_tools"
-            >Tools &amp; Resources</a
-          >
+          <a href="get-involved.html" data-track="nav_click" data-label="nav_get_involved">Get Involved</a>
+          <a href="contact.html" data-track="nav_click" data-label="nav_contact">Contact</a>
+          <a href="reclamation-notes.html" data-track="nav_click" data-label="nav_notes">Reclamation Notes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO (background image lives here) -->
+      <section class="work-hero" aria-label="Our Work hero">
+        <div class="container work-hero-inner">
+          <div class="work-hero-panel">
+            <p class="threshold">Our Work</p>
+
+            <h1 class="h1">
+              Programs built for safety, dignity,<br />
+              and sustainable change.
+            </h1>
+
+            <p class="lead">
+              SoulStone's work is grounded in trauma-informed, intentional programming designed
+              to support nervous-system safety, dignity, and real-life integration. Our offerings
+              are developed with care for pacing and capacity, recognizing that healing is not linear
+              and cannot be rushed.
+            </p>
+          </div>
         </div>
-      </details>
+      </section>
 
-      <a
-        href="get-involved.html"
-        data-track="nav_click"
-        data-label="nav_get_involved"
-        >Get Involved</a
-      >
-      <!-- <a href="impact.html" data-track="nav_click" data-label="nav_impact"
-        >Impact</a
-      > -->
-      <a href="contact.html" data-track="nav_click" data-label="nav_contact"
-        >Contact</a
-      >
-      <a
-        href="reclamation-notes.html"
-        data-track="nav_click"
-        data-label="nav_notes"
-        >Reclamation Notes</a
-      >
-    </nav>
-  </div>
-</header>
-
-
-    <main class="section">
+      <!-- OVERVIEW CARDS -->
+      <section class="section section-tight">
         <div class="container">
-    <div class="card card-hero">
-      <p class="threshold">Our Work</p>
-
-      <h1 class="h1">
-        Programs built for safety, dignity,<br />
-        and sustainable change.
-      </h1>
-
-      <p class="lead">
-        SoulStone's work is grounded in trauma-informed, intentional programming designed
-        to support nervous-system safety, dignity, and real-life integration.
-        Our offerings are developed with care for pacing and capacity, recognizing that
-        healing is not linear and cannot be rushed.
-      </p>
-        <div class="section section-tight">
           <div class="grid-3">
             <!-- Live Cohorts -->
             <div class="card card-pad" id="work-cohorts">
               <div class="kicker">Live Cohorts</div>
-              <h2 class="h2 h2-tight">
-                Small, facilitated groups—held with care.
-              </h2>
+              <h2 class="h2 h2-tight">Small, facilitated groups—held with care.</h2>
               <p class="small">
-                Structured experiences that support regulation, reflection, and
-                connection—without urgency or performance.
+                Structured experiences that support regulation, reflection, and connection—without urgency or performance.
               </p>
               <div class="hr"></div>
               <ul class="small list">
-                <li>
-                  For women and caregivers in burnout, transition, or long
-                  seasons of responsibility
-                </li>
+                <li>For women and caregivers in burnout, transition, or long seasons of responsibility</li>
                 <li>Nervous-system education in accessible language</li>
                 <li>Grounding practices + guided integration</li>
                 <li>Gentle structure with clear boundaries</li>
               </ul>
               <div class="hero-cta">
-                <a
-                  class="btn btn-outline"
-                  href="#live-cohorts"
-                  data-track="cta_click"
-                  data-label="our-work_jump_live_cohorts"
-                >
+                <a class="btn btn-outline" href="#live-cohorts" data-track="cta_click" data-label="our-work_jump_live_cohorts">
                   Learn about Live Cohorts
                 </a>
               </div>
@@ -235,13 +160,10 @@
             <!-- Trainings & Workshops -->
             <div class="card card-pad" id="work-trainings">
               <div class="kicker">Trainings &amp; Workshops</div>
-              <h2 class="h2 h2-tight">
-                Practical learning for real-world roles.
-              </h2>
+              <h2 class="h2 h2-tight">Practical learning for real-world roles.</h2>
               <p class="small">
-                Trauma-informed education for organizations, caregivers, and
-                helping professionals. Grounded, accessible, and built for
-                application—not theory alone.
+                Trauma-informed education for organizations, caregivers, and helping professionals.
+                Grounded, accessible, and built for application—not theory alone.
               </p>
               <div class="hr"></div>
               <ul class="small list">
@@ -251,12 +173,7 @@
                 <li>One-time, multi-session, or customized options</li>
               </ul>
               <div class="hero-cta">
-                <a
-                  class="btn btn-outline"
-                  href="trainings-workshops.html"
-                  data-track="cta_click"
-                  data-label="our-work_jump_trainings"
-                >
+                <a class="btn btn-outline" href="trainings-workshops.html" data-track="cta_click" data-label="our-work_jump_trainings">
                   Explore Trainings &amp; Workshops
                 </a>
               </div>
@@ -265,12 +182,9 @@
             <!-- Community-Based Supports -->
             <div class="card card-pad" id="work-community">
               <div class="kicker">Community-Based Supports</div>
-              <h2 class="h2 h2-tight">
-                Reducing isolation. Increasing access.
-              </h2>
+              <h2 class="h2 h2-tight">Reducing isolation. Increasing access.</h2>
               <p class="small">
-                Low-barrier offerings shaped by community need, partnerships,
-                and capacity—rooted in dignity and inclusion.
+                Low-barrier offerings shaped by community need, partnerships, and capacity—rooted in dignity and inclusion.
               </p>
               <div class="hr"></div>
               <ul class="small list">
@@ -280,26 +194,18 @@
                 <li>Programming that evolves over time</li>
               </ul>
               <div class="hero-cta">
-                <a
-                  class="btn btn-outline"
-                  href="#community-supports"
-                  data-track="cta_click"
-                  data-label="our-work_jump_community_supports"
-                >
+                <a class="btn btn-outline" href="#community-supports" data-track="cta_click" data-label="our-work_jump_community_supports">
                   View Community Supports
                 </a>
               </div>
             </div>
 
-            <!-- Tools & Resources (4th card; will wrap) -->
+            <!-- Tools & Resources (4th card; wraps) -->
             <div class="card card-pad" id="work-tools">
               <div class="kicker">Tools &amp; Resources</div>
-              <h2 class="h2 h2-tight">
-                Grounded tools—never replacements for care.
-              </h2>
+              <h2 class="h2 h2-tight">Grounded tools—never replacements for care.</h2>
               <p class="small">
-                Carefully designed materials to support ongoing regulation,
-                reflection, and integration in daily life.
+                Carefully designed materials to support ongoing regulation, reflection, and integration in daily life.
               </p>
               <div class="hr"></div>
               <ul class="small list">
@@ -309,69 +215,43 @@
                 <li>Support for integration between sessions</li>
               </ul>
               <div class="hero-cta">
-                <a
-                  class="btn btn-outline"
-                  href="#tools-resources"
-                  data-track="cta_click"
-                  data-label="our-work_jump_tools_resources"
-                >
+                <a class="btn btn-outline" href="#tools-resources" data-track="cta_click" data-label="our-work_jump_tools_resources">
                   See Tools &amp; Resources
                 </a>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Detail sections (same page) -->
-        <div class="section">
+      <!-- DETAILS -->
+      <section class="section">
+        <div class="container">
           <!-- Live Cohorts detail -->
           <div class="card card-pad" id="live-cohorts">
             <div class="kicker">Live Cohorts</div>
-            <h2 class="h2">
-              Small, facilitated group experiences—structured for safety.
-            </h2>
+            <h2 class="h2">Small, facilitated group experiences—structured for safety.</h2>
             <p class="small">
-              Live cohorts provide structure, support, and connection for people
-              who carry ongoing responsibility for others and are experiencing
-              burnout, overwhelm, or transition.
+              Live cohorts provide structure, support, and connection for people who carry ongoing responsibility for others
+              and are experiencing burnout, overwhelm, or transition.
             </p>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">Who They’re For</h3>
             <ul class="small list">
-              <li>
-                Caregivers (foster, kinship, adoptive, aging parent/family care)
-              </li>
-              <li>
-                Helping professionals in high-stress or service-oriented roles
-              </li>
-              <li>
-                Women in midlife transition or extended seasons of
-                responsibility
-              </li>
-              <li>
-                People used to being “the strong one” who are feeling depleted
-              </li>
+              <li>Caregivers (foster, kinship, adoptive, aging parent/family care)</li>
+              <li>Helping professionals in high-stress or service-oriented roles</li>
+              <li>Women in midlife transition or extended seasons of responsibility</li>
+              <li>People used to being “the strong one” who are feeling depleted</li>
             </ul>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">What Cohorts Include</h3>
             <ul class="small list">
-              <li>
-                Trauma-informed nervous-system education (accessible language)
-              </li>
+              <li>Trauma-informed nervous-system education (accessible language)</li>
               <li>Grounding and regulation practices for daily life</li>
               <li>Guided reflection and integration</li>
               <li>Relational support within clear, respectful boundaries</li>
-              <li>
-                Gentle structure and accountability—without urgency or
-                performance
-              </li>
+              <li>Gentle structure and accountability—without urgency or performance</li>
             </ul>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">How They’re Held</h3>
             <ul class="small list">
@@ -379,109 +259,64 @@
               <li>Relational, not clinical</li>
               <li>Structured, but not prescriptive</li>
               <li>Choice, pacing, and dignity are prioritized</li>
-              <li>
-                Participants are never asked to relive trauma or share beyond
-                comfort
-              </li>
+              <li>Participants are never asked to relive trauma or share beyond comfort</li>
             </ul>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">Availability</h3>
             <p class="small">
-              Cohorts are offered periodically and intentionally limited in size
-              to preserve depth and safety. Upcoming cohorts and enrollment
-              details will be shared as they are scheduled.
+              Cohorts are offered periodically and intentionally limited in size to preserve depth and safety.
+              Upcoming cohorts and enrollment details will be shared as they are scheduled.
             </p>
 
             <div class="hero-cta">
-              <a
-                class="btn btn-outline"
-                href="get-involved.html"
-                data-track="cta_click"
-                data-label="our-work_view_upcoming_cohorts"
-              >
+              <a class="btn btn-outline" href="get-involved.html" data-track="cta_click" data-label="our-work_view_upcoming_cohorts">
                 View Upcoming Cohorts
               </a>
-              <a
-                class="btn btn-primary"
-                href="contact.html?interest=interest-list"
-                data-track="cta_click"
-                data-label="our-work_join_the_interest_list"
-              >
+              <a class="btn btn-primary" href="contact.html?interest=interest-list" data-track="cta_click" data-label="our-work_join_the_interest_list">
                 Join the Interest List
               </a>
             </div>
           </div>
 
           <!-- Trainings & Workshops detail -->
-          <div
-            class="card card-pad"
-            id="trainings-workshops"
-            style="margin-top: 18px"
-          >
+          <div class="card card-pad" id="trainings-workshops" style="margin-top: 18px">
             <div class="kicker">Trainings &amp; Workshops</div>
-            <h2 class="h2">
-              Trauma-informed education for organizations and professionals.
-            </h2>
+            <h2 class="h2">Trauma-informed education for organizations and professionals.</h2>
             <p class="small">
-              SoulStone offers trainings that support sustainable care in
-              high-responsibility roles. These sessions are practical, grounded,
-              and designed for real-world application.
+              SoulStone offers trainings that support sustainable care in high-responsibility roles.
+              These sessions are practical, grounded, and designed for real-world application.
             </p>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">Training Areas</h3>
             <ul class="small list">
               <li>Burnout prevention and recovery</li>
               <li>Nervous-system awareness and stress response</li>
               <li>Trauma-informed caregiving and leadership</li>
-              <li>
-                Sustainable support practices for high-demand environments
-              </li>
+              <li>Sustainable support practices for high-demand environments</li>
             </ul>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">Formats</h3>
             <ul class="small list">
               <li>One-time workshops</li>
               <li>Multi-session learning experiences</li>
-              <li>
-                Customized trainings for organizations or community groups
-              </li>
+              <li>Customized trainings for organizations or community groups</li>
             </ul>
 
             <div class="hero-cta">
-              <a
-                class="btn btn-primary"
-                href="contact.html?interest=trainings"
-                data-track="cta_click"
-                data-label="our-work_request_training"
-              >
+              <a class="btn btn-primary" href="contact.html?interest=trainings" data-track="cta_click" data-label="our-work_request_training">
                 Ask About Training Availability
               </a>
             </div>
           </div>
 
           <!-- Community-Based Supports detail -->
-          <div
-            class="card card-pad"
-            id="community-supports"
-            style="margin-top: 18px"
-          >
+          <div class="card card-pad" id="community-supports" style="margin-top: 18px">
             <div class="kicker">Community-Based Supports</div>
-            <h2 class="h2">
-              Support that reduces isolation and increases access.
-            </h2>
+            <h2 class="h2">Support that reduces isolation and increases access.</h2>
             <p class="small">
-              As capacity allows, SoulStone offers community-rooted programming
-              shaped by need, partnerships, and available resources. These
-              offerings may evolve over time.
+              As capacity allows, SoulStone offers community-rooted programming shaped by need, partnerships, and available resources.
+              These offerings may evolve over time.
             </p>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">May Include</h3>
             <ul class="small list">
@@ -492,116 +327,75 @@
             </ul>
 
             <div class="hero-cta">
-              <a
-                class="btn btn-outline"
-                href="get-involved.html"
-                data-track="cta_click"
-                data-label="our-work_get_involved"
-              >
+              <a class="btn btn-outline" href="get-involved.html" data-track="cta_click" data-label="our-work_get_involved">
                 Get Involved
               </a>
             </div>
           </div>
 
           <!-- Tools & Resources detail -->
-          <div
-            class="card card-pad"
-            id="tools-resources"
-            style="margin-top: 18px"
-          >
+          <div class="card card-pad" id="tools-resources" style="margin-top: 18px">
             <div class="kicker">Tools &amp; Resources</div>
-            <br />
-            <h2 class="h2">
-              Supportive tools designed to complement, not replace, relational
-              care.
-            </h2>
+            <h2 class="h2">Supportive tools designed to complement, not replace, relational care.</h2>
             <p class="small">
-              In addition to live programming, SoulStone offers select tools and
-              resources to support grounding and regulation in daily life. These
-              tools are meant to support—not replace—relational and
-              community-based care.
+              In addition to live programming, SoulStone offers select tools and resources to support grounding and regulation in daily life.
+              These tools are meant to support—not replace—relational and community-based care.
             </p>
-
-            <!-- <div class="hr"></div> -->
 
             <h3 class="h2 h2-tight">May Include</h3>
             <ul class="small list">
               <li>Guided practices</li>
               <li>Reflection tools</li>
               <li>Educational resources</li>
-              <li>
-                Carefully designed materials that support regulation and
-                grounding
-              </li>
+              <li>Carefully designed materials that support regulation and grounding</li>
             </ul>
 
             <div class="hero-cta">
-              <a
-                class="btn btn-outline"
-                href="reclamation-notes.html"
-                data-track="cta_click"
-                data-label="our-work_tools_notes"
-              >
+              <a class="btn btn-outline" href="reclamation-notes.html" data-track="cta_click" data-label="our-work_tools_notes">
                 Read Reclamation Notes
               </a>
-              <a
-                class="btn btn-primary"
-                href="contact.html?interest=updates"
-                data-track="cta_click"
-                data-label="our-work_tools_interest"
-              >
+              <a class="btn btn-primary" href="contact.html?interest=updates" data-track="cta_click" data-label="our-work_tools_interest">
                 Get Updates
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
 
     <footer class="footer">
-  <div class="container footer-inner">
-    <div class="small footer-meta">
-  <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+      <div class="container footer-inner">
+        <div class="small footer-meta">
+          <strong>SoulStone, Inc. | 501(c)(3) nonprofit organization</strong>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="muted">©<span id="year"></span></span>
 
-  <span class="dot" aria-hidden="true"></span>
+          <span class="muted site-credit">
+            Site by
+            <a href="https://kaylamariecollective.com" target="_blank" rel="noopener noreferrer">
+              Kayla Marie Collective
+            </a>
+          </span>
+        </div>
 
-  <span class="muted">©<span id="year"></span></span>
+        <div class="small footer-nav">
+          <a href="financial-transparency.html">Financial Transparency</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="donor-faq.html">Donor FAQ</a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="contact.html">Contact</a>
 
-  <!-- <span class="dot" aria-hidden="true"></span> -->
-
-  <span class="muted site-credit">Site by
-    <a
-      href="https://kaylamariecollective.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Kayla Marie Collective
-    </a>
-  </span>
-</div>
-
-    <div class="small footer-nav">
-      <a href="financial-transparency.html">Financial Transparency</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="donor-faq.html">Donor FAQ</a>
-      <span class="dot" aria-hidden="true"></span>
-      <a href="contact.html">Contact</a>
-
-      <a
-        href="https://www.facebook.com/SoulStoneInc/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="SoulStone on Facebook"
-        class="social-link"
-      >
-        <img
-          src="Static/Images/facebook-custom.png"
-          alt="Follow SoulStone on Facebook"
-          loading="lazy"
-        />
-      </a>
-    </div>
-  </div>
-</footer>
+          <a
+            href="https://www.facebook.com/SoulStoneInc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SoulStone on Facebook"
+            class="social-link"
+          >
+            <img src="Static/Images/facebook-custom.png" alt="Follow SoulStone on Facebook" loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
