@@ -379,6 +379,7 @@ const initContactPrefill = () => {
     });
   };
 
+  
   /* -------------------------
      Reveal-on-scroll (calm motion)
   ------------------------- */
@@ -471,6 +472,34 @@ const initContactPrefill = () => {
       track(action, label);
     });
   };
+
+  (function () {
+  const rails = document.querySelectorAll(".reviews-rail");
+  if (!rails.length) return;
+
+  rails.forEach((rail) => {
+    const track = rail.querySelector(".reviews-track");
+    const prev = rail.querySelector(".rail-prev");
+    const next = rail.querySelector(".rail-next");
+    const card = track?.querySelector(".review");
+
+    if (!track || !prev || !next || !card) return;
+
+    const step = () => {
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    prev.addEventListener("click", () => {
+      track.scrollBy({ left: -step(), behavior: "smooth" });
+    });
+
+    next.addEventListener("click", () => {
+      track.scrollBy({ left: step(), behavior: "smooth" });
+    });
+  });
+})();
+
 
   /* -------------------------
      Boot
