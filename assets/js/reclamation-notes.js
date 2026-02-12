@@ -38,7 +38,7 @@
      ========================= */
 
   // 1) Substack (primary)
-  const SUBSTACK_FEED = "https://reclamationnotes.substack.com/feed";
+  const SUBSTACK_FEED = "https://soulstoneinc.substack.com/feed";
   const RSS2JSON = (feedUrl) =>
     `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
 
