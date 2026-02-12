@@ -1,9 +1,11 @@
 /* =========================================================
-   The Reclamation Co. — Reclamation Notes Feed (Archetype-style)
-   Source: Substack RSS (via RSS→JSON bridge for GitHub Pages) + local JSON fallback
-   Feed: https://reclamationnotes.substack.com/feed
-   Backup: assets/data/reclamation-notes.json
-   Renders cards + filters + single-entry reader
+   The Reclamation Co. — Reclamation Notes Feed (Unified)
+   Priority:
+     1) Substack RSS (via rss2json bridge)
+     2) GitHub content repo (Netlify CMS-style markdown)
+     3) Local JSON fallback
+
+   Local JSON expected: /assets/data/reclamation-notes.json  (or change path below)
    ========================================================= */
 
 (() => {
@@ -12,7 +14,7 @@
   const LIST = document.getElementById("writingList");
   const STATUS = document.getElementById("writingStatus");
 
-  const SHELL = document.querySelector(".writing-shell"); // feed wrapper card
+  const SHELL = document.querySelector(".writing-shell");
   const READER = document.getElementById("writingReader");
   const BACK = document.getElementById("backToFeed");
 
@@ -23,32 +25,35 @@
 
   const chips = Array.from(document.querySelectorAll(".chip[data-filter]"));
 
-  // hard fail if markup is broken
   if (
-    !LIST ||
-    !STATUS ||
-    !SHELL ||
-    !READER ||
-    !BACK ||
-    !readerType ||
-    !readerTitle ||
-    !readerMeta ||
-    !readerBody
+    !LIST || !STATUS || !SHELL || !READER || !BACK ||
+    !readerType || !readerTitle || !readerMeta || !readerBody
   ) {
     console.error("Reclamation Notes page missing required elements.");
     return;
   }
 
   /* =========================
-     Substack feed settings
+     SOURCE SETTINGS
      ========================= */
 
-  // Substack RSS feed (pattern: /feed)
+  // 1) Substack (primary)
   const SUBSTACK_FEED = "https://reclamationnotes.substack.com/feed";
-
-  // RSS → JSON bridge so GitHub Pages can fetch reliably (CORS-friendly)
   const RSS2JSON = (feedUrl) =>
     `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+
+  // 2) GitHub content repo (secondary / Netlify CMS output)
+  // If you don’t want this at all, set ENABLE_GITHUB_SOURCE = false
+  const ENABLE_GITHUB_SOURCE = true;
+  const GH_OWNER = "Kmarie85";
+  const GH_REPO = "reclamation-notes-content";
+  const GH_FOLDER = "notes"; // repo folder containing .md files
+
+  // 3) Local JSON (last resort)
+  // IMPORTANT: Make sure this matches your real file path.
+  const LOCAL_JSON_PATH = "assets/data/reclamation-notes.json";
+  // If your file is actually /data/reclamation-notes.json, use:
+  // const LOCAL_JSON_PATH = "data/reclamation-notes.json";
 
   let allEntries = [];
   let currentFilter = "all";
@@ -65,7 +70,6 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
 
-  // Convert HTML to plain text (safe for our <p> renderer)
   const stripHtml = (html = "") =>
     String(html)
       .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
@@ -85,20 +89,14 @@
   };
 
   const typeFromCategories = (cats = []) => {
-    // If she tags posts with: journal / guidance / pattern / letter
-    // your filter chips will work automatically.
     const allowed = new Set(["journal", "guidance", "pattern", "letter"]);
     for (const c of cats || []) {
       const t = String(c || "").toLowerCase();
       if (allowed.has(t)) return t;
     }
-    return "guidance"; // default
+    return "guidance";
   };
 
-  // Safe minimal renderer:
-  // - paragraphs split by blank lines
-  // - line breaks preserved
-  // - italics *like this*
   const renderBody = (text = "") => {
     const blocks = String(text).trim().split(/\n\s*\n/g);
     return blocks
@@ -131,9 +129,7 @@
     });
   };
 
-  const setStatus = (msg) => {
-    STATUS.textContent = msg || "";
-  };
+  const setStatus = (msg) => (STATUS.textContent = msg || "");
 
   const setChipActive = (value) => {
     chips.forEach((btn) => {
@@ -233,77 +229,161 @@
   };
 
   /* =========================
-     Load entries (Substack → fallback JSON)
+     LOADERS
      ========================= */
 
   const loadFromLocalJson = async () => {
-    const res = await fetch("assets/data/reclamation-notes.json", {
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error(`Failed to load backup JSON (${res.status})`);
+    const res = await fetch(LOCAL_JSON_PATH, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load local JSON (${res.status})`);
 
     const data = await res.json();
     const entries = Array.isArray(data.entries) ? data.entries : [];
-
     return entries
       .slice()
       .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
   };
 
+  const loadFromSubstack = async () => {
+    const res = await fetch(RSS2JSON(SUBSTACK_FEED), { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load Substack (${res.status})`);
+
+    const data = await res.json();
+    const items = Array.isArray(data.items) ? data.items : [];
+
+    return items
+      .map((it) => {
+        const title = it.title || "";
+        const bodyText = stripHtml(it.content || it.description || "");
+        const excerpt =
+          bodyText.length > 180 ? bodyText.slice(0, 180) + "…" : bodyText;
+
+        return {
+          slug: slugFromLink(it.link || ""),
+          type: typeFromCategories(it.categories),
+          date: it.pubDate ? it.pubDate.slice(0, 10) : "",
+          title,
+          excerpt,
+          body: bodyText.replace(/\n{3,}/g, "\n\n"),
+        };
+      })
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+  };
+
+  // GitHub repo markdown loader (Netlify CMS output)
+  const parseFrontmatter = (md) => {
+    const fm = md.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
+    if (!fm) return { data: {}, body: md };
+
+    const raw = fm[1];
+    const body = fm[2];
+
+    const data = {};
+    raw.split("\n").forEach((line) => {
+      const idx = line.indexOf(":");
+      if (idx === -1) return;
+      const key = line.slice(0, idx).trim();
+      let val = line.slice(idx + 1).trim();
+      val = val.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+      data[key] = val;
+    });
+
+    return { data, body };
+  };
+
+  const loadFromGithubRepo = async () => {
+    if (!ENABLE_GITHUB_SOURCE) return [];
+
+    const api = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FOLDER}`;
+    const res = await fetch(api, {
+      headers: { Accept: "application/vnd.github+json" },
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`Failed GitHub contents (${res.status})`);
+
+    const files = await res.json();
+    const mdFiles = (Array.isArray(files) ? files : [])
+      .filter((f) => f.type === "file" && f.name.toLowerCase().endsWith(".md"))
+      .sort((a, b) => b.name.localeCompare(a.name));
+
+    if (!mdFiles.length) return [];
+
+    const loaded = [];
+    for (const f of mdFiles) {
+      const t = await fetch(f.download_url, { cache: "no-store" });
+      if (!t.ok) continue;
+      const md = await t.text();
+
+      const { data, body } = parseFrontmatter(md);
+      const cleanBody = stripHtml(body); // keep your safe paragraph renderer
+
+      const excerpt =
+        (data.excerpt || "").trim() ||
+        (cleanBody.length > 180 ? cleanBody.slice(0, 180) + "…" : cleanBody);
+
+      loaded.push({
+        slug: f.name.replace(/\.md$/i, ""),
+        type: String(data.type || "journal").toLowerCase(),
+        date: data.date ? String(data.date).slice(0, 10) : "",
+        title: data.title || f.name.replace(/\.md$/i, ""),
+        excerpt,
+        body: cleanBody.replace(/\n{3,}/g, "\n\n"),
+      });
+    }
+
+    loaded.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+    return loaded;
+  };
+
+  const openDeepLinkIfPresent = () => {
+    const url = new URL(window.location.href);
+    const slug = url.searchParams.get("entry");
+    if (!slug) return;
+    const entry = allEntries.find((x) => x.slug === slug);
+    if (entry) showReader(entry);
+  };
+
   const loadEntries = async () => {
+    setStatus("Loading…");
+
+    // 1) Substack
     try {
-      setStatus("Loading…");
+      const sub = await loadFromSubstack();
+      if (sub.length) {
+        allEntries = sub;
+        setStatus("");
+        renderList();
+        openDeepLinkIfPresent();
+        return;
+      }
+    } catch (e) {
+      console.warn("Substack failed:", e);
+    }
 
-      // Try Substack first
-      const res = await fetch(RSS2JSON(SUBSTACK_FEED), { cache: "no-store" });
-      if (!res.ok) throw new Error(`Failed to load feed (${res.status})`);
+    // 2) GitHub repo markdown (optional)
+    try {
+      const gh = await loadFromGithubRepo();
+      if (gh.length) {
+        allEntries = gh;
+        setStatus("");
+        renderList();
+        openDeepLinkIfPresent();
+        return;
+      }
+    } catch (e) {
+      console.warn("GitHub repo failed:", e);
+    }
 
-      const data = await res.json();
-      const items = Array.isArray(data.items) ? data.items : [];
-
-      const substackEntries = items
-        .map((it) => {
-          const title = it.title || "";
-          const bodyText = stripHtml(it.content || it.description || "");
-          const excerpt =
-            bodyText.length > 180 ? bodyText.slice(0, 180) + "…" : bodyText;
-
-          return {
-            slug: slugFromLink(it.link || ""),
-            type: typeFromCategories(it.categories),
-            date: it.pubDate ? it.pubDate.slice(0, 10) : "",
-            title,
-            excerpt,
-            body: bodyText.replace(/\n{3,}/g, "\n\n"),
-          };
-        })
-        .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-
-      // If Substack is empty, fall back to local JSON
-      allEntries = substackEntries.length ? substackEntries : await loadFromLocalJson();
-
+    // 3) Local JSON
+    try {
+      const local = await loadFromLocalJson();
+      allEntries = local;
       setStatus(allEntries.length ? "" : "No notes yet.");
       renderList();
-
-      // Open deep link if present
-      const url = new URL(window.location.href);
-      const slug = url.searchParams.get("entry");
-      if (slug) {
-        const entry = allEntries.find((x) => x.slug === slug);
-        if (entry) showReader(entry);
-      }
-    } catch (err) {
-      console.error(err);
-
-      // If Substack fails, fall back to local JSON
-      try {
-        allEntries = await loadFromLocalJson();
-        setStatus(allEntries.length ? "" : "No notes yet.");
-        renderList();
-      } catch (e) {
-        console.error(e);
-        setStatus("Couldn’t load notes right now.");
-      }
+      openDeepLinkIfPresent();
+    } catch (e) {
+      console.error("Local JSON failed:", e);
+      setStatus("Couldn’t load notes right now.");
+      LIST.innerHTML = "";
     }
   };
 
@@ -329,5 +409,6 @@
     if (entry) showReader(entry);
   });
 
+  setChipActive("all");
   loadEntries();
 })();
